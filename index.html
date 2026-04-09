@@ -1,263 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
 <style>
-body {
-  background: url("https://xatimg.com/image/2BodrkEXd94u.png") no-repeat center center fixed;
-  background-size: cover;
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-}
 html, body {
-  height: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  background: black;
 }
-/* Player contenedor */
-.player {
+
+/* VIDEO DE FONDO */
+#bgvideo {
   position: fixed;
-  top: 82%;
-  left: 500px;
-  right: 25px;
-  transform: translateY(-50%);
-  width: 220px;
-  padding: 18px;
-  background: rgba(255,255,255,0.14);
-  backdrop-filter: blur(7px);
-  border-radius: 24px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
-  color: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* CONTENIDO ENCIMA (opcional) */
+.content {
+  position: relative;
+  z-index: 1;
+  color: white;
   text-align: center;
+  top: 40%;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  text-shadow: 2px 2px 10px black;
 }
-
-/* Título animado */
-.song-title {
-  font-size: 14px;
-  color: #e9ddff;
-  margin-bottom: 14px;
-  font-weight: 500;
-  animation: fadeSlide 0.6s ease;
-}
-
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Barra botones tipo cápsula */
-.controls {
-  display: flex;
-  height: 30px;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 999px;
-}
-
-
-
-/* Botones */
-.controls button {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: #000;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Íconos SVG */
-.controls svg {
-  width: 16px;
-  height: 16px;
-  fill: #e6e6e6;
-}
-
-.controls button:hover svg {
-  fill: #ffffff;
-}
-
-/* Glass central */
-.glass-box {
-  max-width: 500px;
-  min-height: 260px;
-  margin: 120px auto;
-  padding: 25px;
-  text-align: center;
-  backdrop-filter: blur(5px);
-  border-radius: 22px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4);
-  color: #fff;
-}
-
-
-.glass-box a {
-  color: #f1f1f1;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.glass-box a:hover {
-  text-shadow: 0 0 10px #ffffff;
-}
-
-/* Contenedor de la firma */
-.firma-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-    border-radius: 22px;
-  height: 200px; /* controla el espacio vertical */
-  overflow: hidden;
-}
-
-/* Tamaño del GIF de la firma */
-.firma-box img {
-  width: 500px;
-  height: 200ox;
-  border-radius: 10px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(214,180,255,0.45));
-}
-/* Texto bienvenida elegante y discreto */
-.welcome-text {
-  font-size: 20px;
-  font-weight: 500;
-  color: #fdfdfd;
-  text-align: center;
-  display: inline-block;
-  animation: softMove 4s ease-in-out infinite;
-  text-shadow: 0 0 6px rgba(214,180,255,0.35);
-}
-
-/* Protección básica de imágenes */
-img {
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-body {
-  user-select: none;
-}
-
 </style>
+</head>
 
-<!-- Player -->
-<div class="player">
-  <div class="song-title" id="songTitle">Nombre de la canción</div>
+<body>
 
-  <div class="controls">
-    <!-- Play / Pause -->
-    <button onclick="playPause()" id="playBtn">
-      <svg id="playIcon" viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-    </button>
-
-    <!-- Next -->
-    <button onclick="nextSong()">
-      <svg viewBox="0 0 24 24">
-        <path d="M7 6v12l8.5-6L7 6zm9 0h2v12h-2z"/>
-      </svg>
-    </button>
-  </div>
-</div>
-
-<audio id="audio" muted autoplay></audio>
-
-
-<!-- Cuadro central -->
-<div class="glass-box">
-<p class="welcome-text">Bienvenidos a mi xatspace</p>
-<div class="firma-box">
-  <img src="https://i.ibb.co/nNCJ254t/0c33l-6gdzd.gif" alt="Mi firma">
-</div>
-
-
-<script>
-var playlist = [
-  {
-    title: "Anuel AA - Amanece",
-    src: "musica/Anuel AA - Amanece.mp3"
-  }
-];
-
-var index = 0;
-var audio = document.getElementById("audio");
-var title = document.getElementById("songTitle");
-var playIcon = document.getElementById("playIcon");
-
-function loadSong() {
-  audio.src = playlist[index].src;
-  title.textContent = playlist[index].title;
-  title.style.animation = "none";
-  title.offsetHeight;
-  title.style.animation = null;
-  playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-}
-
-function playPause() {
-  if (audio.paused) {
-    audio.play();
-    playIcon.innerHTML = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
-  } else {
-    audio.pause();
-    playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-  }
-}
-
-audio.addEventListener("ended", function () {
-  index = (index + 1) % playlist.length;
-  loadSong();
-  audio.play();
-});
+<video id="bgvideo" autoplay loop muted>
+  <source src="https://i.imgur.com/9ZlOLDf.mp4" type="video/mp4">
+</video>
 
 
 
-loadSong();
-
-audio.play();
-
-setTimeout(function () {
-  audio.muted = false;
-}, 500);
-
-
-// Blo evitar clic derecho
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-});
-
-// Bloquear arrastrar imágenes
-document.addEventListener('dragstart', function(e) {
-  e.preventDefault();
-});
-
-// Bloquear copiar
-document.addEventListener('copy', function(e) {
-  e.preventDefault();
-});
-
-// Bloquear combinaciones comunes
-document.addEventListener('keydown', function(e) {
-  if (
-    e.ctrlKey && (
-      e.key === 'u' || // ver código fuente
-      e.key === 's' || // guardar
-      e.key === 'c' || // copiar
-      e.key === 'p'    // imprimir
-    )
-  ) {
-    e.preventDefault();
-  }
-});
-
-
-</script>
+</body>
+</html>
