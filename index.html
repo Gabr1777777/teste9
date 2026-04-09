@@ -2,1461 +2,1222 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>XatSpace – Jefa</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-
+<title>Xatspace Pixel Perfect</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+#bg-video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+}
 
 body{
-  margin:0;
-  height:100vh;
-  font-family:'Poppins',sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-  background:
-  linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-  url("https://i.imgur.com/HRDw2tY.gif");
-
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
+    /* fondo base por si no carga el video */
+    background: radial-gradient(circle at top, #0f0c29, #09061a 70%);
 }
 
-/* CONTENEDOR PRINCIPAL */
 .wrapper{
-  position:relative;
-  display:flex;
-  align-items:center;
-}
-
-/* BOTONES PEGADOS A LA CARD */
-.menu-left{
-  position:absolute;
-  left:-100px;       /* pegado a la card */
-  top:36%;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:10;
-}
-
-.menu-left a{
-  position:relative;
-  width:110px;
-  padding:10px 0;
-  text-align:center;
-
-  background:rgba(214, 214, 214, 0.712);
-  backdrop-filter:blur(14px);
-
-  border-radius:10px;
-  border:1px solid rgba(184, 184, 184, 0.35); /* 👈 BORDE */
-  
-  font-size:13px;
-  color:#2c2c2c;
-  text-decoration:none;
-
-  box-shadow:
-    inset 0 0 1px rgba(214, 214, 214, 0.6),  /* brillo glass */
-    0 4px 10px rgba(124, 124, 124, 0.25);
-
-  transition:transform .25s ease,
-             box-shadow .25s ease,
-             border-color .25s ease;
-
-  font-family:'Poppins',sans-serif;
-  overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:40px;
 }
 
 
-.menu-left a::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    135deg,
-    rgb(218, 218, 218),
-    rgb(155, 155, 155),
-    rgb(226, 226, 226)
-  );
-  opacity:0;
-  transition:opacity .15s ease;
+/* PERFIL */
+.profile{
+    position:relative;
+    width:390px;
+    height:400px; /* 👈 CLAVE */
+    padding:180px 10px 30px;
+    border-radius:25px;
+
+    /* 👇 glass */
+    background: rgba(93, 193, 185, 0.6);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border:1px solid rgba(21, 126, 139, 0.075);
+
+    overflow:visible; /* 👈 IMPORTANTE */
+    box-shadow:0 30px 60px rgba(0,0,0,0.7);
+    color:#fff;
 }
 
-
-
-.menu-left a:hover{
-  transform:translateX(-10px);
-  box-shadow:0 2px 2px rgba(226, 226, 226, 0.795);
-}
-
-.menu-left a:hover::after{
-  opacity:0;
-}
-
-
-.menu-left a:active::before{
-  opacity:0;
-}
-
-
-/* TARJETA */
-.card{
-  position:relative;
-  width:420px;
-  height:560px;
-  border-radius:30px;
-  background:rgba(61, 61, 61, 0.514);
-  backdrop-filter:blur(20px);
-  box-shadow:0 15px 10px rgba(114, 114, 114, 0.486);
-  z-index:2;
-  overflow:hidden; /* IMPORTANTE */
-}
-
-/* BORDE INTERNO */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:14px;                 /* separación del borde */
-  border-radius:22px;
-  border:1.5px solid rgba(255,255,255,.75);
-  pointer-events:none;
-}
-
-
-
-
-
+/* AVATAR */
 .avatar{
-  position:absolute;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:160px;
-  height:160px;
-  border-radius:50%;
-  overflow:hidden;
-  border:4px solid rgba(255,255,255,.8);
+    position:absolute;
+    top:-45px;
+    left:-178px;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    background: rgba(93, 193, 185, 0.6);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    overflow:hidden;
+    border:21px solid #358a8da1;
+    box-shadow:0 10px 30px rgba(0, 0, 0, 0.384);
+    z-index:20;
+}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+
+/* MENU */
+.menu{
+    position:absolute;
+    top:-45px;
+    left:50%;
+    transform:translateX(-50%);
+
+    display:flex;
+    gap:8px;
+    border:1px solid rgba(112, 255, 255, 0.075);
+    background: rgba(93, 193, 185, 0.6);
+    backdrop-filter: blur(15px);
+
+
+
+    padding:6px;
+    border-radius:26px;
+}
+.menu span{
+    font-size:12px;
+    opacity:0.6;
+    padding:6px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.menu span:hover{
+    background: rgba(117, 182, 202, 0.6);
+    opacity:1;
 }
 
+.menu .active{
+    background:linear-gradient(90deg,#46efd3,#2eb8a5);
+    opacity:1;
+    box-shadow:0 5px 15px rgba(51, 234, 204, 0.5);
+}
+
+.menu .active:hover{
+    background:linear-gradient(90deg,#46efe1,#2eb8a5);
+    opacity:1;
+}
+/* TEXTO */
 .name{
-  position:absolute;
-  top:230px;
-  left:50%;
-  transform:translateX(-50%);
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-
-  /* degradado */
-  background: linear-gradient(
-    90deg,
-    #e2e2e2,
-    #e0e0e0,
-    #929292,
-    #dddddd
-  );
-  background-size:200% auto;
-
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  /* brillo neon (lo mantenemos) */
-  text-shadow:
-    0 0 6px rgba(236, 236, 236, 0.8),
-    0 0 12px rgba(197, 197, 197, 0.7),
-    0 0 22px rgba(218, 218, 218, 0.6),
-    0 0 40px rgba(197, 197, 197, 0.5);
-
-  animation: gradientMove 5s linear infinite;
+    text-align:center;
+    font-size:35px;
+    position: relative;
+    top:-90px;
+    background:linear-gradient(90deg,#46efca,#16e2d8);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.id{
+    position: relative;
+    top: -88px;
+    font-size:12px;
+    text-align:center;
+    opacity:0.5;
+    margin-bottom:25px;
 }
 
-@keyframes gradientMove{
-  to{
-    background-position:200% center;
-  }
-}
-/* animación del brillo */
-@keyframes brilloNombre{
-  to{
-    background-position:200% center;
-  }
+/* INFO */
+.info{
+    position: relative;
+    top: -85px;
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:25px;
 }
 
+/* TARJETAS */
+.card{
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border:1px solid rgba(199, 172, 243, 0.15);
 
-.subtitle{
-  position:absolute;
-  top:280px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:13px;
-  color:#dfdfdf;
+    padding:10px 14px;
+    border-radius:14px;
+
+    min-width:110px;
+    text-align:center;
+
+    transition:0.3s;
 }
 
-
-.bio{
-  position:absolute;
-  top:315px;
-  left:50%;
-  transform:translateX(-50%);
-  width:80%;
- white-space: pre-wrap; /* permite saltos y wrapping natural */
-
-  padding:14px 16px;                 /* espacio interno del texto */
-  font-size:11px;
-  line-height:1.6;
-  color:#e4e4e4;
-   text-align:center;
-  background:rgba(163, 163, 163, 0.596);  /* fondo suave */
-  backdrop-filter:blur(10px);
-  border-radius:16px;
-
-  box-shadow:0 2px 4px rgba(41, 41, 41, 0.12);
+/* HOVER PRO */
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(51, 228, 234, 0.25);
 }
 
-
-
-/* FIRMA */
-.firma{
-  position:absolute;
-  bottom:40px;
-  left:50%;
-  transform:translateX(-50%);
+/* TITULO (remarcado) */
+.card .title{
+    display:block;
+    font-size:11px;
+    font-weight:600;
+    color:#84fcd8; /* violeta */
+    margin-bottom:4px;
+    letter-spacing:0.5px;
 }
 
-
-.firma img{
-  max-width:280px;
+/* SUBTITULO */
+.card .sub{
+    font-size:10px;
+    color:#fff;
+    opacity:0.9;
 }
 
-/* FOOTER */
-.footer{
-  position:absolute;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:8px;
-  color:#e2e2e2aa;
+.flag{
+    width:16px;
+    height:12px;
+    object-fit:cover;
+    border-radius:2px;
+    margin-right:6px;
+    vertical-align:middle;
+}
+.info div{
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+
+    border:1px solid rgba(199, 172, 243, 0.15);
+
+    padding:6px 10px;
+    border-radius:12px;
+    font-size:10px;
+    text-align:center;
+    min-width:110px;
 }
 
-/* OVERLAY */
-.modal-overlay{
-  position:fixed;
-  inset:0;
-
-  /* MÁS TRANSPARENTE */
-  background: rgba(26, 26, 26, 0.08);
-
-  /* BLUR MÁS SUAVE */
-  backdrop-filter: blur(7px);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition:.35s ease;
-  z-index:999;
+/* MENSAJE */
+.message{
+    position: absolute;
+    top: 120px;
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    font-size:11px;
+    opacity:0.85;
 }
 
-
-/* ACTIVO */
-.modal-overlay.active{
-  opacity:1;
-  pointer-events:auto;
+.cursor{
+    display:inline-block;
+    margin-left:2px;
+    animation:blink 1s infinite;
+    color:#c084fc;
 }
 
-/* CONTENIDO */
-.modal-content{
-  position:relative;
-  width:90%;
-  max-width:650px;
-  height:530px;
-  border-radius:20px;
-  overflow:visible;   /* ✅ CLAVE */
-   box-shadow:0 0 40px rgba(192, 192, 192, 0.466);
-  animation:zoomIn .35s ease;
+@keyframes blink{
+    0%,50%,100%{opacity:1;}
+    25%,75%{opacity:0;}
 }
 
+.tabs{
+    position: relative;
+    top:-70px;
 
-.modal-content::before{
-  content:"";
-  position:absolute;
-  inset:-3px;
-  border-radius:25px;
-  border:3px solid rgba(255, 255, 255, 0.9);
-  pointer-events:none;
-
-  box-shadow:
-    0 0 25px rgba(194, 194, 194, 0.9),
-    0 0 60px rgba(148, 148, 148, 0.5);
+    height:220px; /* 👈 altura fija */
+    overflow:visible; /* 👈 evita que crezca */
 }
 
+.tab{
+    position:absolute; /* 👈 CLAVE */
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
 
-/* IFRAME */
-.modal-content iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  border-radius:20px;
-  overflow:hidden;
+    display:none;
 }
 
-
-/* BOTÓN CERRAR */
-.modal-close{
-  position:absolute;
-  top:7px;
-  right:10px;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:rgba(224, 224, 224, 0.75);
-  backdrop-filter:blur(8px);
-  color:#2b2b2b;
-  font-size:22px;
-  font-weight:600;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:1000;
-  box-shadow:0 6px 18px rgba(90, 90, 90, 0.45);
-  transition:.25s ease;
-}
-
-.modal-close:hover{
-  background:#d6d6d6;
-  transform:scale(1.15);
-}
-
-
-@keyframes zoomIn{
-  from{transform:scale(.85); opacity:0}
-  to{transform:scale(1); opacity:1}
-}
-
-#heartsCanvas{
-  position:fixed;
-  inset:0;
-  z-index:0;            /* detrás de todo */
-  pointer-events:none;  /* no molesta clicks */
-}
-
-/* ===============================
-   🎧 PLAYER LATERAL SHULA
-   =============================== */
-
-.player-slide{
-  position:absolute;
-  top:670px;
-  right:0;
-  transform: translateX(260px); /* OCULTO */
-  width:200px;
-  height:100px;
-  display:flex;
-  align-items:center;
-  transition: transform .6s cubic-bezier(.4,0,.2,1);
-  z-index:10060;
-}
-
-.player-slide.active{
-  transform: translateX(0); /* VISIBLE */
+.tab.active{
+    display:block;
 }
 
 
 
-.player-tab{
-  width:40px;
-  height:120px;
-  background: linear-gradient(180deg,#dddddd,#9292927a);
-  border-radius:15px 0 0 15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  cursor:pointer;
-  box-shadow:0 0 25px rgba(238, 238, 238, 0.6);
+@keyframes fade{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-.player-glass{
-  width:200px;
-  height:40%;
-  padding:4px;
-  background: rgba(211, 211, 211, 0.575);
-  backdrop-filter: blur(18px);
+/* PLAYER */
+.player{
+    position: relative;
+    top:80px;
+    left:-602px;
+    width:170px;
+    padding:16px 15px 20px;
 
-  border-radius:20px;                     /* ✔ bordes iguales */
-  border:1px solid rgba(255,255,255,.25);
-  margin-left:-1px;                       /* ✔ unión perfecta */
+    border-radius:80px 80px 30px 30px;
 
-  box-shadow:
-    inset 0 0 20px rgba(255,255,255,.15),
-    0 0 40px rgba(182, 182, 182, 0.45);
+    background: rgba(49, 126, 133, 0.6);
+    backdrop-filter: blur(25px);
+
+    border:1px solid rgba(112, 226, 255, 0.075);
+
+    box-shadow:0 30px 60px rgba(0,0,0,0.7);
+    color:#fff;
+    text-align:center;
+}
+.player img{
+
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    object-fit:cover;
+
+    top:-5px;
+
+    border:6px solid #2d8b8b;
+    box-shadow:
+        inset 0 0 0 6px rgba(0,0,0,0.6),
+        inset 0 0 0 12px rgba(255,255,255,0.05),
+        0 10px 30px rgba(0,0,0,0.5);
+
+    position:relative;
 }
 
 
-.music-title{
-  font-size:11px;
-  letter-spacing:2px;
-  color:#ececec;
-  text-transform:uppercase;
-  margin-bottom:6px;
-  text-align:center;
+.player.playing::before{
+    animation-play-state: running;
+}
+/* centro del vinilo */
+.player img::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:#a01717;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 }
 
-.animated-song{
-  font-size:12px;
-  margin-bottom:14px;
-   background: linear-gradient(90deg,#fff,#e0e0e0,#fff);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation: songGlow 4s linear infinite;
+
+
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
 }
 
-@keyframes songGlow{
-  to{ background-position:200% center; }
+.player img{
+
+    animation:spin 6s linear infinite;
+    animation-play-state: paused;
 }
 
-.player-controls{
-  display:flex;
-  justify-content:center;
-  gap:16px;
+.player.playing img{
+    animation-play-state: running;
 }
 
-.player-controls button{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  background: rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.3);
-  cursor:pointer;
-  backdrop-filter: blur(12px);
-  transition:.3s;
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+.song{
+    position: relative;
+    top:8px;
+    font-size:10px;
+    margin-bottom:15px;
 }
 
-.player-controls button:hover{
-  transform: scale(1.15);
-  box-shadow:0 0 25px rgba(184, 184, 184, 0.8);
+.controls{
+    position: relative;
+    top:-18px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+}
+.controls button{
+    width:30px;
+    height:30px;
+    border:none;
+    border-radius:50%;
+    background:linear-gradient(90deg,#46dbef65,#33eabc5b);
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(51, 222, 234, 0.24);
+}
+
+
+.progress-container{
+    position: relative;
+    top:-10px;
+    width:100%;
+    height:4px;
+    background:rgba(255,255,255,0.15);
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
 }
 
 .progress{
-  margin-top:14px;
-  width:100%;
-  accent-color:#b9b9b9;
-}
-.btn-player{
-  position:relative;
-}
-
-/* CONTENEDOR DEL PLAYER */
-.player-drop{
-  position:fixed;               /* 🔥 SALE del menú */
-  left:calc(140% - 210px);       /* alineado con la card */
-  top:42%;                      /* misma altura del menú */
-  margin-top:120px;             /* cae hacia abajo */
-  width:260px;
-
-  transform: translateY(-15px);
-  opacity:0;
-  pointer-events:none;
-
-  transition:.4s ease;
-  z-index:1000;
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#46cdef,#33deea);
+    border-radius:10px;
+    box-shadow:0 0 8px rgba(70, 205, 239, 0.8);
+    transition:width 0.1s linear;
 }
 
-
-
-/* ACTIVO */
-.player-drop.active{
-  transform: translateY(0);
-  opacity:1;
-  pointer-events:auto;
+.wrapper{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    top:20px;
+    position: relative;
+    left: 150px;
 }
 
-/* 🔧 FIX: el wrapper del reproductor debe comportarse como un botón */
-.menu-left .btn-player{
-  width:110px;            /* igual que .menu-left a */
-  display:block;
-}
+.glass{
+    background: rgba(255, 255, 255, 0.08); /* transparencia */
+    backdrop-filter: blur(20px); /* efecto vidrio */
+    -webkit-backdrop-filter: blur(20px);
 
-/* asegura que el <a> interno no altere el layout */
-.menu-left .btn-player > a{
-  width:100%;
-  display:block;
-}
+    border: 1px solid rgba(255, 255, 255, 0.15);
 
-img{
-  pointer-events:none;
-  user-select:none;
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+
+    border-radius: 20px;
 }
 
 
-.home-icon{
-  position:absolute;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-
-  right:-6px;
-  bottom:-6px;
-
-  /* FONDO MÁS SÓLIDO */
-  background: linear-gradient(
-    145deg,
-    #d6d6d6,
-    #a0a0a0
-  );
-
-  border:2px solid #fff;
-
-  box-shadow:
-    0 4px 12px rgba(116, 116, 116, 0.45),
-    inset 0 0 6px rgba(255,255,255,.8);
-
-  z-index:10;
-  cursor:pointer;
-  transition:.25s ease;
+.equalizer{
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+    gap:3px;
+    height:12px;
+    margin-bottom:28px;
 }
 
-/* icono */
-.home-icon::before{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:17px;
-  color:#a8a8a8;
+.equalizer span{
+
+    width:3px;
+    height:100%;
+    background:#84dafc;
+    border-radius:2px;
+    animation:equalize 1s infinite ease-in-out;
+    animation-play-state: paused;
 }
 
-.home-icon:hover{
-  transform:scale(1.15);
+.equalizer span:nth-child(2){animation-delay:0.2s;}
+.equalizer span:nth-child(3){animation-delay:0.4s;}
+.equalizer span:nth-child(4){animation-delay:0.6s;}
+
+.player.playing .equalizer span{
+    animation-play-state: running;
 }
 
-/* contenedor del avatar */
-.avatar-wrap{
-  position:absolute;
-  top:40px;
-  left:50%;
-  transform:translateX(-50%);
-  width:160px;
-  height:160px;
+@keyframes equalize{
+    0%,100%{height:4px;}
+    50%{height:18px;}
 }
 
-/* avatar original intacto */
-.avatar{
-  position:relative;
-  width:100%;
-  height:100%;
+.player{
+    transition:0.3s;
 }
 
-/* icono fuera del círculo */
-.home-icon{
-  position:absolute;
-  width:20px;
-  height:20px;
-  border-radius:50%;
 
-  top:150px;
-  left: 20px;
 
-  z-index:15;
-  cursor:pointer;
-  transition:.25s ease;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
+/* animación al cambiar canción */
+.song{
+    transition:0.3s;
 }
 
-.home-icon img{
-  width:30px;      /* tamaño del icono */
-  height:30px;
-  pointer-events:none;
+.song.change{
+    opacity:0;
+    transform:translateY(10px);
 }
 
-.home-icon:hover{
-  transform:scale(1.15);
+/* GRID FRIENDS */
+.friends{
+    display:grid;
+grid-template-columns:repeat(2, 166px);
+justify-content:center;
+    gap:15px;
+    margin-top:20px;
 }
 
-/* icono fuera del círculo */
-.forum-icon{
-  position:absolute;
-  width:20px;
-  height:20px;
-  border-radius:50%;
+/* CARD FRIEND */
+.friend{
+    position: relative;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    top:-90px;
+    padding:12px 14px; /* 👈 mejor balance */
 
-  top:150px;
-  left: 16px;
+    border-radius:50px;
 
-  z-index:15;
-  cursor:pointer;
-  transition:.25s ease;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    border:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+
+    transition:0.3s;
+}
+.friend:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(147,51,234,0.25);
 }
 
-.forum-icon img{
-  width:30px;      /* tamaño del icono */
-  height:30px;
-  pointer-events:none;
+/* AVATAR */
+.avatar-friend{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0; /* 👈 NO se achica */
+    background:#317c88;
+    border:2px solid rgba(255,255,255,0.1);
+
+    margin-right:12px;
 }
 
-.forum-icon:hover{
-  transform:scale(1.15);
+.avatar-friend img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
-/* INTRO SIMPLE */
 
+/* LETRA fallback */
+.avatar-friend.letter{
+    font-weight:600;
+    color:#fff;
+    font-size:18px;
+}
+
+/* DATA */
+.data{
+    flex:1;
+}
+
+.nick{
+    position: relative;
+    left:-20px;
+    font-size:10px;
+    font-weight:600;
+}
+
+.fid{
+    position: relative;
+    left:-20px;
+    font-size:8px;
+    opacity:0.6;
+}
+
+/* BOTON XAT */
+.xat{
+    position: relative;
+    text-decoration:none;
+    margin-left:auto;
+    width:35px;
+    height:35px;
+    left:-20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0; /* 👈 NO se achica */
+    border-radius:50%;
+
+    font-size:8px;
+    color:#fff;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    transition:0.3s;
+}
+
+/* HOVER BOTON */
+.xat:hover{
+    background:linear-gradient(90deg,#3eabb39d,#33deea9f);
+    box-shadow:0 0 15px rgba(70, 177, 239, 0.6);
+}
+
+/* GALERIA */
+.gallery-container{
+    position:absolute;
+    width:106%;
+    height:280px;
+    top:-95px;
+    left:-12px;
+    margin-top:10px; /* 👈 se acomoda dentro del perfil */
+    gap:80%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow: hidden;
+    perspective:1200px;
+}
+
+/* carta inicial */
+.card-main{
+    position:absolute;
+    width:130px;
+    height:190px;
+    border-radius:18px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.6s;
+    z-index:10;
+    padding:6px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.082),
+        0 0 20px rgba(70, 200, 239, 0.171);
+}
+
+.card-main:hover{
+    transform:scale(1.05);
+    box-shadow:
+        0 20px 30px rgba(0, 0, 0, 0.096),
+        0 0 25px rgba(70, 214, 239, 0.295);
+}
+
+/* 👇 BORDE GRADIENTE PRO */
+.card-main::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    padding:1px;
+
+    background:linear-gradient(120deg,#46dbef8c,#33b0ea80,#60e3fa98);
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+    pointer-events:none;
+}
+
+.card-main img{
+        border-radius:18px;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+
+/* carrusel oculto al inicio */
+.carousel{
+    position:absolute;
+    width:100%;
+    height:100%;
+    transform-style:preserve-3d;
+    display:none;
+}
+
+/* cartas */
+.item{
+    position:absolute;
+    width:110px;
+    height:150px;
+    border-radius:18px;
+    overflow:hidden;
+    padding:6px;
+    left:50%;
+    top:50%;
+
+    transform-style:preserve-3d;
+    transform-origin:center;
+
+    transition:1s;
+
+    /* 👇 EFECTO GLASS */
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.151);
+}
+
+/* 👇 BORDE GRADIENTE PRO */
+.item::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    padding:1px;
+
+    background:linear-gradient(120deg,#46e4ef,#33d5ea,#60a5fa);
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+    pointer-events:none;
+}
+
+/* HOVER PRO */
+.item:hover{
+    transform:translate(-50%, -50%) scale(1.08) !important;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.7),
+        0 0 20px rgba(51, 222, 234, 0.8);
+}
+
+.item img{
+    border-radius:18px;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* animacion giro */
+@keyframes rotate{
+    from{transform:rotateY(0deg);}
+    to{transform:rotateY(360deg);}
+}
+
+.carousel.active{
+    display:block;
+    animation:rotate 20s linear infinite;
+}
+
+/* PANTALLA INICIAL */
 .intro{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  background: rgb(17, 17, 17);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:40px;
+    position:fixed;
+    inset:0;
+    background:#1c454a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
 
-  backdrop-filter:blur(6px);
+    transition:1.5s ease;
 }
 
-/* CUADRO FIRMA */
-
-.firma-box{
-  width:540px;
-  height:230px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(20px);
-
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,0.35);
-
-  box-shadow:
-    0 0 30px rgba(255,255,255,0.25),
-    inset 0 0 15px rgba(255,255,255,0.25);
-}
-
-.firma-box img{
-  border-radius:18px;
-  max-width:90%;
-  max-height:90%;
-}
-
-/* BOTON INGRESAR */
-
+/* BOTON */
 .enter-btn{
-  padding:12px 40px;
+    padding:14px 40px;
+    border:none;
+    border-radius:30px;
+    font-size:14px;
+    letter-spacing:3px;
+    color:#fff;
+    cursor:pointer;
 
-  font-family:'Poppins',sans-serif;
-  font-size:14px;
-  letter-spacing:2px;
+    background:linear-gradient(90deg,#55f7f7,#84fcfc);
+    box-shadow:0 0 25px rgba(85, 223, 247, 0.7);
 
-  color:#fff;
-
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(18px);
-
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.4);
-
-  cursor:pointer;
-
-  box-shadow:
-    0 0 18px rgba(255,255,255,0.25),
-    inset 0 0 10px rgba(255,255,255,0.25);
-
-  transition:.25s;
+    transition:0.3s;
 }
 
 .enter-btn:hover{
-  transform:scale(1.08);
-  box-shadow:
-    0 0 35px rgba(255,255,255,0.45),
-    inset 0 0 15px rgba(255,255,255,0.35);
+    transform:scale(1.05);
+    box-shadow:0 0 40px rgb(85, 196, 247);
 }
 
-/* ===============================
-   🔧 FIX CLICK IFRAMES
-   =============================== */
-html, body{
-  pointer-events: auto !important;
+/* EFECTO AL ENTRAR */
+.intro.hide{
+    opacity:0;
+    backdrop-filter: blur(20px);
 }
 
+/* MARIPOSA */
+.butterfly{
+    position:absolute;
+    top:-70px;
+    left:-230px; /* 👈 ajustá según gusto */
 
+    width:150px;
+    pointer-events:none;
 
-
-html, body, a, div, span, p, img, button, input, textarea, select, * {
-    cursor: none !important;
+    animation:floatButterfly 4s ease-in-out infinite;
+    z-index:25;
 }
 
-
-/* ===============================
-   👥 FRIENDS INTEGRADO
-================================ */
-
-.friends-card{
-  width:420px;
-  height:520px;
-  border-radius:30px;
-  background:rgba(77, 77, 77, 0.95);
-  backdrop-filter:blur(20px);
-  box-shadow:0 15px 25px rgba(36, 36, 36, 0.55);
-  position:relative;
-  overflow:hidden;
-  margin:auto;
+.butterfly img{
+    width:100%;
+    filter: hue-rotate(280deg) saturate(1.8) brightness(1.1);
 }
 
-.friends-card::before{
-  content:"";
-  position:absolute;
-  inset:14px;
-  border-radius:22px;
-  border:1.5px solid rgba(230, 230, 230, 0.75);
-}
-
-.friends-title{
-  text-align:center;
-  margin-top:26px;
-  font-family:'Playfair Display',serif;
-  font-size:26px;
-  color:#e7e7e7;
-  letter-spacing:3px;
-}
-
-.friends-list{
-  margin:24px auto 0;
-  width:82%;
-  max-height:360px;
-  overflow-y:auto;
-  padding-right:6px;
-}
-
-.friend-item{
-  background:rgba(175, 175, 175, 0.55);
-  backdrop-filter:blur(12px);
-  border-radius:18px;
-  padding:10px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-  box-shadow:0 4px 10px rgba(78, 78, 78, 0.25);
-}
-
-.friend-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.friends-card .avatar{
-  width:36px;
-  height:36px;
-  left: 10px;
-  top: 0px;
-  border-radius:50%;
-  background:linear-gradient(145deg,#dfdfdf,#b3b3b3);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:600;
-  font-size:12px;
-  color:#141414;
-}
-
-.friend-name{
-  font-size:14px;
-  color:#e6e6e6;
-}
-
-.friend-id{
-  font-size:11px;
-  color:#e7e7e7;
-}
-
-.friend-btn{
-  padding:6px 14px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.6);
-  background:linear-gradient(145deg,#b8b8b8,#757575);
-  font-size:11px;
-  color:#dbdbdb;
-  text-decoration:none;
-  transition:.25s ease;
-}
-
-.friend-btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 20px rgba(131, 131, 131, 0.9);
-}
-
-/* ===============================
-   SCROLL MODERNO FRIENDS
-================================ */
-
-.friends-list{
-  margin:24px auto 0;
-  width:82%;
-  max-height:360px;
-  overflow-y:auto;
-  padding-right:6px;
-
-  /* Firefox */
-  scrollbar-width:thin;
-  scrollbar-color:rgba(255,255,255,.35) transparent;
-}
-
-/* Chrome / Edge / Safari */
-
-.friends-list::-webkit-scrollbar{
-  width:6px;
-}
-
-.friends-list::-webkit-scrollbar-track{
-  background:transparent;
-  border-radius:20px;
-}
-
-.friends-list::-webkit-scrollbar-thumb{
-  background:linear-gradient(
-    180deg,
-    rgba(255,255,255,.55),
-    rgba(180,180,180,.35)
-  );
-  border-radius:20px;
-  backdrop-filter:blur(10px);
-  transition:all .3s ease;
-}
-
-/* Hover efecto premium */
-
-.friends-list::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(
-    180deg,
-    rgba(255,255,255,.85),
-    rgba(200,200,200,.55)
-  );
-  box-shadow:0 0 10px rgba(255,255,255,.35);
-}
-
-/* ===============================
-   🖼 GALERIA INTEGRADA
-================================ */
-
-.gallery-box{
-  position:relative;
-  width:100%;
-  height:100%;
-
-  background:rgba(65, 65, 65, 0.55);
-
-  padding:22px;
-
-  border-radius:24px;            /* 🔴 REDONDEO REAL */
-  overflow:hidden;               /* 🔴 CLAVE PARA NO DEFORMAR */
-
-  backdrop-filter:blur(18px);
-  box-shadow:0 15px 35px rgba(54, 54, 54, 0.45);
-}
-
-
-.gallery-box::before{
-  content:"";
-  position:absolute;
-  inset:12px;
-  border-radius:20px;             /* proporcional al exterior */
-  border:1.1px solid rgba(255,255,255,.75);
-  pointer-events:none;
-}
-
-/* HEADER */
-.gallery-header{
-  position: relative;
-  text-align: center;
-  height: 110px;       /* 🔒 ALTURA FIJA */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-
-.gallery-header span{
-  position:relative;
-  display:inline-block;
-  top:-12px;
-  padding:0 18px;
-  font-size:40px;
-  letter-spacing:6px;
-  font-weight:400;
-
-  background:linear-gradient(
-    90deg,
-    #cfcfcf,
-    #919191,
-    #d6d6d6
-  );
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  text-shadow:
-    0 0 6px rgba(245, 245, 245, 0.8),
-    0 0 14px rgba(221, 221, 221, 0.6);
-}
-
-.gallery-header span{
-  font-weight:200;
-  -webkit-text-stroke: 0.5px rgba(194, 194, 194, 0.6);
-}
-/* LÍNEA */
-.gallery-header::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom: 22px;        /* 🔒 POSICIÓN FIJA */
-  height:1px;
-  z-index:5;
-
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(197, 197, 197, 0.8),
-    rgb(228, 228, 228),
-    rgba(197, 197, 197, 0.8),
-    transparent
-  );
-
-  box-shadow:0 0 8px rgba(104, 104, 104, 0.8);
-}
-
-/* SLIDER */
-.slider{
-  margin-top: -40px;
-  position:relative;
-  width:100%;
-  height:420px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-    transform: translateY(-10px);
-}
-
-/* SLIDE */
-.slide{
-  position:absolute;
-  top:50px;
-  width:220px;
-  height:360px;
-  border-radius:18px;
-  overflow:hidden;
-  transition:.6s ease;
-  filter:brightness(.45);
-  transform:scale(.75);
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
-}
-
-
-
-.slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.slide.active:hover::after{
-  opacity:1;
-}
-
-/* ACTIVO */
-.slide.active{
-  transform:scale(1);
-  filter:brightness(1);
-  opacity:1;
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,.9),
-    0 0 35px rgba(114, 114, 114, 0.9);
-  z-index:3;
-}
-
-
-/* IZQ / DER */
-.slide.left{
-opacity:.6;
-  transform:translateX(-260px) scale(.8);
-  z-index:1;
-}
-
-.slide.right{
-  opacity:.6;
-  transform:translateX(260px) scale(.8);
-  z-index:1;
-}
-
-
-/* FLECHAS */
-.nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  background:rgba(211, 211, 211, 0.692);
-  backdrop-filter:blur(10px);
-  color:#7c7c7c;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:22px;
-  box-shadow:0 8px 20px rgba(66, 66, 66, 0.35);
-  transition:.3s ease;
-  z-index:5;
-}
-
-.nav:hover{
-  background:#e4e4e4;
-  transform:translateY(-50%) scale(1.15);
-}
-
-.nav.prev{left:18px}
-.nav.next{right:18px}
-
-.name{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px; /* espacio entre nick y bandera */
-}
-
-.name .flag{
-  width:20px;
-  height:auto;
-  border-radius:3px;
-  box-shadow:0 0 6px rgba(255,255,255,.6);
-}
-
-/* ===============================
-   💗 CURSOR JEFA EXACTO
-================================ */
-
-#cursorJefaExacto{
-  position:fixed !important;
-  left:0;
-  top:0;
-
-  width:40px;   /* 🔥 más grande para ver flecha + corazones */
-  height:auto;
-
-  pointer-events:none;
-
-  z-index:99999999999;
-
-  object-fit:contain;
-  overflow:visible !important;
+/* animación flotante */
+@keyframes floatButterfly{
+    0%{
+        transform:translate(0px, 0px) rotate(0deg);
+    }
+    25%{
+        transform:translate(10px, -10px) rotate(5deg);
+    }
+    50%{
+        transform:translate(0px, -20px) rotate(0deg);
+    }
+    75%{
+        transform:translate(-10px, -10px) rotate(-5deg);
+    }
+    100%{
+        transform:translate(0px, 0px) rotate(0deg);
+    }
 }
 </style>
 </head>
-
 <body>
-
-<img id="cursorJefaExacto"
-src="https://xatimg.com/image/WmUTHP4IOFWv.png">
-
 <div class="intro" id="intro">
+    <button class="enter-btn" id="enterBtn">INGRESAR</button>
+</div> 
+    
+<video autoplay muted loop id="bg-video">
+    <source src="https://i.imgur.com/6235ET0.mp4" type="video/mp4">
+</video>
+<div class="wrapper">
 
-  <!-- FIRMA -->
-  <div class="firma-box">
-      <img src="https://i.ibb.co/nNCJ254t/0c33l-6gdzd.gif" alt="firma">
-  </div>
+ <div class="butterfly">
+    <img src="https://i.imgur.com/dVLIvmG.gif">
+</div>
 
-  <!-- BOTON -->
-  <button class="enter-btn" onclick="enterSite()">
-      INGRESAR
-  </button>
+    <div class="profile">
+
+        <div class="avatar">
+            <img src="https://xatimg.com/image/4XcRCYqKde7i.png">
+        </div>
+
+        <!-- MENU -->
+        <div class="menu">
+            <span class="active">PERFIL</span>
+            <span>AMIGOS</span>
+            <span>GALERÍA</span>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+
+            <!-- PERFIL -->
+            <div class="tab active" id="perfil">
+
+                <div class="name">✿ 𝑳𝑼𝑵𝑨 ✿</div>
+                <div class="id">Id: 1544139450</div>
+
+<div class="info">
+
+    <div class="card">
+        <span class="title">Cumpleaños</span>
+        <span class="sub">🎂 1 de Octubre</span>
+    </div>
+
+    <div class="card">
+        <span class="title">Signo</span>
+        <span class="sub">♎ libra</span>
+    </div>
+
+    <div class="card">
+        <span class="title">País</span>
+<span class="sub">
+    <img src="https://flagcdn.com/w20/us.png" class="flag">
+    USA
+    </div>
 
 </div>
 
-<!-- TRANSICIÓN PREMIUM -->
-<div id="page-transition"></div>
+<div class="message">
+    <span id="typing"></span><span class="cursor">|</span>
+</div>
 
-<!-- ===============================
-     CONTENIDO PRINCIPAL
-================================ -->
-<div class="page-content">
-
-
-  <div class="wrapper">
-
-    <!-- BOTONES -->
-    <div class="menu-left">
-  <a href="#" onclick="abrirFriend(); return false;"> Friend </a>
-      <a href="#" onclick="abrirGaleria(); return false;"> Galeria </a>
-
-      <div class="btn-player">
-        <a href="#" onclick="togglePlayer(); return false;"> Musica </a>
-
-        <div class="player-drop" id="playerDrop">
-          <div class="player-glass">
-            <div class="music-title">Musica</div>
-            <div class="song-name animated-song" id="songName">Cargando...</div>
-
-            <div class="player-controls">
-              <button id="prevBtn">⏮</button>
-              <button id="playPauseBtn">▶</button>
-              <button id="nextBtn">⏭</button>
             </div>
 
-            <input type="range" id="progress" class="progress" value="0">
-          </div>
+<div class="tab" id="amigos">
+
+    <div class="friends">
+
+        <!-- FRIEND -->
+        <div class="friend">
+            <div class="avatar-friend letter">CH</div>
+
+            <div class="data">
+                <div class="nick">CHIMI</div>
+                <div class="fid">59818683</div>
+            </div>
+
+<a href="https://xat.me/59818683" target="_blank" class="xat">xat.me</a>
         </div>
-      </div>
+
+        <!-- SIN IMAGEN (LETRA) -->
+        <div class="friend">
+            <div class="avatar-friend letter">SN</div>
+
+            <div class="data">
+                <div class="nick">SANDY</div>
+                <div class="fid">1517173614</div>
+            </div>
+
+            <a href="https://xat.me/1517173614" target="_blank" class="xat">xat.me</a>
+        </div>
+
+                <!-- SIN IMAGEN (LETRA) -->
+        <div class="friend">
+            <div class="avatar-friend letter">DN</div>
+
+            <div class="data">
+                <div class="nick">DIANA </div>
+                <div class="fid">289238842</div>
+            </div>
+
+            <a href="https://xat.me/289238842" target="_blank" class="xat">xat.me</a>
+        </div>
+
+        <!-- SIN IMAGEN (LETRA) -->
+        <div class="friend">
+            <div class="avatar-friend letter">AN</div>
+
+            <div class="data">
+                <div class="nick">ANA</div>
+                <div class="fid">1520937234</div>
+            </div>
+
+            <a href="https://xat.me/1520937234" target="_blank" class="xat">xat.me</a>
+        </div>
+
+                <!-- SIN IMAGEN (LETRA) -->
+        <div class="friend">
+            <div class="avatar-friend letter">RB</div>
+
+            <div class="data">
+                <div class="nick">ROBALO</div>
+                <div class="fid">161136359</div>
+            </div>
+
+            <a href="https://xat.me/161136359" target="_blank" class="xat">xat.me</a>
+        </div>
+
+                        <!-- SIN IMAGEN (LETRA) -->
+        <div class="friend">
+            <div class="avatar-friend letter">RZ</div>
+
+            <div class="data">
+                <div class="nick">RUZA </div>
+                <div class="fid">27278727</div>
+            </div>
+
+            <a href="https://xat.me/27278727" target="_blank" class="xat">xat.me</a>
+        </div>
     </div>
 
-<!-- CARD -->
-<div class="card">
-
-  <!-- AVATAR -->
-  <div class="avatar-wrap">
-    <div class="avatar">
-      <img src="https://xatimg.com/image/8qlz8q5AyD7s.png">
-    </div>
-
-
-
-    <!-- ICONO FORUM -->
-    <a href="https://xat.com/trade" target="_blank" class="forum-icon" title="trade">
-      <img src="https://xatimg.com/image/TltnJ6ffKtRX.png" alt="forum">
-    </a>
-  </div>
-
-  <!-- TEXTO -->
-<div class="name">
-  Lex
-  <img class="flag" src="https://flagcdn.com/w20/sv.png" alt="Francia">
-</div>
-  <div class="subtitle">✧ Bienvenidos a mi xatspace ✧</div>
-
-  <div class="bio" id="typingText">
-    No dejes de intentarlo nunca!.
-  </div>
-
-
-
-  <!-- FOOTER -->
-  <div class="footer">✦ By Fabricio ✦</div>
-
-</div>
-
-<!-- MODAL GALERIA -->
-<div class="modal-overlay" id="galeriaModal">
-  <div class="modal-content">
-
-    <span class="modal-close" onclick="cerrarGaleria()">×</span>
-
-    <div class="gallery-box">
-
-      <div class="gallery-header">
-        <span>ɢᴀʟᴇʀɪᴀ</span>
-      </div>
-
-      <div class="slider" id="slider">
-
-        <div class="slide active">
-          <img src="https://xatimg.com/image/2Jouuawm2zSU.png">
-        </div>
-
-        <div class="slide right">
-          <img src="https://xatimg.com/image/iSH8rPX9J5M5.png">
-        </div>
-
-        <div class="slide right">
-          <img src="https://xatimg.com/image/H4uFhikgqWeh.png">
-        </div>
-
-        <div class="slide right">
-          <img src="https://xatimg.com/image/cecUBxkH1CZm.png">
-        </div>
-        <!-- AGREGA MÁS SLIDES AQUÍ -->
-        <!--
-        <div class="slide">
-          <img src="URL_IMAGEN">
-        </div>
-        -->
-
-      </div>
-
-      <div class="nav prev" onclick="prev()">❮</div>
-      <div class="nav next" onclick="next()">❯</div>
-
-    </div>
-
-  </div>
 </div>
 
+<!-- GALERÍA -->
+<div class="tab" id="galeria">
 
-<!-- MODAL FRIEND -->
-<div class="modal-overlay" id="friendModal">
-  <div class="modal-content">
+    <div class="gallery-container">
 
-    <span class="modal-close" onclick="cerrarFriend()">×</span>
+        <!-- carta principal -->
+        <div class="card-main" id="mainCard">
+            <img src="https://xatimg.com/image/KWbvhbgwqWem.png">
+        </div>
 
-    <div class="friends-card">
+        <!-- carrusel -->
+        <div class="carousel" id="carousel">
+            <div class="item"><img src="https://xatimg.com/image/x3yMX5D1MnmP.png"></div>
+            <div class="item"><img src="https://xatimg.com/image/XWwX5wH5T0jx.png"></div>
+            <div class="item"><img src="https://xatimg.com/image/GiTAvuZW718b.png"></div>
+            <div class="item"><img src="https://xatimg.com/image/KWbvhbgwqWem.png"></div>
+        </div>
 
-      <div class="friends-title"> Friends </div>
-
-      <div class="friends-list">
-
-  <!-- FRIEND 1 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">DY</div>
-      <div class="friend-info">
-        <div class="friend-name">iDaii</div>
-        <div class="friend-id">116447265</div>
-      </div>
     </div>
 
-    <a class="friend-btn" href="https://xat.me/116447265" target="_blank">
-      XAT.ME
-    </a>
-  </div>
-
-   <!-- FRIEND 2 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">CB</div>
-      <div class="friend-info">
-        <div class="friend-name">iBlessed </div>
-        <div class="friend-id">155924227</div>
-      </div>
-    </div>
-
-    <a class="friend-btn" href="https://xat.me/155924227" target="_blank">
-      XAT.ME
-    </a>
-  </div>
-
-      <!-- FRIEND 3 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">ANG</div>
-      <div class="friend-info">
-        <div class="friend-name">XANG3LiTAX </div>
-        <div class="friend-id">10346</div>
-      </div>
-    </div>
-
-    <a class="friend-btn" href="https://xat.me/10346" target="_blank">
-      XAT.ME
-    </a>
-  </div> 
-        
-  <!-- FRIEND 2 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">CB</div>
-      <div class="friend-info">
-        <div class="friend-name">CeboLLita </div>
-        <div class="friend-id">1557810815</div>
-      </div>
-    </div>
-
-    <a class="friend-btn" href="https://xat.me/1557810815" target="_blank">
-      XAT.ME
-    </a>
-  </div>
-
-  <!-- FRIEND 3 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">UN</div>
-      <div class="friend-info">
-        <div class="friend-name">Universo</div>
-        <div class="friend-id">202051162</div>
-      </div>
-    </div>
-
-    <a class="friend-btn" href="https://xat.me/202051162" target="_blank">
-      XAT.ME
-    </a>
-  </div>
-
-  <!-- FRIEND 3 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">ML</div>
-      <div class="friend-info">
-        <div class="friend-name">MyLoveLovee</div>
-        <div class="friend-id">707651438</div>
-      </div>
-    </div>
-
-    <a class="friend-btn" href="https://xat.me/707651438" target="_blank">
-      XAT.ME
-    </a>
-  </div>   
-
-     <!-- FRIEND 3 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">FB</div>
-      <div class="friend-info">
-        <div class="friend-name">xfabriciio</div>
-        <div class="friend-id">1537898900</div>
-      </div>
-    </div>
-
-    <a class="friend-btn" href="https://xat.me/1537898900" target="_blank">
-      XAT.ME
-    </a>
-  </div>  
-      </div>     
-    </div>
-
-  </div>
 </div>
 
+    </div>
+</div>
+<div class="player">
 
-
+<!-- DISCO -->
+<div class="disc">
+    <img id="cover" src="https://xatimg.com/image/rQKnT3qeior8.jpg">
+</div>
+    <!-- INFO -->
+    <div class="song">
+        <span id="artist">Artista</span><br>
+        <small id="title">Canción</small>
+    </div>
+<div class="equalizer" id="equalizer">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+    <!-- CONTROLES -->
+    <div class="controls">
+        <button onclick="prev()">⏮</button>
+        <button onclick="togglePlay()" id="playBtn">▶</button>
+        <button onclick="next()">⏭</button>
     </div>
 
-  </div>
+    <!-- PROGRESO -->
+    <div class="progress-container" onclick="setProgress(event)">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <audio id="audio"></audio>
+</div>
+
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const element = document.getElementById("typingText");
-  if (!element) return;
+const audio = document.getElementById("audio");
+const cover = document.getElementById("cover");
+const title = document.getElementById("title");
+const artist = document.getElementById("artist");
+const progress = document.getElementById("progress");
+const playBtn = document.getElementById("playBtn");
+const player = document.querySelector(".player");
 
-  // Evita que se ejecute más de una vez
-  if (element.dataset.typed === "true") return;
-  element.dataset.typed = "true";
-
-  const text = element.textContent.trim();
-  element.textContent = "";
-
-  let index = 0;
-  const speed = 65;
-
-  function typeEffect() {
-    if (index < text.length) {
-      element.textContent += text.charAt(index);
-      index++;
-      setTimeout(typeEffect, speed);
+// 🎵 TUS CANCIONES (CAMBIÁ NOMBRES SEGÚN TU CARPETA)
+const songs = [
+    {
+        name: "Carlos Rivera - Que lo nuestro se quede nuestro.mp3",
+        title: "Que lo nuestro se quede nuestro",
+        artist: "Carlos Rivera",
+        cover: "album.jpg"
     }
-  }
-
-  typeEffect();
-});
-
-function abrirGaleria(){
-  document.getElementById("galeriaModal").classList.add("active");
-}
-
-function cerrarGaleria(){
-  document.getElementById("galeriaModal").classList.remove("active");
-}
-
-
-let songs = [
-  { name: "Bad Bunny - Monaco", url: "music/Bad Bunny – MONACO.mp3" },
-  { name: "Bad Bunny - Te mudaste el ultimo tour del mundo", url: "music/BAD BUNNY - TE MUDASTE _ EL ÚLTIMO TOUR DEL MUNDO.mp3" },
-  { name: "Bad Bunny, Mora - Una Vez", url: "music/Bad Bunny, Mora - Una Vez.mp3" }
 ];
 
-let audio = new Audio();
-let currentIndex = 0;
-let isPlaying = false;
+let index = 0;
+let playing = false;
 
-const playPauseBtn = document.getElementById("playPauseBtn");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
-const songName = document.getElementById("songName");
-const progress = document.getElementById("progress");
-
-function loadSong(autoplay = false){
-  audio.src = songs[currentIndex].url;
-  songName.textContent = songs[currentIndex].name;
-
-  if(autoplay){
-    audio.play().then(()=>{
-      isPlaying = true;
-      playPauseBtn.textContent = "⏸";
-    }).catch(()=>{});
-  }
+// cargar canción
+function loadSong(song){
+    audio.src = "music/" + song.name;
+    cover.src = "music/" + song.cover;
+    title.textContent = song.title;
+    artist.textContent = song.artist;
 }
 
-playPauseBtn.addEventListener("click", () => {
-  if(audio.paused){
+// play / pause
+function togglePlay(){
+    if(playing){
+        audio.pause();
+        playBtn.textContent = "▶";
+        player.classList.remove("playing");
+    }else{
+        audio.play();
+        playBtn.textContent = "⏸";
+        player.classList.add("playing");
+    }
+    playing = !playing;
+}
+
+// siguiente
+function next(){
+    index++;
+    if(index >= songs.length) index = 0;
+    loadSong(songs[index]);
     audio.play();
-    isPlaying = true;
-    playPauseBtn.textContent = "⏸";
-  }else{
-    audio.pause();
-    isPlaying = false;
-    playPauseBtn.textContent = "▶";
-  }
-});
-
-nextBtn.onclick = () => {
-  currentIndex = (currentIndex + 1) % songs.length;
-  loadSong(true);
-};
-
-prevBtn.onclick = () => {
-  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  loadSong(true);
-};
-
-// ▶ cuando termina la canción → pasa a la siguiente automáticamente
-audio.addEventListener("ended", () => {
-  currentIndex = (currentIndex + 1) % songs.length;
-  loadSong(true);
-});
-
-
-progress.addEventListener("input", () => {
-  if(audio.duration){
-    audio.currentTime = (progress.value / 100) * audio.duration;
-  }
-});
-
-// Carga inicial SIN reproducir
-loadSong(false);
-
-
-function togglePlayer(){
-  document
-    .getElementById("playerDrop")
-    .classList.toggle("active");
+    player.classList.add("playing");
+    playBtn.textContent = "⏸";
+    playing = true;
 }
+
+// anterior
+function prev(){
+    index--;
+    if(index < 0) index = songs.length - 1;
+    loadSong(songs[index]);
+    audio.play();
+    player.classList.add("playing");
+    playBtn.textContent = "⏸";
+    playing = true;
+}
+
+// progreso automático
+audio.addEventListener("timeupdate", () => {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = percent + "%";
+});
+
+// click en barra
+function setProgress(e){
+    const width = e.currentTarget.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audio.duration;
+
+    audio.currentTime = (clickX / width) * duration;
+}
+
+// autoplay
+window.addEventListener("load", () => {
+    loadSong(songs[index]);
+
+    audio.volume = 0.5;
+
+    audio.play().then(()=>{
+        playing = true;
+        playBtn.textContent = "⏸";
+        player.classList.add("playing");
+    }).catch(()=>{
+        playBtn.textContent = "▶";
+    });
+});
+
+// siguiente automático
+audio.addEventListener("ended", next);
+
+title.parentElement.classList.add("change");
+
+setTimeout(()=>{
+    title.parentElement.classList.remove("change");
+},300);
+
+const tabs = document.querySelectorAll('.tab');
+const buttons = document.querySelectorAll('.menu span');
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+
+        // quitar activo de botones
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // ocultar tabs
+        tabs.forEach(t => t.classList.remove('active'));
+
+        // mostrar tab correcto
+        const id = btn.textContent.toLowerCase();
+
+        if(id.includes('perfil')) document.getElementById('perfil').classList.add('active');
+        if(id.includes('amigos')) document.getElementById('amigos').classList.add('active');
+        if(id.includes('galería')) document.getElementById('galeria').classList.add('active');
+    });
+});
+
+const text = "Cada día es un regalo,ábrelo con gratitud y úsalo con propósito";
+const speed = 40; // velocidad (más bajo = más rápido)
+
+let i = 0;
+const typing = document.getElementById("typing");
+
+function writeText(){
+    if(i < text.length){
+        typing.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(writeText, speed);
+    }
+}
+
+// iniciar al cargar
+window.addEventListener("load", writeText);
+
+const mainCard = document.getElementById("mainCard");
+const carousel = document.getElementById("carousel");
+const items = document.querySelectorAll(".item");
+
+let opened = false;
+
+mainCard.addEventListener("click", () => {
+
+    if(opened) return;
+    opened = true;
+
+    // ocultar carta principal
+    mainCard.style.transform = "scale(0)";
+    mainCard.style.opacity = "0";
+
+    carousel.style.display = "block";
+
+    const total = items.length;
+    const radius = 170;
+
+// 🔥 RESET para evitar efecto hacia abajo
+items.forEach(item => {
+    item.style.transition = "none";
+    item.style.transform = "translate(-50%, -50%) rotateY(0deg) translateZ(0px)";
+});
+
+// forzar reflow
+items[0].offsetHeight;
+
+
+// efecto "repartir cartas"
+items.forEach((item, i) => {
+
+    const angle = (360 / total) * i;
+
+    setTimeout(() => {
+        item.style.transition = "0.8s ease";
+        item.style.transform =
+            `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`;
+    }, i * 120);
+
+});
+
+
+// activar giro después de repartir
+setTimeout(() => {
+    carousel.classList.add("active");
+}, total * 120 + 300);
+});
+const wrapper = document.querySelector(".wrapper");
+
+enterBtn.addEventListener("click", () => {
+
+    // animación intro
+    intro.classList.add("hide");
+
+    // mostrar contenido con blur
+    setTimeout(() => {
+        intro.style.display = "none";
+        wrapper.classList.add("show");
+    }, 800);
+
+    // 🔊 reproducir música
+    loadSong(songs[index]);
+
+    audio.volume = 0.5;
+
+    audio.play().then(() => {
+        playing = true;
+        playBtn.textContent = "⏸";
+        player.classList.add("playing");
+    }).catch(() => {
+        playBtn.textContent = "▶";
+    });
+
+});
 
 /* Bloquear clic derecho */
 document.addEventListener('contextmenu', function(e){
@@ -1473,99 +1234,6 @@ document.addEventListener('dragstart', function(e){
   e.preventDefault();
 });
 
-function enterSite(){
-  const intro = document.getElementById("intro");
-  if(!intro) return;
-
-  intro.style.pointerEvents = "none";
-
-  // 🔥 animación de entrada
-  document.body.classList.add("entered");
-
-  // 🔥 autoplay seguro (ya hubo click)
-  audio.play().then(()=>{
-    isPlaying = true;
-    playPauseBtn.textContent = "⏸";
-  }).catch(()=>{});
-
-  intro.style.transition = "opacity 1s ease";
-  intro.style.opacity = "0";
-
-  setTimeout(() => {
-    intro.remove();
-  }, 1100);
-}
-
-
-function spawnSparkle(){
-  const sparkle = document.createElement("div");
-  sparkle.className = "heart-sparkle";
-  sparkle.style.left = posX + "px";
-  sparkle.style.top = posY + "px";
-  document.body.appendChild(sparkle);
-
-  setTimeout(() => sparkle.remove(), 600);
-}
-
-document.addEventListener('mousemove', spawnSparkle);
-window.addEventListener("message", spawnSparkle);
-
-
-function abrirFriend(){
-  document.getElementById("friendModal").classList.add("active");
-}
-
-function cerrarFriend(){
-  document.getElementById("friendModal").classList.remove("active");
-}
-
-function abrirMarried(){
-  document.getElementById("marriedModal").classList.add("active");
-}
-
-function cerrarMarried(){
-  document.getElementById("marriedModal").classList.remove("active");
-}
-
-const slides = document.querySelectorAll('#galeriaModal .slide');
-let current = 0;
-
-function update(){
-  slides.forEach((s,i)=>{
-    s.className = 'slide';
-    if(i === current) s.classList.add('active');
-    else if(i === (current - 1 + slides.length) % slides.length) s.classList.add('left');
-    else if(i === (current + 1) % slides.length) s.classList.add('right');
-  });
-}
-
-function next(){
-  current = (current + 1) % slides.length;
-  update();
-}
-
-function prev(){
-  current = (current - 1 + slides.length) % slides.length;
-  update();
-}
-
-/* ===============================
-   💗 CURSOR JEFA EXACTO (FIX REAL)
-================================ */
-
-const cursor = document.getElementById("cursorJefaExacto");
-
-/* posición inicial para que se vea desde el inicio */
-cursor.style.transform = "translate(50vw, 50vh)";
-
-const offsetX = 20;
-const offsetY = 10;
-
-document.addEventListener("mousemove", (e) => {
-  cursor.style.transform =
-    `translate(${e.clientX - offsetX}px, ${e.clientY - offsetY}px)`;
-});
 </script>
 
 </body>
-</html>
