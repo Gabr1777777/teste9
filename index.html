@@ -14,7 +14,7 @@ body{
   margin:0;
   height:100vh;
   font-family:'Poppins',sans-serif;
-  background:radial-gradient(circle at top,#875151,#875151,#875151);
+  background:radial-gradient(circle at top,#2864bd,#174888,#234eac);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -46,19 +46,19 @@ body{
   padding:10px 0;
   text-align:center;
 
-  background:rgba(248, 187, 191, 0.712);
+  background:rgba(234, 241, 248, 0.712);
   backdrop-filter:blur(14px);
 
   border-radius:10px;
-  border:1px solid rgba(252, 198, 198, 0.35); /* 👈 BORDE */
+  border:1px solid rgba(49, 132, 241, 0.35); /* 👈 BORDE */
   
   font-size:13px;
-  color:#fcdcdf;
+  color:#dceefc;
   text-decoration:none;
 
   box-shadow:
-    inset 0 0 1px rgba(253, 206, 206, 0.6),  /* brillo glass */
-    0 4px 10px rgba(128, 40, 40, 0.25);
+    inset 0 0 1px rgba(58, 119, 250, 0.6),  /* brillo glass */
+    0 4px 10px rgba(40, 81, 128, 0.25);
 
   transition:transform .25s ease,
              box-shadow .25s ease,
@@ -75,9 +75,9 @@ body{
   inset:0;
   background:linear-gradient(
     135deg,
-    rgb(252, 180, 213),
-    rgb(250, 171, 184),
-    rgb(250, 150, 180)
+    rgb(118, 170, 248),
+    rgb(122, 166, 248),
+    rgb(112, 157, 253)
   );
   opacity:0;
   transition:opacity .15s ease;
@@ -87,7 +87,7 @@ body{
 
 .menu-left a:hover{
   transform:translateX(-10px);
-  box-shadow:0 2px 2px rgba(248, 114, 148, 0.795);
+  box-shadow:0 2px 2px rgba(114, 177, 248, 0.795);
 }
 
 .menu-left a:hover::after{
@@ -106,9 +106,9 @@ body{
   width:420px;
   height:560px;
   border-radius:30px;
-  background:rgba(192, 112, 112, 0.959);
+  background:rgba(168, 176, 185, 0.959);
   backdrop-filter:blur(20px);
-  box-shadow:0 15px 10px rgba(145, 44, 49, 0.637);
+  box-shadow:0 15px 10px rgba(124, 132, 141, 0.637);
   z-index:2;
   overflow:hidden; /* IMPORTANTE */
 }
@@ -153,40 +153,7 @@ body{
   transform:translateX(-50%);
   font-family:'Playfair Display',serif;
   font-size:28px;
-
-  /* degradado */
-  background: linear-gradient(
-    90deg,
-    #ffd6e1,
-    #ffffff,
-    #ffb3c6,
-    #ffd6e1
-  );
-  background-size:200% auto;
-
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  /* brillo neon (lo mantenemos) */
-  text-shadow:
-    0 0 6px rgba(255,220,220,.8),
-    0 0 12px rgba(255,170,190,.7),
-    0 0 22px rgba(255,140,160,.6),
-    0 0 40px rgba(255,120,140,.5);
-
-  animation: gradientMove 5s linear infinite;
-}
-
-@keyframes gradientMove{
-  to{
-    background-position:200% center;
-  }
-}
-/* animación del brillo */
-@keyframes brilloNombre{
-  to{
-    background-position:200% center;
-  }
+  color:#ffe8e8;
 }
 
 
@@ -196,7 +163,7 @@ body{
   left:50%;
   transform:translateX(-50%);
   font-size:13px;
-  color:#f7d4d4;
+  color:#fdeaea;
 }
 
 
@@ -211,9 +178,9 @@ body{
   padding:14px 16px;                 /* espacio interno del texto */
   font-size:11px;
   line-height:1.6;
-  color:#fddce1;
+  color:#fcf3f4;
    text-align:center;
-  background:rgba(247, 168, 168, 0.596);  /* fondo suave */
+  background:rgba(102, 151, 224, 0.596);  /* fondo suave */
   backdrop-filter:blur(10px);
   border-radius:16px;
 
@@ -242,7 +209,7 @@ body{
   left:50%;
   transform:translateX(-50%);
   font-size:8px;
-  color:#fdeef0aa;
+  color:#eef6fdaa;
 }
 
 /* OVERLAY */
@@ -251,7 +218,7 @@ body{
   inset:0;
 
   /* MÁS TRANSPARENTE */
-  background: rgba(255, 180, 210, 0.08);
+  background: rgba(180, 219, 255, 0.08);
 
   /* BLUR MÁS SUAVE */
   backdrop-filter: blur(7px);
@@ -280,7 +247,7 @@ body{
   height:530px;
   border-radius:20px;
   overflow:visible;   /* ✅ CLAVE */
-   box-shadow:0 0 40px rgba(250, 130, 140, 0.466);
+  box-shadow:0 0 40px rgba(118, 182, 241, 0.466);
   animation:zoomIn .35s ease;
 }
 
@@ -294,8 +261,8 @@ body{
   pointer-events:none;
 
   box-shadow:
-    0 0 25px rgba(255, 170, 170, 0.9),
-    0 0 60px rgba(255, 120, 127, 0.5);
+    0 0 25px rgba(84, 131, 192, 0.9),
+    0 0 60px rgba(90, 138, 194, 0.5);
 }
 
 
@@ -319,7 +286,7 @@ body{
   border-radius:50%;
   background:rgba(255,255,255,.75);
   backdrop-filter:blur(8px);
-  color:#d84450;
+  color:#6eadf5;
   font-size:22px;
   font-weight:600;
   display:flex;
@@ -327,12 +294,12 @@ body{
   justify-content:center;
   cursor:pointer;
   z-index:1000;
-  box-shadow:0 6px 18px rgba(120,40,90,.45);
+  box-shadow:0 6px 18px rgba(40, 81, 120, 0.45);
   transition:.25s ease;
 }
 
 .modal-close:hover{
-  background:#ffd6e8;
+  background:#d6edff;
   transform:scale(1.15);
 }
 
@@ -375,21 +342,21 @@ body{
 .player-tab{
   width:40px;
   height:120px;
-  background: linear-gradient(180deg,#ff3b3b,#ca36367a);
+  background: linear-gradient(180deg,#71a9fd,#3676ca7a);
   border-radius:15px 0 0 15px;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:22px;
   cursor:pointer;
-  box-shadow:0 0 25px rgba(255,0,0,.6);
+  box-shadow:0 0 25px rgba(0, 132, 255, 0.6);
 }
 
 .player-glass{
   width:200px;
   height:40%;
   padding:4px;
-  background: rgba(223, 129, 129, 0.575);
+  background: rgba(129, 178, 223, 0.575);
   backdrop-filter: blur(18px);
 
   border-radius:20px;                     /* ✔ bordes iguales */
@@ -398,14 +365,14 @@ body{
 
   box-shadow:
     inset 0 0 20px rgba(255,255,255,.15),
-    0 0 40px rgba(194, 88, 88, 0.45);
+    0 0 40px rgba(88, 138, 194, 0.45);
 }
 
 
 .music-title{
   font-size:11px;
   letter-spacing:2px;
-  color:#ffd6d6;
+  color:#d6e8ff;
   text-transform:uppercase;
   margin-bottom:6px;
   text-align:center;
@@ -414,7 +381,7 @@ body{
 .animated-song{
   font-size:12px;
   margin-bottom:14px;
-   background: linear-gradient(90deg,#fff,#ffb3b3,#fff);
+  background: linear-gradient(90deg,#fff,#e3f0fc,#fff);
   background-size:200% auto;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -444,13 +411,13 @@ body{
 
 .player-controls button:hover{
   transform: scale(1.15);
-  box-shadow:0 0 25px rgba(228, 164, 164, 0.8);
+  box-shadow:0 0 25px rgba(235, 243, 253, 0.8);
 }
 
 .progress{
   margin-top:14px;
   width:100%;
-  accent-color:#be8686;
+  accent-color:#d7e3ee;
 }
 .btn-player{
   position:relative;
@@ -511,14 +478,14 @@ img{
   /* FONDO MÁS SÓLIDO */
   background: linear-gradient(
     145deg,
-    #ffd6e1,
-    #f4a8b8
+    #d6e8ff,
+    #a8c9f4
   );
 
   border:2px solid #fff;
 
   box-shadow:
-    0 4px 12px rgba(150,50,60,.45),
+    0 4px 12px rgba(82, 134, 182, 0.45),
     inset 0 0 6px rgba(255,255,255,.8);
 
   z-index:10;
@@ -534,7 +501,7 @@ img{
   align-items:center;
   justify-content:center;
   font-size:17px;
-  color:#9c2f42;
+  color:#437bb9;
 }
 
 .home-icon:hover{
@@ -628,9 +595,9 @@ img{
   justify-content:center;
   background: radial-gradient(
     circle at top,
-    #875151,
-    #974646,
-    #b15656
+    #00325a,
+    #003050,
+    #002e53
   );
   overflow:hidden;
 }
@@ -655,8 +622,8 @@ img{
   animation:heartFloat 3s ease-in-out infinite;
 
   filter:
-    drop-shadow(0 0 25px rgba(247, 142, 142, 0.8))
-    drop-shadow(0 0 60px rgba(221, 130, 130, 0.6));
+    drop-shadow(0 0 25px rgba(23, 129, 216, 0.8))
+    drop-shadow(0 0 60px rgba(18, 108, 192, 0.6));
 
   transition:.35s ease;
 }
@@ -676,9 +643,9 @@ img{
 
   background:linear-gradient(
     145deg,
-    #ffd6d6,
-    #f4a8a8,
-    #d17070
+    #88c7fa,
+    #1976cc,
+    #166cce
   );
 }
 
@@ -705,14 +672,14 @@ img{
   background:linear-gradient(
     145deg,
     rgba(255,255,255,.35),
-    rgba(255,180,190,.85)
+    rgba(180, 215, 255, 0.85)
   );
 
   backdrop-filter:blur(14px);
 
   box-shadow:
     inset 0 0 28px rgba(255,255,255,.45),
-    0 0 45px rgba(255, 100, 100, 0.75);
+    0 0 45px rgba(100, 180, 255, 0.75);
 }
 
 /* BORDE INTERNO */
@@ -759,10 +726,10 @@ img{
   letter-spacing:4px;
   line-height:1;
 
-  color:#fd849a;
+  color:#599ce9;
   text-shadow:
     0 2px 3px rgba(255,255,255,.95),
-    0 0 12px rgba(255,150,160,.9);
+    0 0 12px rgba(88, 170, 247, 0.9);
 
   pointer-events:none;
 }
@@ -783,7 +750,7 @@ img{
   height:14px;
   z-index:3; /* debajo del texto */
 
-  background:linear-gradient(145deg,#ffd6dc,#f4a8b8);
+  background:linear-gradient(145deg,#ffd6dc,#6ea6fa);
   transform:rotate(-45deg);
   opacity:.75;
   animation:floatMini 3s ease-in-out infinite;
@@ -834,8 +801,8 @@ img{
   position:fixed;
   inset:0;
   background:radial-gradient(circle at center,
-    rgba(255,200,210,.85),
-    rgba(255,120,140,.95)
+    rgba(137, 176, 248, 0.85),
+    rgba(20, 90, 196, 0.95)
   );
   opacity:0;
   pointer-events:none;
@@ -892,7 +859,7 @@ body.entered{
   position: fixed;
   width: 8px;
   height: 8px;
-  background: radial-gradient(circle, #ffb3b3, transparent);
+  background: radial-gradient(circle, #348aec, transparent);
   border-radius: 50%;
  pointer-events:none;
   z-index: 99998;
@@ -917,7 +884,27 @@ html, body{
   pointer-events: auto !important;
 }
 
+/* CORAZONES ELEGANTES */
+.corazon-xat {
+    position: fixed;
+    font-size: 16px;
+    color: #70abf8;
+    animation: corazonFlotar 3.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 999999;
+    text-shadow: 0 0 6px rgba(87, 133, 219, 0.6);
+}
 
+@keyframes corazonFlotar {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120px) scale(1.4);
+        opacity: 0;
+    }
+}
 
 
 html, body, a, div, span, p, img, button, input, textarea, select, * {
@@ -932,11 +919,11 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
 .married-card{
   width:380px;
   height:520px;
-  background:rgba(192,112,112,.95);
+  background:rgba(90, 143, 223, 0.95);
   backdrop-filter:blur(22px);
   border-radius:26px;
   position:relative;
-  box-shadow:0 18px 35px rgba(120,40,40,.55);
+  box-shadow:0 18px 35px rgba(40, 81, 120, 0.55);
   overflow:hidden;
   margin:auto;
 }
@@ -964,7 +951,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   border-radius:50%;
   overflow:hidden;
   border:4px solid rgba(255,255,255,.85);
-  box-shadow:0 0 30px rgba(255,140,160,.9);
+  box-shadow:0 0 30px rgba(71, 162, 247, 0.9);
 }
 
 .married-card .avatar img{
@@ -980,16 +967,16 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   width:40px;
   height:40px;
   border-radius:50%;
-  background:linear-gradient(145deg,#ffd6e1,#f4a8a8);
+  background:linear-gradient(145deg,#d6e9ff,#a8c9f4);
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 0 18px rgba(255, 120, 120, 0.9);
+  box-shadow:0 0 18px rgba(120, 174, 255, 0.9);
 }
 
 .married-heart span{
   font-size:18px;
-  color:#9c2f42;
+  color:#0d6dda;
 }
 
 .married-card .name{
@@ -999,7 +986,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   transform:translateX(-50%);
   font-family:'Playfair Display',serif;
   font-size:26px;
-  color:#f7d4d4;
+  color:#d4e3f7;
 }
 
 .married-card .id{
@@ -1008,7 +995,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   left:50%;
   transform:translateX(-50%);
   font-size:12px;
-  color:#ffdede;
+  color:#deefff;
 }
 
 .married-card .message{
@@ -1021,8 +1008,8 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   text-align:center;
   font-size:15px;
   line-height:1.6;
-  color:#fdeef0;
-  background:rgba(247,168,168,.45);
+  color:#eef5fd;
+  background:rgba(168, 196, 247, 0.45);
   backdrop-filter:blur(12px);
   border-radius:18px;
 }
@@ -1037,12 +1024,12 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
 .married-card .xatme a{
   padding:8px 28px;
   border-radius:20px;
-  background:linear-gradient(145deg,#ffd6d6,#f4a8bf);
+  background:linear-gradient(145deg,#d6e6ff,#a8cff4);
   border:1px solid rgba(255,255,255,.75);
   font-size:12px;
-  color:#9c2f53;
+  color:#2f5e9c;
   text-decoration:none;
-  box-shadow:0 0 18px rgba(255, 120, 154, 0.8);
+  box-shadow:0 0 18px rgba(120, 179, 255, 0.8);
   transition:.25s ease;
 }
 
@@ -1058,9 +1045,9 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   width:420px;
   height:520px;
   border-radius:30px;
-  background:rgba(192,112,112,.95);
+  background:rgba(90, 144, 224, 0.95);
   backdrop-filter:blur(20px);
-  box-shadow:0 15px 25px rgba(145,44,49,.55);
+  box-shadow:0 15px 25px rgba(44, 79, 145, 0.55);
   position:relative;
   overflow:hidden;
   margin:auto;
@@ -1079,7 +1066,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   margin-top:26px;
   font-family:'Playfair Display',serif;
   font-size:26px;
-  color:#f7d4d4;
+  color:#d4e3f7;
   letter-spacing:3px;
 }
 
@@ -1092,7 +1079,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
 }
 
 .friend-item{
-  background:rgba(243, 107, 152, 0.55);
+  background:rgba(107, 166, 243, 0.55);
   backdrop-filter:blur(12px);
   border-radius:18px;
   padding:10px 14px;
@@ -1115,13 +1102,13 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   left: 10px;
   top: 0px;
   border-radius:50%;
-  background:linear-gradient(145deg,#ffd6e1,#f4a8b8);
+  background:linear-gradient(145deg,#ffd6e1,#a8ccf4);
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:600;
   font-size:12px;
-  color:#9c2f42;
+  color:#5991da;
 }
 
 .friend-name{
@@ -1138,16 +1125,16 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   padding:6px 14px;
   border-radius:20px;
   border:1px solid rgba(255,255,255,.6);
-  background:linear-gradient(145deg,#ffd6e1,#f4a8b8);
+  background:linear-gradient(145deg,#d6e8ff,#a8ccf4);
   font-size:11px;
-  color:#9c2f50;
+  color:#5991da;
   text-decoration:none;
   transition:.25s ease;
 }
 
 .friend-btn:hover{
   transform:scale(1.1);
-  box-shadow:0 0 20px rgba(255,170,180,.9);
+  box-shadow:0 0 20px rgba(170, 210, 255, 0.9);
 }
 
 /* ===============================
@@ -1159,7 +1146,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   width:100%;
   height:100%;
 
-  background:rgba(245, 146, 163, 0.55);
+  background:rgba(46, 121, 218, 0.55);
 
   padding:22px;
 
@@ -1203,9 +1190,9 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
 
   background:linear-gradient(
     90deg,
-    #ffd6e8,
-    #f8d0e1,
-    #ffd6e8
+    #d6e9ff,
+    #d0e5f8,
+    #d6e9ff
   );
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -1217,7 +1204,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
 
 .gallery-header span{
   font-weight:200;
-  -webkit-text-stroke: 0.5px rgba(255, 200, 200, 0.6);
+  -webkit-text-stroke: 0.5px rgba(200, 222, 255, 0.6);
 }
 /* LÍNEA */
 .gallery-header::after{
@@ -1232,13 +1219,13 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   background:linear-gradient(
     90deg,
     transparent,
-    rgba(250,216,216,.8),
-    rgba(255,220,235,1),
-    rgba(253,213,213,.8),
+    rgba(216, 232, 250, 0.8),
+    rgb(220, 236, 255),
+    rgba(213, 232, 253, 0.8),
     transparent
   );
 
-  box-shadow:0 0 8px rgba(255, 180, 203, 0.8);
+  box-shadow:0 0 8px rgba(180, 210, 255, 0.8);
 }
 
 /* SLIDER */
@@ -1287,7 +1274,7 @@ html, body, a, div, span, p, img, button, input, textarea, select, * {
   opacity:1;
   box-shadow:
     0 0 0 2px rgba(255,255,255,.9),
-    0 0 35px rgba(247, 168, 168, 0.9);
+    0 0 35px rgba(168, 202, 247, 0.9);
   z-index:3;
 }
 
@@ -1314,9 +1301,9 @@ opacity:.6;
   width:46px;
   height:46px;
   border-radius:50%;
-  background:rgba(253, 225, 228, 0.692);
+  background:rgba(225, 238, 253, 0.692);
   backdrop-filter:blur(10px);
-  color:#e95f66;
+  color:#5f9fe9;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -1328,53 +1315,17 @@ opacity:.6;
 }
 
 .nav:hover{
-  background:#ffd6e8;
+  background:#d6e9ff;
   transform:translateY(-50%) scale(1.15);
 }
 
 .nav.prev{left:18px}
 .nav.next{right:18px}
 
-.name{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px; /* espacio entre nick y bandera */
-}
-
-.name .flag{
-  width:20px;
-  height:auto;
-  border-radius:3px;
-  box-shadow:0 0 6px rgba(255,255,255,.6);
-}
-
-/* ===============================
-   💗 CURSOR JEFA EXACTO
-================================ */
-
-#cursorJefaExacto{
-  position:fixed !important;
-  left:0;
-  top:0;
-
-  width:90px;   /* 🔥 más grande para ver flecha + corazones */
-  height:auto;
-
-  pointer-events:none;
-
-  z-index:99999999999;
-
-  object-fit:contain;
-  overflow:visible !important;
-}
 </style>
 </head>
 
 <body>
-
-<img id="cursorJefaExacto"
-src="https://xatimg.com/image/JG5xethZ11GX.png">
 
 <!-- INTRO -->
 <div class="intro" id="intro">
@@ -1441,37 +1392,22 @@ src="https://xatimg.com/image/JG5xethZ11GX.png">
   <!-- AVATAR -->
   <div class="avatar-wrap">
     <div class="avatar">
-      <img src="https://xatimg.com/image/GWbINLNdbfKi.jpg">
+      <img src="https://xatimg.com/image/3vMg3mNnTnCs.png">
     </div>
 
-    <!-- ICONO HOME -->
-    <a href="https://xat.com/eterno" target="_blank" class="home-icon" title="eterno">
-      <img src="https://xatimg.com/image/TltnJ6ffKtRX.png" alt="Home">
-    </a>
 
-    <!-- ICONO FORUM -->
-    <a href="https://xat.com/trade" target="_blank" class="forum-icon" title="trade">
-      <img src="https://xatimg.com/image/hPaxHzl4lHe9.png" alt="forum">
-    </a>
   </div>
 
   <!-- TEXTO -->
-<div class="name">
-  ♥ 𝕯ᵉᶤ͟ᵃ͟ʰ ♥
-  <img class="flag" src="https://flagcdn.com/w20/fr.png" alt="Francia">
-</div>
-  <div class="subtitle">✧ Bienvenidos a mi xatspace ✧</div>
+  <div class="name">♥  𝙈𝙖𝙧𝙞𝙞𝙨 ♥</div>
+  <div class="subtitle">♡ Bienvenidos a mi xatspace ♡</div>
 
   <div class="bio" id="typingText">
-    Si tuviera una sola flor por cada vez que pienso en ti,
-    podria caminar para siempre en mi jardín.
+ La naturaleza nos ha dado las piezas necesarias para alcanzar una riqueza y un bienestar excepcionales, pero nos ha dejado la tarea de juntarlas.
   </div>
 
   
-  <!-- FIRMA -->
-  <div class="firma">
-    <img src="https://xatimg.com/image/yVc4WXi1ntcB.gif">
-  </div>
+
 
   <!-- FOOTER -->
   <div class="footer">✦ By Fabricio ✦</div>
@@ -1493,13 +1429,24 @@ src="https://xatimg.com/image/JG5xethZ11GX.png">
       <div class="slider" id="slider">
 
         <div class="slide active">
-          <img src="https://xatimg.com/image/e6IFZ76DMH8M.jpg">
+          <img src="https://xatimg.com/image/SE8BpmwrSA0o.png">
         </div>
 
         <div class="slide right">
-          <img src="https://xatimg.com/image/Kg8dj0YKZM9Y.jpg">
+          <img src="https://xatimg.com/image/ZrBt80hQu4LP.png">
         </div>
 
+        <div class="slide left">
+          <img src="https://xatimg.com/image/jpyrn0LlOaGK.png">
+        </div>
+
+        <div class="slide right">
+          <img src="https://xatimg.com/image/AnMGDxMWoF2P.png">
+        </div> 
+        
+        <div class="slide right">
+          <img src="https://xatimg.com/image/TqZA5EU3eh8J.png">
+        </div> 
         <!-- AGREGA MÁS SLIDES AQUÍ -->
         <!--
         <div class="slide">
@@ -1530,50 +1477,52 @@ src="https://xatimg.com/image/JG5xethZ11GX.png">
 
       <div class="friends-list">
 
-  <!-- FRIEND 1 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">JF</div>
-      <div class="friend-info">
-        <div class="friend-name">Jefa</div>
-        <div class="friend-id">1231322223</div>
-      </div>
-    </div>
+        <!-- FRIEND 1 -->
+        <div class="friend-item">
+          <div class="friend-left">
+            <div class="avatar">Fb</div>
+            <div class="friend-info">
+              <div class="friend-name">Fabricio</div>
+              <div class="friend-id">1537898900</div>
+            </div>
+          </div>
 
-    <a class="friend-btn" href="https://xat.me/1231322223" target="_blank">
-      XAT.ME
-    </a>
-  </div>
+          <a class="friend-btn" href="https://xat.me/1537898900" target="_blank">
+            XAT.ME
+          </a>
+        </div>
 
-  <!-- FRIEND 2 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">SFR</div>
-      <div class="friend-info">
-        <div class="friend-name">Stiffer</div>
-        <div class="friend-id">344107857</div>
-      </div>
-    </div>
+        <!-- FRIEND 2 -->
+        <div class="friend-item">
+          <div class="friend-left">
+            <div class="avatar">Pp</div>
+            <div class="friend-info">
+              <div class="friend-name">Peep</div>
+              <div class="friend-id">1459253504</div>
+            </div>
+          </div>
 
-    <a class="friend-btn" href="https://xat.me/344107857" target="_blank">
-      XAT.ME
-    </a>
-  </div>
+          <a class="friend-btn" href="https://xat.me/1459253504" target="_blank">
+            XAT.ME
+          </a>
+        </div>
 
-  <!-- FRIEND 3 -->
-  <div class="friend-item">
-    <div class="friend-left">
-      <div class="avatar">LND</div>
-      <div class="friend-info">
-        <div class="friend-name">Leonidas</div>
-        <div class="friend-id">1538488247</div>
-      </div>
-    </div>
+        <!-- FRIEND 3 -->
+        <div class="friend-item">
+          <div class="friend-left">
+            <div class="avatar">Bi</div>
+            <div class="friend-info">
+              <div class="friend-name">Beei</div>
+              <div class="friend-id">108108</div>
+            </div>
+          </div>
 
-    <a class="friend-btn" href="https://xat.me/1538488247" target="_blank">
-      XAT.ME
-    </a>
-  </div>
+          <a class="friend-btn" href="https://xat.me/Beei" target="_blank">
+            XAT.ME
+          </a>
+        </div>
+
+
 
       </div>
 
@@ -1592,27 +1541,28 @@ src="https://xatimg.com/image/JG5xethZ11GX.png">
 
       <div class="avatar-wrap">
         <div class="avatar">
-      <img src="https://xatimg.com/image/Kg8dj0YKZM9Y.jpg" alt="Pareja">
+          <img src="https://xatimg.com/image/x0iTShQu3SUD.jpg" alt="Pareja">
         </div>
         <div class="married-heart"><span>❤</span></div>
       </div>
 
-  <div class="name">Warren</div>
-  <div class="id">1548738197</div>
+      <div class="name">Mauro</div>
+      <div class="id">1534999118</div>
 
-  <div class="message">
-    Eres la forma más bonita que ah tenido la vida que vale la pena arriesgarse a amar.
-  </div>
+      <div class="message">
+  Mi amor te quiero..
+      </div>
 
-  <div class="xatme">
-    <a href="https://xat.me/1548738197" target="_blank">XAT.ME</a>
-  </div>
+      <div class="xatme">
+        <a href="https://xat.me/lMauroxFcc" target="_blank">XAT.ME</a>
+      </div>
 
 
     </div>
 
   </div>
 </div>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1719,9 +1669,8 @@ function animate(){
 animate();
 
 let songs = [
-  { name: "Benedetta Caretta - Me quedo contigo", url: "music/Benedetta Caretta - Me quedo contigo.mp3" },
-  { name: "Chris De Burgh - Lady In Red", url: "music/Chris De Burgh - Lady In Red.mp3" },
-  { name: "Claude Barzotti - Aime-moi", url: "music/Claude Barzotti - Aime-moi.mp3" }
+  { name: "Beéle, Ovy On The Drums - Mi Refe", url: "music/Beéle, Ovy On The Drums - Mi Refe.mp3" },
+  { name: "Yapi - DONDE TE ESCONDES", url: "music/Yapi - DONDE TE ESCONDES.mp3" },
 ];
 
 let audio = new Audio();
@@ -1844,6 +1793,21 @@ document.addEventListener('mousemove', spawnSparkle);
 window.addEventListener("message", spawnSparkle);
 
 
+document.addEventListener("mousemove", function(e) {
+    let corazon = document.createElement("div");
+    corazon.className = "corazon-xat";
+    corazon.innerHTML = "❤";
+    corazon.style.left = (e.clientX + 5) + "px";
+    corazon.style.top = (e.clientY + 5) + "px";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 3500);
+});
+
+
 function abrirFriend(){
   document.getElementById("friendModal").classList.add("active");
 }
@@ -1882,22 +1846,6 @@ function prev(){
   update();
 }
 
-/* ===============================
-   💗 CURSOR JEFA EXACTO (FIX REAL)
-================================ */
-
-const cursor = document.getElementById("cursorJefaExacto");
-
-/* posición inicial para que se vea desde el inicio */
-cursor.style.transform = "translate(50vw, 50vh)";
-
-const offsetX = 20;
-const offsetY = 10;
-
-document.addEventListener("mousemove", (e) => {
-  cursor.style.transform =
-    `translate(${e.clientX - offsetX}px, ${e.clientY - offsetY}px)`;
-});
 </script>
 
 </body>
