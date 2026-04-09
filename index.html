@@ -1,99 +1,263 @@
-<script>
-// Bloquea click derecho en toda la página
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-});
-</script>
-
 <style>
-/* Evita seleccionar y copiar */
-body, img {
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-/* Evita arrastrar imágenes para descargarlas */
-img {
-    -webkit-user-drag: none;
-    user-drag: none;
-}
-
-/* Fondo general */
 body {
-    background-color: #000 !important;
-    margin: 0;
-    padding: 0;
+  background: url("https://xatimg.com/image/2BodrkEXd94u.png") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+/* Player contenedor */
+.player {
+  position: fixed;
+  top: 82%;
+  left: 500px;
+  right: 25px;
+  transform: translateY(-50%);
+  width: 220px;
+  padding: 18px;
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(7px);
+  border-radius: 24px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  color: #fff;
+  text-align: center;
 }
 
-/* SCROLLBAR PERSONALIZADO */
-body::-webkit-scrollbar {
-    width: 10px;
+/* Título animado */
+.song-title {
+  font-size: 14px;
+  color: #e9ddff;
+  margin-bottom: 14px;
+  font-weight: 500;
+  animation: fadeSlide 0.6s ease;
 }
 
-body::-webkit-scrollbar-track {
-    background: #111; 
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #888, #000);
-    border-radius: 10px;
-    border: 2px solid #222;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #aaa, #000);
-}
-
-/* Contenedor centrado */
-#contenedor {
-    width: 300px;
-    margin: 60px auto;
-    padding: 20px;
-    background: #111;
-    border: 2px solid #666;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #444;
-    text-align: center;
-    position: relative;
-}
-
-/* Imagen efecto transparencia */
-.imagen-efecto {
-    width: 100%;
-    border-radius: 6px;
-    transition: opacity 0.4s ease-in-out;
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
     opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.imagen-efecto:hover {
-    opacity: 0.15;
+/* Barra botones tipo cápsula */
+.controls {
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
 }
 
-/* FRASE ANIMADA */
-.frase {
-    margin-top: 20px;
-    font-size: 32px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, #fff, #000, #fff);
-    background-size: 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: movimiento 3s linear infinite;
+
+
+/* Botones */
+.controls button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Animación del degradado */
-@keyframes movimiento {
-    0% { background-position: 0%; }
-    100% { background-position: 200%; }
+/* Íconos SVG */
+.controls svg {
+  width: 16px;
+  height: 16px;
+  fill: #e6e6e6;
 }
+
+.controls button:hover svg {
+  fill: #ffffff;
+}
+
+/* Glass central */
+.glass-box {
+  max-width: 500px;
+  min-height: 260px;
+  margin: 120px auto;
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  border-radius: 22px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+
+.glass-box a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.glass-box a:hover {
+  text-shadow: 0 0 10px #ffffff;
+}
+
+/* Contenedor de la firma */
+.firma-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+    border-radius: 22px;
+  height: 200px; /* controla el espacio vertical */
+  overflow: hidden;
+}
+
+/* Tamaño del GIF de la firma */
+.firma-box img {
+  width: 500px;
+  height: 200ox;
+  border-radius: 10px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(214,180,255,0.45));
+}
+/* Texto bienvenida elegante y discreto */
+.welcome-text {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fdfdfd;
+  text-align: center;
+  display: inline-block;
+  animation: softMove 4s ease-in-out infinite;
+  text-shadow: 0 0 6px rgba(214,180,255,0.35);
+}
+
+/* Protección básica de imágenes */
+img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  user-select: none;
+}
+
 </style>
 
-<div id="contenedor">
-    <img class="imagen-efecto" src="https://xatimg.com/image/OmyxmlzEhdMs.jpg">
-    <div class="frase">fraudity</div>
+<!-- Player -->
+<div class="player">
+  <div class="song-title" id="songTitle">Nombre de la canción</div>
+
+  <div class="controls">
+    <!-- Play / Pause -->
+    <button onclick="playPause()" id="playBtn">
+      <svg id="playIcon" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </button>
+
+    <!-- Next -->
+    <button onclick="nextSong()">
+      <svg viewBox="0 0 24 24">
+        <path d="M7 6v12l8.5-6L7 6zm9 0h2v12h-2z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<audio id="audio" muted autoplay></audio>
+
+
+<!-- Cuadro central -->
+<div class="glass-box">
+<p class="welcome-text">Bienvenidos a mi xatspace</p>
+<div class="firma-box">
+  <img src="https://i.ibb.co/nNCJ254t/0c33l-6gdzd.gif" alt="Mi firma">
 </div>
 
 
+<script>
+var playlist = [
+  {
+    title: "Anuel AA - Amanece",
+    src: "musica/Anuel AA - Amanece.mp3"
+  }
+];
+
+var index = 0;
+var audio = document.getElementById("audio");
+var title = document.getElementById("songTitle");
+var playIcon = document.getElementById("playIcon");
+
+function loadSong() {
+  audio.src = playlist[index].src;
+  title.textContent = playlist[index].title;
+  title.style.animation = "none";
+  title.offsetHeight;
+  title.style.animation = null;
+  playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+}
+
+function playPause() {
+  if (audio.paused) {
+    audio.play();
+    playIcon.innerHTML = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+  } else {
+    audio.pause();
+    playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+  }
+}
+
+audio.addEventListener("ended", function () {
+  index = (index + 1) % playlist.length;
+  loadSong();
+  audio.play();
+});
+
+
+
+loadSong();
+
+audio.play();
+
+setTimeout(function () {
+  audio.muted = false;
+}, 500);
+
+
+// Blo evitar clic derecho
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+
+// Bloquear arrastrar imágenes
+document.addEventListener('dragstart', function(e) {
+  e.preventDefault();
+});
+
+// Bloquear copiar
+document.addEventListener('copy', function(e) {
+  e.preventDefault();
+});
+
+// Bloquear combinaciones comunes
+document.addEventListener('keydown', function(e) {
+  if (
+    e.ctrlKey && (
+      e.key === 'u' || // ver código fuente
+      e.key === 's' || // guardar
+      e.key === 'c' || // copiar
+      e.key === 'p'    // imprimir
+    )
+  ) {
+    e.preventDefault();
+  }
+});
+
+
+</script>
