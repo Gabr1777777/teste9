@@ -12,7 +12,7 @@
             --deep-blue-bar: rgba(0, 10, 31, 0.5); 
         }
 
-        /* PERSONALIZAÇÃO DAS BARRAS DE ROLAGEM (APLICADO AOS CONTAINERS SEPARADOS) */
+        /* PERSONALIZAÇÃO DAS BARRAS DE ROLAGEM */
         .nav-container::-webkit-scrollbar,
         .content-area::-webkit-scrollbar {
             width: 8px;
@@ -147,8 +147,8 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            height: 100vh; /* FIXO NA ALTURA DA TELA */
-            overflow: hidden; /* REMOVIDA ROLAGEM GLOBAL */
+            height: 100vh;
+            overflow: hidden;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -189,7 +189,7 @@
         .main-wrapper { 
             display: flex; 
             flex: 1; 
-            overflow: hidden; /* O WRAPPER NÃO ROLA, OS FILHOS SIM */
+            overflow: hidden;
             position: relative;
         }
 
@@ -202,7 +202,7 @@
             background: rgba(0, 0, 0, 0.4);
             border-right: 1px solid var(--neon-blue);
             z-index: 20;
-            overflow-y: auto; /* ROLAGEM INDEPENDENTE PARA BOTÕES */
+            overflow-y: auto;
             flex-shrink: 0;
         }
 
@@ -241,10 +241,10 @@
         .content-area { 
             flex: 1; 
             padding: 30px; 
-            overflow-y: auto; /* ROLAGEM INDEPENDENTE PARA CONTEÚDO/GIFS */
+            overflow-y: auto;
             z-index: 15;
             position: relative;
-            padding-bottom: 100px; /* ESPAÇO PARA O FOOTER NÃO TAPAR O FINAL */
+            /* Padding-bottom removido para alinhar com a retirada do footer */
         }
 
         .section { display: none; width: 100%; }
@@ -316,34 +316,6 @@
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
 
-        .perfil-footer {
-            text-align: center;
-            padding: 15px;
-            background: rgba(5, 5, 5, 0.8);
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 100; 
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 14px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: none;
-            border-top: 1px solid var(--neon-blue);
-        }
-
-        #visit-counter {
-            position: absolute;
-            left: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 1s ease 1s;
-        }
-
         .texto-gradiente-animado {
             background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 300%;
@@ -378,8 +350,8 @@
     </div>
 
     <div class="perfil-header">
-        <h1>GALERIA DE GIFS</h1>
-        <p>Gabr (1777777)</p>
+        <h1>GABRIEL GALLERY</h1>
+        <p>Propriedade de Gabr (1777777)</p>
     </div>
 
     <div class="main-wrapper">
@@ -415,28 +387,9 @@
         </div>
     </div>
 
-    <footer class="perfil-footer">
-        <div id="visit-counter">
-            <span style="color: var(--neon-blue); font-size: 7px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Visitas</span>
-            <span id="count-number" style="color: #fff; font-size: 14px; font-family: monospace;">...</span>
-        </div>
-        <span class="texto-gradiente-animado">Galeria Exclusiva 2026 - By: Gabr Designer</span>
-    </footer>
-
     <div id="modalZoom" class="modal" onclick="closeZoom()"><img class="modal-content" id="imgZoom"></div>
 
     <script>
-        const ID_VISITAS = "galeria_wrs_v1_2026"; 
-        async function carregarContadores() {
-            try {
-                const res = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
-                const data = await res.json();
-                const total = data.count || data.value;
-                document.getElementById('count-number').innerText = total;
-            } catch(e) { document.getElementById('count-number').innerText = "1"; }
-        }
-        window.addEventListener('load', carregarContadores);
-
         function showAlert() {
             const alertBox = document.getElementById('copyright-alert');
             alertBox.style.display = 'block';
@@ -480,9 +433,7 @@
 
         function entrarGaleria() {
             const intro = document.getElementById('intro-screen');
-            const counter = document.getElementById('visit-counter');
             intro.style.opacity = '0'; intro.style.transform = 'scale(1.1)'; intro.style.visibility = 'hidden';
-            counter.style.opacity = '1';
             setTimeout(() => { intro.style.display = 'none'; }, 1000); 
             togglePlay(); 
         }
