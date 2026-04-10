@@ -615,18 +615,53 @@
                 h += `</div>`; gifSec.innerHTML += h;
             });
 
+            // LOGICA RIGOROSA DE LISTAS ESPECÍFICAS
             const configs = [
-                { id: 'content-pcback-gif', url: 'https://i.imgur.com/SFnk7A6.gif', label: 'PCBack Gif', count: 16 },
-                { id: 'content-pstyle-gif', url: 'https://i.imgur.com/rUIzfWU.gif', label: 'PStyle Gif', count: 16 },
-                { id: 'content-pcback-est', url: 'https://i.imgur.com/OyX4Jwt.png', label: 'Wallpaper', count: 10 },
-                { id: 'content-pstyle-est', url: 'https://i.imgur.com/zlcL7Dh.png', label: 'PStyle Fix', count: 8 },
-                { id: 'content-fundos', url: 'https://i.imgur.com/eJtGG3D.png', label: 'Fundo', count: 10 }
+                { 
+                    id: 'content-pcback-gif', 
+                    urls: ['SFnk7A6.gif', 'KKY2zqU.gif', 'fmhynyY.gif'], 
+                    label: 'PCBack Gif', 
+                    count: 15 // Multiplo de 3 para manter a sequência perfeita
+                },
+                { 
+                    id: 'content-pstyle-gif', 
+                    urls: ['rUIzfWU.gif', 'dGfJDfh.gif', 'ZXBA6F1.gif'], 
+                    label: 'PStyle Gif', 
+                    count: 15 
+                },
+                { 
+                    id: 'content-pcback-est', 
+                    urls: ['OyX4Jwt.png', 'dbSy2Rf.png', 'uBp1ypU.png'], 
+                    label: 'Pcback', 
+                    count: 12 
+                },
+                { 
+                    id: 'content-pstyle-est', 
+                    urls: ['Ii4pk4g.png', 'm2Ew85b.png', 'zlcL7Dh.png'], 
+                    label: 'Pstyle', 
+                    count: 12 
+                },
+                { 
+                    id: 'content-fundos', 
+                    urls: ['eJtGG3D.png', 'Q8XwtQZ.png', '6phSrhR.png'], 
+                    label: 'FUNDO', 
+                    count: 12 
+                }
             ];
+            
             configs.forEach(c => {
                 const el = document.getElementById(c.id);
                 if (el) {
                     el.innerHTML = "";
-                    for(let i=1; i<=c.count; i++) el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
+                    for(let i=0; i < c.count; i++) {
+                        const imgId = c.urls[i % c.urls.length];
+                        const fullUrl = `https://i.imgur.com/${imgId}`;
+                        el.innerHTML += `
+                            <div class="card" onclick="openZoom('${fullUrl}')">
+                                <img src="${fullUrl}">
+                                <div class="label">${c.label} - ${(i % c.urls.length) + 1}</div>
+                            </div>`;
+                    }
                 }
             });
         }
