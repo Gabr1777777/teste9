@@ -7,7 +7,6 @@
     <style>
         :root {
             --neon-blue: #0048FF;
-            --silver: #C0C0C0;
             --bg-dark: #050505;
             --card-bg: #111;
         }
@@ -23,7 +22,7 @@
             align-items: center;
         }
 
-        /* HEADER E PERFIL */
+        /* PERFIL */
         .perfil-header {
             text-align: center;
             padding: 30px;
@@ -40,7 +39,7 @@
             text-shadow: 0 0 20px var(--neon-blue);
         }
 
-        /* MENU DE NAVEGAÇÃO */
+        /* NAVEGAÇÃO */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
@@ -71,31 +70,37 @@
             box-shadow: 0 0 15px rgba(0, 72, 255, 0.5);
         }
 
-        /* SEÇÕES DA GALERIA */
+        /* SEÇÕES */
         .section {
             display: none;
             width: 100%;
             max-width: 1200px;
-            animation: fadeIn 0.4s ease-in-out;
         }
 
         .section.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* BARRAS DE TÍTULO COM GRADIENTE ANIMADO */
+        .marquee-tag {
+            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientAnim 5s ease infinite;
+            color: #000 !important;
+            padding: 10px;
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* GRIDS E CARDS */
-        .marquee-tag {
-            background: rgba(0, 72, 255, 0.15);
-            color: var(--neon-blue);
-            padding: 8px;
-            border: 1px solid var(--neon-blue);
-            margin: 25px 0 15px 0;
-            font-weight: bold;
-        }
-
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -133,7 +138,11 @@
             background: #0a0a0a;
         }
 
-        .footer-info { margin-top: 50px; color: #444; font-size: 12px; }
+        marquee {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
@@ -153,49 +162,25 @@
         <button class="nav-btn" onclick="showTab('xatspace')">XATSPACE</button>
     </div>
 
-    <div id="gifs" class="section active">
-        <div id="content-gifs"></div>
-    </div>
-
-    <div id="pcback-gif" class="section">
-        <div class="grid-container grid-largo" id="content-pcback-gif"></div>
-    </div>
-
-    <div id="pstyle-gif" class="section">
-        <div class="grid-container" id="content-pstyle-gif"></div>
-    </div>
-
-    <div id="pcback-est" class="section">
-        <div class="grid-container grid-largo" id="content-pcback-est"></div>
-    </div>
-
-    <div id="pstyle-est" class="section">
-        <div class="grid-container" id="content-pstyle-est"></div>
-    </div>
-
-    <div id="fundos" class="section">
-        <div class="grid-container grid-largo" id="content-fundos"></div>
-    </div>
-
-    <div id="xatspace" class="section">
-        <h2 style="text-align:center">Modelos XatSpace</h2>
-        <p style="text-align:center; color:#555">Conteúdo em desenvolvimento...</p>
-    </div>
-
-    <div class="footer-info">Galeria v2.0 - 2026</div>
+    <div id="gifs" class="section active"><div id="content-gifs"></div></div>
+    <div id="pcback-gif" class="section"><div class="grid-container grid-largo" id="content-pcback-gif"></div></div>
+    <div id="pstyle-gif" class="section"><div class="grid-container" id="content-pstyle-gif"></div></div>
+    <div id="pcback-est" class="section"><div class="grid-container grid-largo" id="content-pcback-est"></div></div>
+    <div id="pstyle-est" class="section"><div class="grid-container" id="content-pstyle-est"></div></div>
+    <div id="fundos" class="section"><div class="grid-container grid-largo" id="content-fundos"></div></div>
+    <div id="xatspace" class="section"><h2 style="text-align:center">Modelos XatSpace</h2></div>
 
     <script>
-        // TODOS OS SEUS IDS DA PRIMEIRA MENSAGEM
         const dataGifs = [
             { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
             { marquee: "Blufftitler - Nome + Photo - 350 Xats", prefix: "Blufftitler - ", ids: ["F0b4mnJ", "65bzz5V", "ZetkVFF", "JqzxOwt", "NK9Z8rU", "RNIlFI3", "bSmUjsQ", "R6klF5K", "cgyGLHQ", "ctF1vyH", "Ge90Xy7", "7Z8xEC8", "G8HFkiG", "sh7u3UM", "y0WgmxJ", "Vvw2SMU", "uoNJlEe"] },
             { marquee: "Canva Name + Photo - 300 Xats", prefix: "Canva - ", ids: ["hWVyLox", "Uxlzu5C", "Crt716T", "xo4npxf", "jUG54d4", "gMQ3Fo9", "xvM1ixb", "cwRIh51", "db8sdi9", "nRJQ0BB"] },
             { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd", "HVFwoO9", "ueBRxvV", "XkwoKCf", "ULcq67R", "afxBCK8", "NKjJIGs", "xDhKvCC", "vvcOaEK", "ups9FgX", "JeY6A7M", "zDyoEgZ", "0FklDw9", "FX6gdFw", "V3LO0YG", "r9yfJNZ", "R3sO6Dv", "P8DpN4L", "fRfZuO7", "BPgPihm", "5HxfNaB", "FILAVQP", "5IoR515", "KUQ1WsX", "ZuaO9n5", "eYUpRds", "EkhA4lw", "ufOP9QG", "w2URYst", "1uMiE0k", "JQaMJ7U", "JeVcLkk", "un368jG", "LaClQL2", "l3Az3Nz", "8ME12WB", "SWSOcvf", "HizA7mV", "HnIaNDX", "POgiaNY", "CgwrMHf", "MtDrchh", "P4UINMY", "F0ujERT", "lHdM40L", "vWKX5Fb", "UHq0679", "2tRaU1S", "XQJ8R9h", "n4sAIhn", "LaJAK5L", "RIDkkSc", "ogHzac1", "aV63fjn", "tSuJOKg", "MxeKAfQ", "A4chzU3", "bAXpFow", "1YlDoNZ", "IXCqwlR", "kv1EWDW", "FIulKIF", "qLhMZAE", "R9nl6Ch", "uCXDGTg"] },
             { marquee: "AfterEffects - Name + (2) Photo - 500 Xats", prefix: "Love - ", ids: ["NnEIlrv", "8hrgq1D", "MqnmO8R", "oRvL0X3", "9z2OuGk"] },
-            { marquee: "AfterEffects - Halloween - 450 Xats", prefix: "Hallo - ", ids: ["tYerofL", "DhJDXHE", "w3rSXf6", "9nHfmtZ", "61Eafym", "4ON7Gu0"] },
-            { marquee: "AfterEffects - Christmas - 450 Xats", prefix: "Santa - ", ids: ["79ymrS9", "FOyoZu1", "rIs0a2w", "4USFEwb", "5vvU8qn"] },
-            { marquee: "AfterEffects - DJ - 450 Xats", prefix: "DJ - ", ids: ["Bj6WFKZ", "GGrjZnE", "jJefFUv", "tesP8Me", "VRBqDtS", "WnnPvsU"] },
-            { marquee: "PhotoScape - Parpadeo - Até 300 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
+            { marquee: "AfterEffects - Halloween - Name + Photo 450 Xats", prefix: "Hallo - ", ids: ["tYerofL", "DhJDXHE", "w3rSXf6", "9nHfmtZ", "61Eafym", "4ON7Gu0"] },
+            { marquee: "AfterEffects - Christmas - Name + Photo 450 Xats", prefix: "Santa - ", ids: ["79ymrS9", "FOyoZu1", "rIs0a2w", "4USFEwb", "5vvU8qn"] },
+            { marquee: "AfterEffects - DJ - Name + Photo 450 Xats", prefix: "DJ - ", ids: ["Bj6WFKZ", "GGrjZnE", "jJefFUv", "tesP8Me", "VRBqDtS", "WnnPvsU"] },
+            { marquee: "PhotoScape - (1) Photo - 100 Xats, (2) Photo - 200 Xats, (3) Photo - 300 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
         ];
 
         function showTab(id) {
@@ -206,48 +191,28 @@
         }
 
         function render() {
-            // Render Gifs
             const gifContainer = document.getElementById('content-gifs');
-            dataGifs.forEach(section => {
-                let html = `<marquee class="marquee-tag">${section.marquee}</marquee><div class="grid-container">`;
-                section.ids.forEach((id, i) => {
-                    html += `<div class="card"><img src="https://i.imgur.com/${id}.gif"><div class="label">${section.prefix}${i+1}</div></div>`;
-                });
-                html += `</div>`;
-                gifContainer.innerHTML += html;
+            dataGifs.forEach(sec => {
+                let html = `<div class="marquee-tag"><marquee scrollamount="4" scrolldelay="0">${sec.marquee}</marquee></div><div class="grid-container">`;
+                sec.ids.forEach((id, i) => { html += `<div class="card"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; });
+                html += `</div>`; gifContainer.innerHTML += html;
             });
 
-            // Render PCBack Gif (16x)
-            const pcGifCont = document.getElementById('content-pcback-gif');
-            for(let i=1; i<=16; i++) {
-                pcGifCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/SFnk7A6.gif"><div class="label">PCBack Gif #${i}</div></div>`;
-            }
+            const pcGif = document.getElementById('content-pcback-gif');
+            for(let i=1; i<=16; i++) { pcGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/SFnk7A6.gif"><div class="label">PCBack Gif #${i}</div></div>`; }
 
-            // Render PStyle Gif (16x)
-            const psGifCont = document.getElementById('content-pstyle-gif');
-            for(let i=1; i<=16; i++) {
-                psGifCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/rUIzfWU.gif"><div class="label">PStyle Gif #${i}</div></div>`;
-            }
+            const psGif = document.getElementById('content-pstyle-gif');
+            for(let i=1; i<=16; i++) { psGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/rUIzfWU.gif"><div class="label">PStyle Gif #${i}</div></div>`; }
 
-            // Render PCBack Estático (10x)
-            const pcEstCont = document.getElementById('content-pcback-est');
-            for(let i=1; i<=10; i++) {
-                pcEstCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/OyX4Jwt.png"><div class="label">Wallpaper #${i}</div></div>`;
-            }
+            const pcEst = document.getElementById('content-pcback-est');
+            for(let i=1; i<=10; i++) { pcEst.innerHTML += `<div class="card"><img src="https://i.imgur.com/OyX4Jwt.png"><div class="label">Wallpaper #${i}</div></div>`; }
 
-            // Render PStyle Estático (8x)
-            const psEstCont = document.getElementById('content-pstyle-est');
-            for(let i=1; i<=8; i++) {
-                psEstCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/zlcL7Dh.png"><div class="label">PStyle Fix #${i}</div></div>`;
-            }
+            const psEst = document.getElementById('content-pstyle-est');
+            for(let i=1; i<=8; i++) { psEst.innerHTML += `<div class="card"><img src="https://i.imgur.com/zlcL7Dh.png"><div class="label">PStyle Fix #${i}</div></div>`; }
 
-            // Render Fundos (10x)
-            const fundosCont = document.getElementById('content-fundos');
-            for(let i=1; i<=10; i++) {
-                fundosCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/eJtGG3D.png"><div class="label">Fundo #${i}</div></div>`;
-            }
+            const fundos = document.getElementById('content-fundos');
+            for(let i=1; i<=10; i++) { fundos.innerHTML += `<div class="card"><img src="https://i.imgur.com/eJtGG3D.png"><div class="label">Fundo #${i}</div></div>`; }
         }
-
         window.onload = render;
     </script>
 </body>
