@@ -1,1378 +1,254 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Xatspace Glass</title>
-
-<style>
-body{
-  margin:0;
-  height:100vh;
-  font-family:'Poppins',sans-serif;
-  background:#5b3a73; /* morado base */
-  overflow:hidden;
-}
-
-
-
-
-.app {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transform: scale(0.92);
-  transition: all 1.2s ease;
-}
-
-.app.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.frame-outer {
-  background: rgba(65, 44, 44, 0.2);
-  backdrop-filter: blur(8px);
-  padding: 10px;
-  border-radius: 25px;
-  box-shadow: 0 0 25px rgba(223, 151, 238, 0.25);
-}
-
-.frame-inner {
-  background: rgba(209, 131, 224, 0.226);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 15px;
-}
-
-.container {
-  display: flex;
-  background: rgb(174, 96, 192);
-  border-radius: 15px;
-  width: 600px;
-  height: 440px;
-  position: relative;
-  border: 2px solid rgba(243, 176, 240, 0.35);
-  box-shadow:
-    0 0 18px rgba(255,255,255,0.15),
-    inset 0 0 12px rgba(255,255,255,0.08);
-}
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: 35%;
-  background-color: rgba(83, 27, 94, 0.753);
-  border-radius: 15px 0 0 15px;
-  padding: 10px 17px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.sidebar::after {
-  content: "";
-  position: absolute;
-  top: 12px;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
-}
-
-.profile-pic img {
-  width: 120px;
-  height: 120px;
-  margin-top: 17px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 6px solid rgba(237, 187, 250, 0.5);
-}
-
-.menu {
-  width: 100%;
-  flex: 1;
-  position: relative;
-  padding-bottom: 70px;
-}
-
-.menu-buttons {
-  margin-left: 20px;
-  width: 80%;
-  margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.menu-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 2px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  color: #ffffffe3;
-  background: linear-gradient(
-    180deg,
-    rgba(54, 54, 54, 0.9),
-    rgba(7, 7, 7, 0.9)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow:
-    inset 0 0 8px rgba(173, 173, 173, 0.15),
-    0 0 12px rgba(0,0,0,.6);
-  transition: all .3s ease;
-}
-
-.menu-btn:hover {
-  transform: translateX(4px);
-}
-
-.menu-btn.active {
-  transform: scale(1.07);
-}
-
-/* ===== CONTENIDO ===== */
-.content {
-  flex: 1;
-  background: rgba(0,0,0,.35);
-  border-radius: 0 15px 15px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* ===== SECCIONES ===== */
-.section {
-  width: 100%;
-  height: 100%;
-  display: none;
-  animation: fadeIn .6s ease;
-}
-
-.section.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== INICIO ===== */
-.inicio-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
-}
-
-.inicio-title {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-align: center;
-  background: linear-gradient(90deg,#ffd6e8,#e0c3ff,#dfc3ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 6px rgba(255,200,220,.6),
-    0 0 14px rgba(209, 180, 255, 0.4);
-  animation: fadeGlow 2.5s ease infinite;
-}
-
-@keyframes fadeGlow {
-  0% { opacity: .7; }
-  50% { opacity: 1; }
-  100% { opacity: .7; }
-}
-
-.firma {
-  margin-top: 30px;
-}
-
-.firma img {
-  max-width: 350px;
-  opacity: .9;
-}
-
-
-
-/* ===== INTRO ===== */
-#intro {
-  position: fixed;
-  inset: 0;
-  background: rgba(59, 28, 73, 0.92);
-  backdrop-filter: blur(6px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  transition: opacity 1s ease;
-}
-
-/* ===== BOTÓN DORADO ===== */
-.gold-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 14px 38px;
-  border-radius: 999px;
-  cursor: pointer;
-  border: 2px solid #a737d4;
-
-  background: radial-gradient(
-    circle at top,
-    #784192,
-    #6e397e
-  );
-
-  box-shadow:
-    0 0 18px rgba(154, 55, 212, 0.45),
-    inset 0 0 10px rgba(212, 120, 255, 0.25);
-
-  transition: all .35s ease;
-  animation: glowPulse 2.5s infinite ease-in-out;
-}
-
-/* Hover */
-.gold-btn:hover {
-  transform: scale(1.08);
-  box-shadow:
-    0 0 28px rgba(149, 55, 212, 0.8),
-    inset 0 0 14px rgba(222, 140, 255, 0.45);
-}
-
-/* Corazón */
-.gold-btn .heart {
-  font-size: 18px;
-  filter: drop-shadow(0 0 6px rgba(0,180,255,.8));
-}
-
-/* Texto */
-.gold-btn .text {
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  letter-spacing: 3px;
-  font-weight: 600;
-  color: #edc8fc;
-  text-shadow:
-    0 0 6px rgba(212, 120, 255, 0.6);
-}
-
-/* Animación glow */
-@keyframes glowPulse {
-  0%,100% {
-    box-shadow:
-      0 0 16px rgba(149, 55, 212, 0.45),
-      inset 0 0 10px rgba(212, 120, 255, 0.25);
-  }
-  50% {
-    box-shadow:
-      0 0 30px rgba(154, 55, 212, 0.9),
-      inset 0 0 16px rgba(220, 160, 255, 0.5);
-  }
-}
-
-
-
-/* ===== SOBRE MI ===== */
-.sobremi-wrapper{
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding-top:50px;
-}
-.sobremi-content{text-align:center;max-width:420px}
-.sobremi-nombre{
-  font-size:24px;
-  font-weight:600;
-  background:linear-gradient(90deg,#ffd6e8,#e0c3ff,#c3f0ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.sobremi-id{font-size:12px;color:#ffffffb0 ;margin-top:4px}
-.sobremi-pais{
-  display:flex;
-  justify-content:center;
-  margin-top:4px;
-  gap:6px;
-  font-size:12px;
-  color:#fff;
-}
-.sobremi-pais img{width:18px;height:12px}
-.sobremi-linea{
-  width:60%;
-  height:1px;
-  margin:14px auto;
-  background:linear-gradient(90deg,transparent,#fff,transparent);
-}
-.sobremi-texto{
-  font-size:13px;
-  line-height:1.6;
-  color:#ffffffd8;
-  white-space:pre-line;
-}
-.cursor{
-  display:inline-block;
-  width:2px;
-  height:14px;
-  background:#fff;
-  margin-left:3px;
-  animation:blink 1s infinite;
-}
-@keyframes blink{50%{opacity:0}}
-
-/* ===== FRIENDS ===== */
-.amigos-title{
-  position: relative;
-  top: 30px;
-  text-align: center;
-  font-size: 14px;
-  letter-spacing: 4px;
-  font-weight: 500;
-  background: linear-gradient(
-    90deg,
-    #ffd1dc,
-    #e0c3ff,
-    #e2c3ff,
-    #ffd1dc
-  );
-  background-size: 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 6px rgba(255,180,200,.6),
-    0 0 14px rgba(200,180,255,.4);
-  animation: glowMove 4s linear infinite, titleIn 1.2s ease;
-}
-
-@keyframes glowMove{
-  from{background-position:0%}
-  to{background-position:300%}
-}
-@keyframes titleIn{
-  from{opacity:0; transform:translateY(-10px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
-.amigos-container{
-  position: relative;
-  top:60px;
-  text-align: center;
-  padding: 20px 10px;
-  animation: fadeIn 1.2s ease-out;
-}
-
-.amigos-collage{
-  position: relative;
-  width: 100%;
-  height: 230px;
-  margin-top: 30px;
-}
-
-.amigo-polaroid{
-  position: absolute;
-  width: 48%;
-  height: 150px;
-  background: linear-gradient(
-    145deg,
-    rgba(127, 63, 156, 0.45),
-    rgba(130, 92, 155, 0.45)
-  );
-  border: 1.5px solid rgba(255,255,255,.35);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(87, 36, 100, 0.5);
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.amigo-polaroid:hover{
-  transform: scale(1.08) rotate(0deg);
-  box-shadow: 0 0 14px rgba(200,200,200,.4);
-}
-
-.amigo-polaroid img{
-  width:100%;
-  height:120px;
-  object-fit:cover;
-  border-radius:10px 10px 0 0;
-}
-
-.amigo-polaroid p{
-  margin:4px 0 0;
-  font-size:.75rem;
-  color:#fff;
-  font-weight:500;
-}
-
-/* posiciones */
-.polaroid-0{top:0;left:10px;transform:rotate(-5deg)}
-.polaroid-1{top:-8px;left:160px;transform:rotate(6deg)}
-.polaroid-2{top:110px;left:90px;transform:rotate(3deg)}
-
-/* modal */
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(127, 73, 143, 0.6);
-  backdrop-filter:blur(4px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.modal-overlay.active{display:flex}
-
-.modal-contenido{
-  width:260px;
-  background:linear-gradient(
-    135deg,
-    rgba(210, 155, 241, 0.95),
-    rgba(208, 169, 224, 0.95)
-  );
-  border-radius:14px;
-  padding:18px;
-  text-align:center;
-  color:#2b2b2b;
-  box-shadow:0 0 18px rgba(50,50,50,.8);
-  animation:pop .35s ease;
-}
-
-@keyframes pop{
-  from{transform:scale(.9);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.modal-contenido h3{margin:0 0 6px;color:#fff}
-.modal-contenido p{font-size:.8rem;line-height:1.3rem}
-.modal-contenido button{
-  margin-top:12px;
-  padding:6px 16px;
-  border:none;
-  border-radius:8px;
-  background:#4a4a4a;
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-}
-/* === REPRODUCTOR === */
-.reproductor {
-  position: fixed;   /* ← CLAVE */
-  bottom: 35px;
-  left: 30px;
-
-  width: 100px;
-  height: 42px;
-  background: linear-gradient(145deg, #e0e0e0, #d6d6d6);
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 5px 8px;
-  transition: all 0.5s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,.2);
-  overflow: hidden;
-  cursor: pointer;
-  z-index: 9999;
-}
-
-
-.reproductor.expandido {
-  width: 200px;
-}
-
-/* INFO CANCIÓN */
-.song-info {
-  position: relative;
-  margin-right: 5%;
-  opacity: 0;
-  width: 100px;
-  transform: translateX(-20px);
-  transition: all .5s ease;
-  color: #000;
-  font-size: 11px;
-  text-align: left;
-}
-
-.reproductor.expandido .song-info {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.titulo {
-  margin: 0;
-  font-weight: 600;
-}
-
-.cancion {
-  margin: 0;
-  opacity: .8;
-}
-
-/* CONTROLES */
-.controles {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-control {
-  background: #000;
-  color: #e2e2e2;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.btn-control:hover {
-  background: #222;
-  transform: scale(1.1);
-}
-
-/* ===== GALERIA ===== */
-.gallery-title{
-  position: relative;
-  top: 10px;
-  text-align: center;
-  font-size: 14px;
-  letter-spacing: 5px;
-  font-weight: 500;
-  background: linear-gradient(
-    90deg,
-    #ffd1dc,
-    #e0c3ff,
-    #c3f0ff,
-    #ffd1dc
-  );
-  background-size: 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 8px rgba(255,180,200,.6),
-    0 0 16px rgba(200,180,255,.4);
-  animation: glowMove 4s linear infinite, titleIn 1.2s ease;
-}
-
-.gallery-box{
-  position: relative;
-  width: 100%;
-  height: 85%;
-  padding: 10px;
-  top: 40px;
-}
-
-.slider{
-  position:relative;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-.slide{
-  position:absolute;
-  width:180px;
-  height:280px;
-  border-radius:16px;
-  overflow:hidden;
-  transition:.6s ease;
-  filter:brightness(.45);
-  transform:scale(.75);
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
-}
-
-.slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.slide.active{
-  transform:scale(1);
-  filter:brightness(1);
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,.9),
-    0 0 28px rgba(105,105,105,.9);
-  z-index:3;
-}
-
-.slide.left{
-  opacity:.6;
-  transform:translateX(-200px) scale(.8);
-}
-
-.slide.right{
-  opacity:.6;
-  transform:translateX(200px) scale(.8);
-}
-
-.nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:rgba(255,255,255,.35);
-  backdrop-filter:blur(8px);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:18px;
-  box-shadow:0 6px 16px rgba(0,0,0,.45);
-  transition:.3s ease;
-  z-index:5;
-}
-
-.nav:hover{
-  transform:translateY(-50%) scale(1.15);
-  background:rgba(255,255,255,.6);
-}
-
-.nav.prev{left:10px}
-.nav.next{right:10px}
-
-/* ===== CURSOR FANTASÍA ===== */
-body {
-  cursor: none;
-}
-
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 100000;
-  transform: translate(-50%, -50%);
-}
-
-/* 🔺 TRIÁNGULO FANTASÍA */
-.cursor-dot {
-  width: 0;
-  height: 0;
-
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 14px solid #b84dff;
-
-  filter: drop-shadow(0 0 6px rgba(206, 120, 255, 0.9))
-          drop-shadow(0 0 14px rgba(176, 80, 255, 0.6));
-
-  transform: translate(-50%, -50%) rotate(20deg);
-}
-
-/* ✨ luz en movimiento */
-.cursor-dot::after {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 2px;
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, rgba(255,255,255,.9), transparent 70%);
-  opacity: .6;
-  animation: glowMove 1.2s linear infinite;
-}
-
-@keyframes glowMove {
-  0% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  100% { transform: translateX(-4px); }
-}
-
-/* 🟢 ANILLO (NO SE TOCA) */
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 2px solid rgba(226, 200, 255, 0.6);
-  border-radius: 50%;
-  box-shadow:
-    0 0 18px rgba(215, 180, 255, 0.45),
-    inset 0 0 12px rgba(255,255,255,.35);
-  transition: width .15s ease, height .15s ease, border .15s ease;
-}
-
-/* Hover */
-.cursor-hover .cursor-ring {
-  width: 52px;
-  height: 52px;
-  border-color: rgba(236, 160, 255, 0.9);
-}
-
-/* Click */
-.cursor-click .cursor-ring {
-  width: 26px;
-  height: 26px;
-  border-color: rgba(255,255,255,.9);
-}
-.star-explosion {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, #fff, #be4dff);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  animation: explode .6s ease-out forwards;
-}
-
-@keyframes explode {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    box-shadow:
-      0 0 6px #fff,
-      0 0 14px #b84dff;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-    box-shadow:
-      0 0 30px #be4dff,
-      0 0 60px rgba(198, 100, 255, 0.8);
-  }
-}
-
-
-/* OCULTAR CURSOR REAL */
-html, body, * {
-  cursor: none !important;
-}
-
-/* ===== MENU BUTTONS – VIDRIO + LUZ ===== */
-.menu-btn {
-  position: relative;
-  overflow: hidden;
-
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.12),
-    rgba(0,0,0,.35)
-  );
-
-  border: 1px solid rgba(255,255,255,.35);
-  box-shadow:
-    inset 0 0 12px rgba(255,255,255,.12),
-    0 0 14px rgba(255,255,255,.12);
-}
-
-/* reflejo tipo vidrio */
-.menu-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,.45),
-    rgba(255,255,255,.08),
-    transparent 60%
-  );
-  opacity: .35;
-  pointer-events: none;
-}
-
-/* brillo suave al hover */
-.menu-btn::after {
-  content: "";
-  position: absolute;
-  inset: -60%;
-  background: radial-gradient(
-    circle,
-    rgba(255,255,255,.35),
-    transparent 55%
-  );
-  opacity: 0;
-  transition: opacity .4s ease;
-}
-
-.menu-btn:hover::after {
-  opacity: .55;
-}
-
-/* ===== TEXTO MENU GRADIENTE ===== */
-.menu-btn {
-  background-image: linear-gradient(
-    90deg,
-    #ffd1dc,
-    #e0c3ff,
-    #c3f0ff,
-    #ffd1dc
-  );
-  background-size: 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: menuTextFlow 4s linear infinite;
-
-  text-shadow:
-    0 0 6px rgba(255,200,220,.5),
-    0 0 12px rgba(180,200,255,.35);
-}
-
-@keyframes menuTextFlow {
-  from { background-position: 0%; }
-  to   { background-position: 300%; }
-}
-
-/* ===== CONTENEDOR GLASS PARA TÍTULOS ===== */
-.title-glass {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 6px 20px;
-  margin: 0 auto;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.18),
-    rgba(255,255,255,.05)
-  );
-
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.45);
-
-  box-shadow:
-    inset 0 0 14px rgba(255,255,255,.18),
-    0 0 22px rgba(255,255,255,.18);
-
-  pointer-events: none; /* el texto NO se mueve */
-}
-
-/* ===== CORREGIR MOVIMIENTO DE LOS TITULOS ===== */
-.inicio-title,
-.amigos-title,
-.gallery-title {
-  position: static !important;
-  animation: glowMove 4s linear infinite; /* solo brillo */
-}
-
-/* ===== CENTRAR TITULOS GLASS ===== */
-.title-glass {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin: 20px auto;   /* ← centra horizontal */
-  width: fit-content; /* ajusta al texto */
-}
-
-/* asegurar centrado del texto interno */
-.inicio-title,
-.amigos-title,
-.gallery-title {
-  text-align: center;
-}
-
-/* ===== AJUSTE FINO TITULOS ===== */
-#amigos .title-glass {
-  margin-top: 48px;   /* un poco más abajo */
-  margin-bottom: 10px;
-}
-
-#galeria .title-glass {
-  margin-top: 8px;    /* un poco más arriba */
-  margin-bottom: 6px;
-}
-/* ===== LIMPIAR POSICIONAMIENTO ANTIGUO ===== */
-.amigos-title,
-.gallery-title {
-  top: auto !important;
-}
-
-.amigos-container,
-.gallery-box {
-  top: auto !important;
-}
-/* ===== GALERIA CENTRADA COMO ANTES ===== */
-#galeria {
-  margin-top: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.gallery-box {
-  margin-top: -10px;   /* sube el slider */
-  height: 80%;        /* mantiene proporción */
-}
-
-#stars{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-  background:#5b3a73; /* fondo morado */
-}
-
-/* FOOTER */
-.footer{
-  position:absolute;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:8px;
-  color:#fdeef0aa;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria Profissional WRS</title>
+    <style>
+        :root {
+            --neon-blue: #0048FF;
+            --silver: #C0C0C0;
+            --bg-dark: #050505;
+            --card-bg: #111;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* HEADER E PERFIL */
+        .perfil-header {
+            text-align: center;
+            padding: 30px;
+            border-bottom: 2px solid var(--neon-blue);
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 30px;
+        }
+
+        .perfil-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        /* MENU DE NAVEGAÇÃO */
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: #1a1a1a;
+            color: #888;
+            border: 1px solid #333;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            border-color: var(--neon-blue);
+            color: white;
+            background: #001240;
+            box-shadow: 0 0 15px rgba(0, 72, 255, 0.5);
+        }
+
+        /* SEÇÕES DA GALERIA */
+        .section {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* GRIDS E CARDS */
+        .marquee-tag {
+            background: rgba(0, 72, 255, 0.15);
+            color: var(--neon-blue);
+            padding: 8px;
+            border: 1px solid var(--neon-blue);
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-largo {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            border-color: var(--neon-blue);
+            transform: scale(1.04);
+        }
+
+        .card img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .card .label {
+            padding: 10px;
+            font-size: 11px;
+            color: #aaa;
+            background: #0a0a0a;
+        }
+
+        .footer-info { margin-top: 50px; color: #444; font-size: 12px; }
+    </style>
 </head>
-
 <body>
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
 
-<div id="intro">
-  <button class="gold-btn">
-    <span class="text">INGRESAR</span>
-  </button>
-</div>
-<canvas id="stars"></canvas>
-
-<div class="app">
-  <div class="frame-outer">
-    <div class="frame-inner">
-      <div class="container">
-
-        <div class="sidebar">
-          <div class="profile-pic">
-            <img src="https://xatimg.com/image/16rbjN1898Dr.jpg">
-          </div>
-
-          <div class="menu">
-            <div class="menu-buttons">
-              <div class="menu-btn active" onclick="showSection('inicio', this)">♡ Inicio ♡</div>
-              <div class="menu-btn" onclick="showSection('sobremi', this)">♡ Sobre mi ♡</div>
-              <div class="menu-btn" onclick="showSection('amigos', this)">♡ Friend ♡</div>
-              <div class="menu-btn" onclick="showSection('galeria', this)">♡ Galeria ♡</div>
-              <div class="reproductor" id="reproductor">
-  <div class="song-info">
-    <p class="titulo" id="artist">---</p>
-    <p class="cancion" id="title">---</p>
-  </div>
-
-  <div class="controles">
-    <button class="btn-control" id="nextBtn">⏭</button>
-    <button class="btn-control" id="playBtn">▶</button>
-  </div>
-
-  <audio id="audio"></audio>
-</div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="content">
-          <div class="section active" id="inicio">
-            <div class="inicio-wrapper">
-          <div class="title-glass">
-  <div class="inicio-title"> Bienvenido a mi xatspace </div>
-</div>
-              <div class="firma">
-                <img src="https://xatimg.com/image/m6f4OZoruM0W.gif">
-              </div>
-            </div>
-          </div>
-
-<div class="section" id="sobremi">
-  <div class="sobremi-wrapper">
-    <div class="sobremi-content">
-      <div class="sobremi-nombre">ツ𝓛ℴѵﻨղℊ⍨</div>
-      <div class="sobremi-id">ID: 87000577</div>
-      <div class="sobremi-pais">
-        <span>País:</span><img src="https://flagcdn.com/w20/mx.png"><span>Mexico</span>
-      </div>
-      <div class="sobremi-linea"></div>
-      <div class="sobremi-texto">
-        <span id="typing"></span><span class="cursor"></span>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="section" id="amigos">
-
-<div class="title-glass">
-  <div class="amigos-title"> MIS AMIGOS </div>
-</div>
-
-  <div class="amigos-container">
-    <div class="amigos-collage">
-
-      <div class="amigo-polaroid polaroid-0"
-        onclick="openModal('Nombre ♡','frase')">
-        <img src="https://xatimg.com/image/zDC881ggZRfJ.png">
-        <p>Nombre</p>
-      </div>
-
-      <div class="amigo-polaroid polaroid-1"
-        onclick="openModal('Nombre ♡','frase')">
-        <img src="https://xatimg.com/image/zDC881ggZRfJ.png">
-        <p>Nombre</p>
-      </div>
-
-    </div>
-  </div>
-
-</div> <!-- ✅ CIERRE AMIGOS -->
-
-<div class="section" id="galeria">
-
-<div class="title-glass">
-  <div class="gallery-title"> GALERÍA </div>
-</div>
-
-  <div class="gallery-box">
-    <div class="slider">
-
-      <div class="slide active">
-        <img src="https://xatimg.com/image/ejlI39l40m5u.jpg">
-      </div>
-
-      <div class="slide right">
-        <img src="https://xatimg.com/image/E6he9XsnySz7.jpg">
-      </div>
-
-      <div class="slide">
-        <img src="https://xatimg.com/image/gbNoXS33GD7e.jpg">
-      </div>
-
-      <div class="slide">
-        <img src="https://xatimg.com/image/6SXNcV3iyhXS.jpg">
-      </div>
-
-      <div class="slide">
-        <img src="https://xatimg.com/image/gt1euPaD6U6t.jpg">
-      </div>
-
-      <div class="slide">
-        <img src="https://xatimg.com/image/00TwKVFCyVnl.jpg">
-      </div>
-
-      <div class="slide">
-        <img src="https://xatimg.com/image/pfijdu4mlKXH.jpg">
-      </div>
-
-
+    <div class="perfil-header">
+        <h1>GABRIEL GALLERY</h1>
+        <p>Propriedade de Gabr (1777777)</p>
     </div>
 
-    <div class="nav prev" onclick="prev()">❮</div>
-    <div class="nav next" onclick="next()">❯</div>
-  </div>
-
-</div>
-
-      </div>
+    <div class="nav-container">
+        <button class="nav-btn active" onclick="showTab('gifs')">GIFS</button>
+        <button class="nav-btn" onclick="showTab('pcback-gif')">PCBACK GIFS</button>
+        <button class="nav-btn" onclick="showTab('pstyle-gif')">PSTYLE GIFS</button>
+        <button class="nav-btn" onclick="showTab('pcback-est')">PCBACK ESTÁTICO</button>
+        <button class="nav-btn" onclick="showTab('pstyle-est')">PSTYLE ESTÁTICO</button>
+        <button class="nav-btn" onclick="showTab('fundos')">FUNDOS</button>
+        <button class="nav-btn" onclick="showTab('xatspace')">XATSPACE</button>
     </div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal">
-  <div class="modal-contenido">
-    <h3 id="modalNombre"></h3>
-    <p id="modalDesc"></p>
-    <button onclick="closeModal()">Cerrar</button>
-  </div>
-</div>
 
-      <div class="footer">✦ By Fabricio ✦</div>
+    <div id="gifs" class="section active">
+        <div id="content-gifs"></div>
     </div>
-<script>
-function showSection(id,el){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll(".menu-btn").forEach(b=>b.classList.remove("active"));
-  el.classList.add("active");
-}
 
-document.querySelector(".gold-btn").onclick = () => {
-  document.getElementById("intro").style.opacity = 0;
+    <div id="pcback-gif" class="section">
+        <div class="grid-container grid-largo" id="content-pcback-gif"></div>
+    </div>
 
-  setTimeout(() => {
-    document.getElementById("intro").style.display = "none";
-    document.querySelector(".app").classList.add("show");
+    <div id="pstyle-gif" class="section">
+        <div class="grid-container" id="content-pstyle-gif"></div>
+    </div>
 
-    // 🔊 AUTOPLAY DESPUÉS DEL CLICK (PERMITIDO)
-    loadSong(current);
+    <div id="pcback-est" class="section">
+        <div class="grid-container grid-largo" id="content-pcback-est"></div>
+    </div>
 
-  }, 1000);
-};
+    <div id="pstyle-est" class="section">
+        <div class="grid-container" id="content-pstyle-est"></div>
+    </div>
 
+    <div id="fundos" class="section">
+        <div class="grid-container grid-largo" id="content-fundos"></div>
+    </div>
 
-const texto=`Se que extrañas a esa persona que sacaste de tu via
-o que incluso ella te saco a ti.
-para recuerdo que esa persona ya no es a quien amaste/quisiste alguna vez.
-Esa persona cambio, tal vez para bien o para mal, por lo que fu funcion en
-esta vida termino ya ah culminado, dejala ir, agradece el aprendizaje y por mas doloroso
-que sea acepta el final.`;
-let i=0;
-const typing=document.getElementById("typing");
-(function escribir(){
-  if(i<texto.length){
-    typing.textContent+=texto.charAt(i++);
-    setTimeout(escribir,35);
-  }
-})();
+    <div id="xatspace" class="section">
+        <h2 style="text-align:center">Modelos XatSpace</h2>
+        <p style="text-align:center; color:#555">Conteúdo em desenvolvimento...</p>
+    </div>
 
-const modal = document.getElementById("modal");
-const modalNombre = document.getElementById("modalNombre");
-const modalDesc = document.getElementById("modalDesc");
+    <div class="footer-info">Galeria v2.0 - 2026</div>
 
-function openModal(nombre, desc){
-  modalNombre.textContent = nombre;
-  modalDesc.textContent = desc;
-  modal.classList.add("active");
-}
+    <script>
+        // TODOS OS SEUS IDS DA PRIMEIRA MENSAGEM
+        const dataGifs = [
+            { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
+            { marquee: "Blufftitler - Nome + Photo - 350 Xats", prefix: "Blufftitler - ", ids: ["F0b4mnJ", "65bzz5V", "ZetkVFF", "JqzxOwt", "NK9Z8rU", "RNIlFI3", "bSmUjsQ", "R6klF5K", "cgyGLHQ", "ctF1vyH", "Ge90Xy7", "7Z8xEC8", "G8HFkiG", "sh7u3UM", "y0WgmxJ", "Vvw2SMU", "uoNJlEe"] },
+            { marquee: "Canva Name + Photo - 300 Xats", prefix: "Canva - ", ids: ["hWVyLox", "Uxlzu5C", "Crt716T", "xo4npxf", "jUG54d4", "gMQ3Fo9", "xvM1ixb", "cwRIh51", "db8sdi9", "nRJQ0BB"] },
+            { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd", "HVFwoO9", "ueBRxvV", "XkwoKCf", "ULcq67R", "afxBCK8", "NKjJIGs", "xDhKvCC", "vvcOaEK", "ups9FgX", "JeY6A7M", "zDyoEgZ", "0FklDw9", "FX6gdFw", "V3LO0YG", "r9yfJNZ", "R3sO6Dv", "P8DpN4L", "fRfZuO7", "BPgPihm", "5HxfNaB", "FILAVQP", "5IoR515", "KUQ1WsX", "ZuaO9n5", "eYUpRds", "EkhA4lw", "ufOP9QG", "w2URYst", "1uMiE0k", "JQaMJ7U", "JeVcLkk", "un368jG", "LaClQL2", "l3Az3Nz", "8ME12WB", "SWSOcvf", "HizA7mV", "HnIaNDX", "POgiaNY", "CgwrMHf", "MtDrchh", "P4UINMY", "F0ujERT", "lHdM40L", "vWKX5Fb", "UHq0679", "2tRaU1S", "XQJ8R9h", "n4sAIhn", "LaJAK5L", "RIDkkSc", "ogHzac1", "aV63fjn", "tSuJOKg", "MxeKAfQ", "A4chzU3", "bAXpFow", "1YlDoNZ", "IXCqwlR", "kv1EWDW", "FIulKIF", "qLhMZAE", "R9nl6Ch", "uCXDGTg"] },
+            { marquee: "AfterEffects - Name + (2) Photo - 500 Xats", prefix: "Love - ", ids: ["NnEIlrv", "8hrgq1D", "MqnmO8R", "oRvL0X3", "9z2OuGk"] },
+            { marquee: "AfterEffects - Halloween - 450 Xats", prefix: "Hallo - ", ids: ["tYerofL", "DhJDXHE", "w3rSXf6", "9nHfmtZ", "61Eafym", "4ON7Gu0"] },
+            { marquee: "AfterEffects - Christmas - 450 Xats", prefix: "Santa - ", ids: ["79ymrS9", "FOyoZu1", "rIs0a2w", "4USFEwb", "5vvU8qn"] },
+            { marquee: "AfterEffects - DJ - 450 Xats", prefix: "DJ - ", ids: ["Bj6WFKZ", "GGrjZnE", "jJefFUv", "tesP8Me", "VRBqDtS", "WnnPvsU"] },
+            { marquee: "PhotoScape - Parpadeo - Até 300 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
+        ];
 
-function closeModal(){
-  modal.classList.remove("active");
-}
+        function showTab(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
 
-modal.addEventListener("click", e=>{
-  if(e.target === modal) closeModal();
-});
+        function render() {
+            // Render Gifs
+            const gifContainer = document.getElementById('content-gifs');
+            dataGifs.forEach(section => {
+                let html = `<marquee class="marquee-tag">${section.marquee}</marquee><div class="grid-container">`;
+                section.ids.forEach((id, i) => {
+                    html += `<div class="card"><img src="https://i.imgur.com/${id}.gif"><div class="label">${section.prefix}${i+1}</div></div>`;
+                });
+                html += `</div>`;
+                gifContainer.innerHTML += html;
+            });
 
-const songs = [
-  { src: "music/Ariana Grande - we can't be friends.mp3", artist: "Ariana Grande", title: "we can't be friends" },
-  { src: "music/Billie Eilish - BIRDS OF A FEATHER.mp3", artist: "Billie Eilish", title: "BIRDS OF A FEATHER" },
-  { src: "music/The Weeknd - Save Your Tears.mp3", artist: "The Weeknd", title: "Save Your Tears" }
-];
+            // Render PCBack Gif (16x)
+            const pcGifCont = document.getElementById('content-pcback-gif');
+            for(let i=1; i<=16; i++) {
+                pcGifCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/SFnk7A6.gif"><div class="label">PCBack Gif #${i}</div></div>`;
+            }
 
-let current = 0;
-let isPlaying = false;
+            // Render PStyle Gif (16x)
+            const psGifCont = document.getElementById('content-pstyle-gif');
+            for(let i=1; i<=16; i++) {
+                psGifCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/rUIzfWU.gif"><div class="label">PStyle Gif #${i}</div></div>`;
+            }
 
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const nextBtn = document.getElementById("nextBtn");
-const artist = document.getElementById("artist");
-const title = document.getElementById("title");
-const reproductor = document.getElementById("reproductor");
+            // Render PCBack Estático (10x)
+            const pcEstCont = document.getElementById('content-pcback-est');
+            for(let i=1; i<=10; i++) {
+                pcEstCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/OyX4Jwt.png"><div class="label">Wallpaper #${i}</div></div>`;
+            }
 
-function loadSong(index) {
-  audio.src = songs[index].src;
-  artist.textContent = songs[index].artist;
-  title.textContent = songs[index].title;
+            // Render PStyle Estático (8x)
+            const psEstCont = document.getElementById('content-pstyle-est');
+            for(let i=1; i<=8; i++) {
+                psEstCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/zlcL7Dh.png"><div class="label">PStyle Fix #${i}</div></div>`;
+            }
 
-  audio.play().then(() => {
-    isPlaying = true;
-    playBtn.textContent = "❚❚";
-  }).catch(() => {
-    isPlaying = false;
-    playBtn.textContent = "▶";
-  });
-}
+            // Render Fundos (10x)
+            const fundosCont = document.getElementById('content-fundos');
+            for(let i=1; i<=10; i++) {
+                fundosCont.innerHTML += `<div class="card"><img src="https://i.imgur.com/eJtGG3D.png"><div class="label">Fundo #${i}</div></div>`;
+            }
+        }
 
-playBtn.onclick = (e) => {
-  e.stopPropagation();
-  if (isPlaying) {
-    audio.pause();
-    playBtn.textContent = "▶";
-  } else {
-    audio.play();
-    playBtn.textContent = "❚❚";
-  }
-  isPlaying = !isPlaying;
-};
-
-nextBtn.onclick = (e) => {
-  e.stopPropagation();
-  current = (current + 1) % songs.length;
-  loadSong(current);
-};
-
-audio.onended = () => {
-  current = (current + 1) % songs.length;
-  loadSong(current);
-};
-
-reproductor.addEventListener("mouseenter", () => {
-  reproductor.classList.add("expandido");
-});
-
-reproductor.addEventListener("mouseleave", () => {
-  reproductor.classList.remove("expandido");
-});
-
-
-
-const slides = document.querySelectorAll('#galeria .slide');
-let currentSlide = 0;
-
-function update(){
-  slides.forEach((s,i)=>{
-    s.className = 'slide';
-    if(i === currentSlide) s.classList.add('active');
-    else if(i === (currentSlide - 1 + slides.length) % slides.length)
-      s.classList.add('left');
-    else if(i === (currentSlide + 1) % slides.length)
-      s.classList.add('right');
-  });
-}
-
-function next(){
-  currentSlide = (currentSlide + 1) % slides.length;
-  update();
-}
-
-function prev(){
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  update();
-}
-
-const dot = document.querySelector(".cursor-dot");
-const ring = document.querySelector(".cursor-ring");
-
-let mouseX = 0, mouseY = 0;
-let ringX = 0, ringY = 0;
-
-// Movimiento real
-document.addEventListener("mousemove", e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-
-  dot.style.left = mouseX + "px";
-  dot.style.top = mouseY + "px";
-});
-
-// Suavizado del anillo
-function animate() {
-  ringX += (mouseX - ringX) * 0.15;
-  ringY += (mouseY - ringY) * 0.15;
-
-  ring.style.left = ringX + "px";
-  ring.style.top = ringY + "px";
-
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Hover interactivo
-document.querySelectorAll("button, a, .menu-btn").forEach(el => {
-  el.addEventListener("mouseenter", () =>
-    document.body.classList.add("cursor-hover")
-  );
-  el.addEventListener("mouseleave", () =>
-    document.body.classList.remove("cursor-hover")
-  );
-});
-
-// Click efecto
-document.addEventListener("mousedown", () =>
-  document.body.classList.add("cursor-click")
-);
-document.addEventListener("mouseup", () =>
-  document.body.classList.remove("cursor-click")
-);
-
-// Ocultar cursor en inputs / textos
-document.querySelectorAll("input, textarea").forEach(el => {
-  el.addEventListener("mouseenter", () => {
-    dot.style.display = "none";
-    ring.style.display = "none";
-    document.body.style.cursor = "text";
-  });
-
-  el.addEventListener("mouseleave", () => {
-    dot.style.display = "block";
-    ring.style.display = "block";
-    document.body.style.cursor = "none";
-  });
-});
-document.addEventListener("click", e => {
-  const star = document.createElement("div");
-  star.className = "star-explosion";
-  star.style.left = e.clientX + "px";
-  star.style.top = e.clientY + "px";
-  document.body.appendChild(star);
-
-  setTimeout(() => star.remove(), 600);
-});
-/* Bloquear clic derecho */
-document.addEventListener('contextmenu', function(e){
-  e.preventDefault();
-});
-
-/* Bloquear selección de texto */
-document.addEventListener('selectstart', function(e){
-  e.preventDefault();
-});
-
-/* Bloquear arrastrar imágenes/texto */
-document.addEventListener('dragstart', function(e){
-  e.preventDefault();
-});
-
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-
-let w, h;
-function resize(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resize);
-resize();
-
-const stars = [];
-const STAR_COUNT = 120;
-
-for(let i=0;i<STAR_COUNT;i++){
-  stars.push({
-    x: Math.random()*w,
-    y: Math.random()*h,
-    r: Math.random()*1.5 + 0.5,
-    speed: Math.random()*0.4 + 0.2,
-    alpha: Math.random()*0.5 + 0.4
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,w,h);
-
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(215,190,235,${s.alpha})`; // morado pastel
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-    ctx.fill();
-
-    s.y += s.speed;
-    if(s.y > h){
-      s.y = -5;
-      s.x = Math.random()*w;
-    }
-  });
-
-  requestAnimationFrame(draw);
-}
-draw();
-</script>
-
+        window.onload = render;
+    </script>
 </body>
 </html>
