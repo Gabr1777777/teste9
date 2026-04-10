@@ -9,6 +9,7 @@
             --neon-blue: #0048FF;
             --bg-dark: #050505;
             --card-bg: #111;
+            --deep-blue-grad: linear-gradient(90deg, #000814, #001a57, #000814);
         }
 
         body {
@@ -70,7 +71,6 @@
             box-shadow: 0 0 15px rgba(0, 72, 255, 0.5);
         }
 
-        /* SEÇÕES */
         .section {
             display: none;
             width: 100%;
@@ -79,25 +79,33 @@
 
         .section.active { display: block; }
 
-        /* BARRAS DE TÍTULO COM GRADIENTE ANIMADO */
+        /* BARRAS COM FUNDO AZUL ESCURO E LETRAS COM GRADIENTE ANIMADO */
         .marquee-tag {
-            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
-            background-size: 400% 400%;
-            animation: gradientAnim 5s ease infinite;
-            color: #000 !important;
-            padding: 10px;
+            background: var(--deep-blue-grad);
+            padding: 12px;
             margin: 25px 0 15px 0;
-            font-weight: bold;
+            border: 1px solid #00268a;
             display: block;
             width: 100%;
             overflow: hidden;
-            white-space: nowrap;
         }
 
-        @keyframes gradientAnim {
+        .marquee-tag marquee {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 16px;
+            /* Efeito Gradiente nas Letras */
+            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 4s linear infinite;
+        }
+
+        @keyframes textGradient {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         /* GRIDS E CARDS */
@@ -136,12 +144,6 @@
             font-size: 11px;
             color: #aaa;
             background: #0a0a0a;
-        }
-
-        marquee {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
     </style>
 </head>
