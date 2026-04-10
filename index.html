@@ -183,6 +183,7 @@
             padding: 20px;
             background: rgba(0, 0, 0, 0.4);
             border-right: 1px solid var(--neon-blue);
+            z-index: 20; /* Navegação sempre acima do footer */
         }
 
         .nav-btn {
@@ -216,7 +217,13 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        .content-area { flex: 1; padding: 30px; overflow-y: auto; max-height: calc(100vh - 120px); }
+        .content-area { 
+            flex: 1; 
+            padding: 30px; 
+            overflow-y: auto; 
+            max-height: calc(100vh - 120px); 
+            z-index: 15; /* Conteúdo sempre acima do footer */
+        }
         .section { display: none; width: 100%; }
         .section.active { display: block; }
 
@@ -273,22 +280,23 @@
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
 
-        /* TEXTO E CONTADOR SEM BARRA */
+        /* RODAPÉ POSICIONADO POR BAIXO */
         .perfil-footer {
             text-align: center;
             padding: 15px;
-            background: transparent; /* Barra removida */
-            border-top: none; /* Borda removida */
+            background: transparent;
+            border-top: none;
             position: fixed;
             bottom: 0;
             width: 100%;
-            z-index: 10;
+            z-index: 1; /* Valor baixo para ficar por baixo de tudo */
             font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
             font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
+            pointer-events: none; /* Garante que não atrapalhe cliques em itens acima */
         }
 
         #visit-counter {
@@ -299,7 +307,6 @@
             align-items: center;
             opacity: 0;
             transition: opacity 1s ease 1s;
-            pointer-events: none;
         }
 
         .texto-gradiente-animado {
@@ -464,8 +471,6 @@
 
         function render() {
             const gifSec = document.getElementById('gifs');
-            
-            // LISTA COMPLETA DE CATEGORIAS ATUALIZADA
             const dataGifs = [
                 { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
                 { marquee: "Blufftitler - Nome + Photo - 350 Xats", prefix: "Blufftitler - ", ids: ["F0b4mnJ", "65bzz5V", "ZetkVFF", "JqzxOwt", "NK9Z8rU", "RNIlFI3", "bSmUjsQ", "R6klF5K", "cgyGLHQ", "ctF1vyH", "Ge90Xy7", "7Z8xEC8", "G8HFkiG", "sh7u3UM", "y0WgmxJ", "Vvw2SMU", "uoNJlEe"] },
@@ -475,23 +480,16 @@
                 { marquee: "AfterEffects - Halloween - Name + Photo 450 Xats", prefix: "Hallo - ", ids: ["tYerofL", "DhJDXHE", "w3rSXf6", "9nHfmtZ", "61Eafym", "4ON7Gu0"] },
                 { marquee: "AfterEffects - Christmas - Name + Photo 450 Xats", prefix: "Santa - ", ids: ["79ymrS9", "FOyoZu1", "rIs0a2w", "4USFEwb", "5vvU8qn"] },
                 { marquee: "AfterEffects - DJ - Name + Photo 450 Xats", prefix: "DJ - ", ids: ["Bj6WFKZ", "GGrjZnE", "jJefFUv", "tesP8Me", "VRBqDtS", "WnnPvsU"] },
-                { marquee: "PhotoScape - (1) Photo - 100 Xats, (2) Photo - 200 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
+                { marquee: "PhotoScape - (1) Photo - 100 Xats, (2) Photo - 200 Xats, (3) Photo - 300 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
             ];
 
-            // Limpa a seção antes de renderizar para evitar duplicatas
             gifSec.innerHTML = "";
-
             dataGifs.forEach(sec => {
-                let h = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div>`;
-                h += `<div class="grid-gifs">`;
-                sec.ids.forEach((id, i) => { 
-                    h += `<div class="card" onclick="openZoom('https://i.imgur.com/${id}.gif')"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; 
-                });
-                h += `</div>`; 
-                gifSec.innerHTML += h; // Adiciona cada categoria na sequência
+                let h = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
+                sec.ids.forEach((id, i) => { h += `<div class="card" onclick="openZoom('https://i.imgur.com/${id}.gif')"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; });
+                h += `</div>`; gifSec.innerHTML += h;
             });
 
-            // RENDERIZAÇÃO DAS OUTRAS SEÇÕES (PCBACK, PSTYLE, ETC)
             const configs = [
                 { id: 'content-pcback-gif', url: 'https://i.imgur.com/SFnk7A6.gif', label: 'PCBack Gif', count: 16 },
                 { id: 'content-pstyle-gif', url: 'https://i.imgur.com/rUIzfWU.gif', label: 'PStyle Gif', count: 16 },
@@ -499,14 +497,11 @@
                 { id: 'content-pstyle-est', url: 'https://i.imgur.com/zlcL7Dh.png', label: 'PStyle Fix', count: 8 },
                 { id: 'content-fundos', url: 'https://i.imgur.com/eJtGG3D.png', label: 'Fundo', count: 10 }
             ];
-            
             configs.forEach(c => {
                 const el = document.getElementById(c.id);
                 if (el) {
-                    el.innerHTML = ""; // Limpa antes de carregar
-                    for(let i=1; i<=c.count; i++) {
-                        el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
-                    }
+                    el.innerHTML = "";
+                    for(let i=1; i<=c.count; i++) el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
                 }
             });
         }
