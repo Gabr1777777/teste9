@@ -72,7 +72,6 @@
             border-right: 1px solid var(--neon-blue);
         }
 
-        /* EFEITOS DE HOVER RESTAURADOS */
         .nav-btn {
             background: var(--deep-blue-bar);
             border: 1px solid rgba(0, 38, 138, 0.5);
@@ -81,18 +80,17 @@
             font-weight: bold;
             text-transform: uppercase;
             font-size: 12px;
-            transition: all 0.3s ease; /* Transição para suavizar o efeito */
+            transition: all 0.3s ease;
             color: white;
             text-align: left;
             position: relative;
-            overflow: hidden;
         }
 
         .nav-btn:hover, .nav-btn.active {
             border-color: var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue); /* Sombra neon restaurada */
+            box-shadow: 0 0 20px var(--neon-blue);
             background: rgba(0, 72, 255, 0.3);
-            transform: translateX(8px); /* Efeito de deslocamento lateral no hover */
+            transform: translateX(8px);
         }
 
         .nav-btn span {
@@ -114,40 +112,59 @@
         .section { display: none; width: 100%; }
         .section.active { display: block; }
 
-        .info-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
+        /* CARDS DE INFORMAÇÃO */
         .info-card {
             background: var(--card-bg);
             border: 1px solid rgba(34, 34, 34, 0.5);
             padding: 20px;
             border-radius: 4px;
             transition: 0.3s;
+            margin-bottom: 20px;
         }
 
         .info-card:hover {
             border-color: var(--neon-blue);
             box-shadow: 0 0 20px var(--neon-blue);
             transform: scale(1.01);
+            background: rgba(17, 17, 17, 0.7);
         }
 
+        /* EFEITO DE HOVER EM GIFS E FOTOS RESTAURADO */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(34, 34, 34, 0.5);
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: center;
+            cursor: zoom-in;
+            transition: all 0.3s ease; /* Transição rigorosa */
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px var(--neon-blue); /* Brilho neon restaurado */
+            transform: scale(1.05); /* Zoom no hover restaurado */
+            background: rgba(17, 17, 17, 0.8); /* Fica levemente menos transparente ao focar */
+            z-index: 5;
+        }
+
+        .card img { width: 100%; display: block; transition: 0.3s; }
+        
+        .card .label { 
+            padding: 8px 5px; 
+            font-size: 11px; 
+            background: rgba(10, 10, 10, 0.6); 
+            text-transform: uppercase; 
+            font-weight: bold;
+            border-top: 1px solid rgba(0, 72, 255, 0.2);
+        }
+
+        /* OUTROS ESTILOS */
+        .info-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .info-card.full-width { grid-column: 1 / span 2; }
-
-        .info-card h3 {
-            margin-top: 0;
-            text-transform: uppercase;
-            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
-            background-size: 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: moveGradient 4s linear infinite;
-        }
-
-        .info-card p { line-height: 1.6; color: #eee; font-size: 14px; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .grid-gifs { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
 
         .marquee-container {
             background: var(--deep-blue-bar);
@@ -169,19 +186,6 @@
 
         @keyframes linear-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes moveGradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-        .grid-gifs { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(34, 34, 34, 0.5);
-            border-radius: 4px; overflow: hidden; text-align: center; cursor: zoom-in; transition: 0.3s;
-        }
-
-        .card:hover { border-color: var(--neon-blue); transform: scale(1.03); background: rgba(17, 17, 17, 0.8); box-shadow: 0 0 20px var(--neon-blue); }
-        .card img { width: 100%; display: block; }
-        .card .label { padding: 8px 5px; font-size: 11px; background: rgba(10, 10, 10, 0.6); text-transform: uppercase; font-weight: bold; }
 
         .modal {
             display: none; position: fixed; z-index: 1000;
