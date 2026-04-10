@@ -141,14 +141,12 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
 
-        /* GRID ESPECÍFICO PARA GIFS (7 por linha) */
         .grid-gifs {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 12px;
         }
 
-        /* GRID ESPECÍFICO PARA PSTYLE (4 por linha) */
         .grid-pstyle {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -189,7 +187,7 @@
         .section { display: none; width: 100%; max-width: 1200px; }
         .section.active { display: block; }
 
-        /* MODAL DE ZOOM (LIGHTBOX) */
+        /* MODAL DE ZOOM */
         .modal {
             display: none;
             position: fixed;
@@ -205,11 +203,19 @@
         }
 
         .modal-content {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 85%;
+            max-height: 85%;
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 30px var(--neon-blue);
             animation: zoomAnim 0.3s ease-out;
+            transition: transform 0.3s;
+        }
+
+        /* ZOOM AMPLIADO PARA PSTYLE */
+        .modal-content.zoom-pstyle {
+            max-width: 98%;
+            max-height: 98%;
+            transform: scale(1.05);
         }
 
         @keyframes zoomAnim {
@@ -284,12 +290,18 @@
             if(event) event.currentTarget.classList.add('active');
         }
 
-        // FUNÇÃO DE ZOOM
-        function openZoom(src) {
+        function openZoom(src, isPstyle = false) {
             const modal = document.getElementById("modalZoom");
             const modalImg = document.getElementById("imgZoom");
             modal.style.display = "flex";
             modalImg.src = src;
+            
+            // Aplica zoom rigorosamente maior se for PStyle
+            if(isPstyle) {
+                modalImg.classList.add('zoom-pstyle');
+            } else {
+                modalImg.classList.remove('zoom-pstyle');
+            }
         }
 
         function closeZoom() {
@@ -316,7 +328,7 @@
             const psGif = document.getElementById('content-pstyle-gif');
             for(let i=1; i<=16; i++) { 
                 let url = `https://i.imgur.com/rUIzfWU.gif`;
-                psGif.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">PStyle Gif #${i}</div></div>`; 
+                psGif.innerHTML += `<div class="card" onclick="openZoom('${url}', true)"><img src="${url}"><div class="label">PStyle Gif #${i}</div></div>`; 
             }
 
             const pcEst = document.getElementById('content-pcback-est');
@@ -328,7 +340,7 @@
             const psEst = document.getElementById('content-pstyle-est');
             for(let i=1; i<=8; i++) { 
                 let url = `https://i.imgur.com/zlcL7Dh.png`;
-                psEst.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">PStyle Fix #${i}</div></div>`; 
+                psEst.innerHTML += `<div class="card" onclick="openZoom('${url}', true)"><img src="${url}"><div class="label">PStyle Fix #${i}</div></div>`; 
             }
 
             const fundos = document.getElementById('content-fundos');
