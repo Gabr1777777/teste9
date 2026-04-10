@@ -250,7 +250,6 @@
         .section.active { display: block; }
 
         .grid-container { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-        
         .grid-gifs { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
         
         .card {
@@ -316,21 +315,21 @@
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
 
-        /* NOVO POSICIONAMENTO DO CONTADOR: INFERIOR DIREITO */
-        .visitor-counter-box {
+        /* ESTILO DO CONTADOR NO CANTO INFERIOR DIREITO */
+        #visit-counter {
             position: fixed;
             bottom: 20px;
-            right: 20px; /* Alterado de left para right */
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.5);
+            right: 20px;
+            z-index: 1000001;
+            background: rgba(5, 5, 5, 0.85);
             border: 1px solid var(--neon-blue);
-            padding: 8px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             box-shadow: 0 0 15px var(--neon-blue);
             backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
     </style>
@@ -396,15 +395,29 @@
         </div>
     </div>
 
-    <div class="visitor-counter-box">
-        <a href="https://www.seeyoufarm.com/free-counter/pt/hits.php?id=gabrgallery1777777">
-            <img src="https://hits.seeyoufarm.com/pt/hits.php?id=gabrgallery1777777" border="0" alt="Contador de Visitas">
-        </a>
+    <div id="visit-counter">
+        <span style="color: var(--neon-blue); font-size: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Visitas</span>
+        <span id="count-number" style="color: #fff; font-size: 18px; font-family: monospace;">...</span>
     </div>
 
     <div id="modalZoom" class="modal" onclick="closeZoom()"><img class="modal-content" id="imgZoom"></div>
 
     <script>
+        // CONTADOR API - ID alterado para galeria_wrs_2026_v2 para zerar a contagem
+        const ID_VISITAS = "galeria_wrs_2026_v2"; 
+
+        async function carregarContadores() {
+            try {
+                const resV = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
+                const dataV = await resV.json();
+                const valor = dataV.count || dataV.value;
+                document.getElementById('count-number').innerText = valor.toString().padStart(5, '0');
+            } catch(e) {
+                console.error("Erro ao carregar contador:", e);
+                document.getElementById('count-number').innerText = "00001";
+            }
+        }
+
         function showAlert() {
             const alertBox = document.getElementById('copyright-alert');
             alertBox.style.display = 'block';
@@ -441,16 +454,9 @@
 
         function cycleVolume() {
             const btn = document.getElementById('volBtn');
-            if (audio.volume === 0.0) { 
-                audio.volume = 0.5; 
-                btn.innerText = "Vol: 50"; 
-            } else if (audio.volume === 0.5) { 
-                audio.volume = 1.0; 
-                btn.innerText = "Vol: 100"; 
-            } else { 
-                audio.volume = 0.0; 
-                btn.innerText = "Mudo"; 
-            }
+            if (audio.volume === 0.0) { audio.volume = 0.5; btn.innerText = "Vol: 50"; }
+            else if (audio.volume === 0.5) { audio.volume = 1.0; btn.innerText = "Vol: 100"; }
+            else { audio.volume = 0.0; btn.innerText = "Mudo"; }
         }
 
         function entrarGaleria() {
@@ -485,10 +491,8 @@
                 { marquee: "Canva Name + Photo - 300 Xats", prefix: "Canva - ", ids: ["hWVyLox", "Uxlzu5C", "Crt716T", "xo4npxf", "jUG54d4", "gMQ3Fo9", "xvM1ixb", "cwRIh51", "db8sdi9", "nRJQ0BB"] },
                 { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd", "HVFwoO9", "ueBRxvV", "XkwoKCf", "ULcq67R", "afxBCK8", "NKjJIGs", "xDhKvCC", "vvcOaEK", "ups9FgX", "JeY6A7M", "zDyoEgZ", "0FklDw9", "FX6gdFw", "V3LO0YG", "r9yfJNZ", "R3sO6Dv", "P8DpN4L", "fRfZuO7", "BPgPihm", "5HxfNaB", "FILAVQP", "5IoR515", "KUQ1WsX", "ZuaO9n5", "eYUpRds", "EkhA4lw", "ufOP9QG", "w2URYst", "1uMiE0k", "JQaMJ7U", "JeVcLkk", "un368jG", "LaClQL2", "l3Az3Nz", "8ME12WB", "SWSOcvf", "HizA7mV", "HnIaNDX", "POgiaNY", "CgwrMHf", "MtDrchh", "P4UINMY", "F0ujERT", "lHdM40L", "vWKX5Fb", "UHq0679", "2tRaU1S", "XQJ8R9h", "n4sAIhn", "LaJAK5L", "RIDkkSc", "ogHzac1", "aV63fjn", "tSuJOKg", "MxeKAfQ", "A4chzU3", "bAXpFow", "1YlDoNZ", "IXCqwlR", "kv1EWDW", "FIulKIF", "qLhMZAE", "R9nl6Ch", "uCXDGTg"] },
                 { marquee: "AfterEffects - Name + (2) Photo - 500 Xats", prefix: "Love - ", ids: ["NnEIlrv", "8hrgq1D", "MqnmO8R", "oRvL0X3", "9z2OuGk"] },
-                { marquee: "AfterEffects - Halloween - Name + Photo 450 Xats", prefix: "Hallo - ", ids: ["tYerofL", "DhJDXHE", "w3rSXf6", "9nHfmtZ", "61Eafym", "4ON7Gu0"] },
-                { marquee: "AfterEffects - Christmas - Name + Photo 450 Xats", prefix: "Santa - ", ids: ["79ymrS9", "FOyoZu1", "rIs0a2w", "4USFEwb", "5vvU8qn"] },
                 { marquee: "AfterEffects - DJ - Name + Photo 450 Xats", prefix: "DJ - ", ids: ["Bj6WFKZ", "GGrjZnE", "jJefFUv", "tesP8Me", "VRBqDtS", "WnnPvsU"] },
-                { marquee: "PhotoScape - (1) Photo - 100 Xats, (2) Photo - 200 Xats, (3) Photo - 300 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
+                { marquee: "PhotoScape - (1) Photo - 100 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
             ];
 
             gifSec.innerHTML = "";
@@ -512,6 +516,7 @@
                     for(let i=1; i<=c.count; i++) el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
                 }
             });
+            carregarContadores();
         }
         window.onload = render;
     </script>
