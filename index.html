@@ -12,6 +12,24 @@
             --deep-blue-bar: rgba(0, 10, 31, 0.5); 
         }
 
+        /* ESTILOS DO EFEITO DO CURSOR (ESTRELA AZUL NEON) */
+        .cursor-star {
+            position: absolute;
+            background: #fff; /* Centro branco para o efeito neon */
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none; /* Não atrapalha cliques */
+            z-index: 1000002; /* Acima de tudo */
+            box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+            animation: trailFade 0.7s linear forwards;
+        }
+
+        @keyframes trailFade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.2); opacity: 0; }
+        }
+
         /* ALERTA DE COPYRIGHT PERSONALIZADO */
         .copy-alert {
             display: none;
@@ -176,6 +194,7 @@
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
+            /* FONT-SIZE AUMENTADO RIGOROSAMENTE DE 12px PARA 13px */
             font-size: 13px; 
             transition: all 0.3s ease;
             color: white;
@@ -258,27 +277,45 @@
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
 
-        /* CONTADOR GLOBAL */
+        /* CONTADOR GLOBAL - ATUALIZADO (MENOR E RESTRITO À GALERIA) */
         #visit-counter {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            z-index: 9998;
+            z-index: 9998; /* Logo abaixo da intro, mas acima do resto */
+            /* FUNDO ALTERADO PARA 50% TRANSPARENTE (Restauração/Ajuste) */
             background: rgba(0, 0, 0, 0.5); 
             border: 1px solid var(--neon-blue);
+            /* REDUZIDO PADDING */
             padding: 4px 8px; 
             border-radius: 4px;
             display: flex;
             flex-direction: column;
             align-items: center;
             box-shadow: 0 0 10px var(--neon-blue);
+            /* ADICIONADO CONTROLE DE EXIBIÇÃO INICIAL */
             opacity: 0;
-            transition: opacity 1s ease 1s;
-            pointer-events: none;
+            transition: opacity 1s ease 1s; /* Aparece junto com a galeria */
+            pointer-events: none; /* Não atrapalha cliques antes de aparecer */
         }
     </style>
 </head>
 <body oncontextmenu="showAlert(); return false;">
+
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const star = document.createElement('div');
+            star.classList.add('cursor-star');
+            star.style.left = e.pageX + 'px';
+            star.style.top = e.pageY + 'px';
+            document.body.appendChild(star);
+
+            // Remove o elemento após a animação acabar (0.7s)
+            setTimeout(() => {
+                star.remove();
+            }, 700);
+        });
+    </script>
 
     <div id="copyright-alert" class="copy-alert">
         <h3>COPYRIGHT - ACESSO PROIBIDO</h3>
@@ -336,17 +373,22 @@
     <div id="modalZoom" class="modal" onclick="closeZoom()"><img class="modal-content" id="imgZoom"></div>
 
     <script>
+        // CONTADOR DE VISITAS GLOBAL (API)
         const ID_VISITAS = "galeria_wrs_v1_2026"; 
+        
         async function carregarContadores() {
             try {
                 const res = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
                 const data = await res.json();
                 const total = data.count || data.value;
                 document.getElementById('count-number').innerText = total;
-            } catch(e) { document.getElementById('count-number').innerText = "1"; }
+            } catch(e) {
+                document.getElementById('count-number').innerText = "1";
+            }
         }
         window.addEventListener('load', carregarContadores);
 
+        // SEGURANÇA: ALERTA E BLOQUEIO DE TECLAS
         function showAlert() {
             const alertBox = document.getElementById('copyright-alert');
             alertBox.style.display = 'block';
@@ -355,10 +397,13 @@
 
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83) || e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
-                showAlert(); e.preventDefault(); return false;
+                showAlert();
+                e.preventDefault();
+                return false;
             }
         });
 
+        // TRAVA BARRAS DE LINK
         (function() {
             const links = document.querySelectorAll('a, .nav-btn, .card');
             links.forEach(link => {
@@ -369,6 +414,7 @@
             });
         })();
 
+        // LOGICA DA GALERIA
         const dataGifs = [{ marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }];
         const playlist = [
             { name: "Abraham-Mateo - BAI LALA", url: "https://www.dropbox.com/scl/fi/gw8940zfvm60ul7malxox/Abraham-Mateo-BAI-LALA.mp3?rlkey=puytwnkxllb6tmz35htfr8tmh&st=ud55ktgf&raw=1" },
@@ -400,8 +446,12 @@
         function entrarGaleria() {
             const intro = document.getElementById('intro-screen');
             const counter = document.getElementById('visit-counter');
+            
             intro.style.opacity = '0'; intro.style.transform = 'scale(1.1)'; intro.style.visibility = 'hidden';
+            
+            // Exibe o contador junto com a galeria
             counter.style.opacity = '1';
+            
             setTimeout(() => { intro.style.display = 'none'; }, 1000); 
             togglePlay(); 
         }
