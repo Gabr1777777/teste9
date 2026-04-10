@@ -196,41 +196,43 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.98);
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
         }
 
         .modal-content {
-            max-width: 85%;
-            max-height: 85%;
+            max-width: 80%;
+            max-height: 80%;
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 30px var(--neon-blue);
-            animation: zoomAnim 0.3s ease-out;
-            transition: transform 0.3s;
+            animation: zoomAnim 0.2s ease-out;
+            transition: all 0.3s;
         }
 
-        /* ZOOM AMPLIADO PARA PSTYLE */
-        .modal-content.zoom-pstyle {
-            max-width: 98%;
-            max-height: 98%;
-            transform: scale(1.05);
+        /* ZOOM MÁXIMO PARA PSTYLE */
+        .zoom-pstyle-grande {
+            max-width: 98% !important;
+            max-height: 98% !important;
+            width: auto;
+            height: auto;
         }
 
         @keyframes zoomAnim {
-            from { transform: scale(0.5); opacity: 0; }
+            from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 35px;
+            top: 10px;
+            right: 25px;
             color: white;
-            font-size: 40px;
+            font-size: 50px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 1001;
         }
     </style>
 </head>
@@ -290,17 +292,17 @@
             if(event) event.currentTarget.classList.add('active');
         }
 
-        function openZoom(src, isPstyle = false) {
+        function openZoom(src, tipo) {
             const modal = document.getElementById("modalZoom");
             const modalImg = document.getElementById("imgZoom");
             modal.style.display = "flex";
             modalImg.src = src;
             
-            // Aplica zoom rigorosamente maior se for PStyle
-            if(isPstyle) {
-                modalImg.classList.add('zoom-pstyle');
+            // Força o zoom máximo se for pstyle
+            if(tipo === 'pstyle') {
+                modalImg.classList.add('zoom-pstyle-grande');
             } else {
-                modalImg.classList.remove('zoom-pstyle');
+                modalImg.classList.remove('zoom-pstyle-grande');
             }
         }
 
@@ -314,7 +316,7 @@
                 let html = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
                 sec.ids.forEach((id, i) => { 
                     let url = `https://i.imgur.com/${id}.gif`;
-                    html += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">${sec.prefix}${i+1}</div></div>`; 
+                    html += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">${sec.prefix}${i+1}</div></div>`; 
                 });
                 html += `</div>`; gifContainer.innerHTML += html;
             });
@@ -322,31 +324,31 @@
             const pcGif = document.getElementById('content-pcback-gif');
             for(let i=1; i<=16; i++) { 
                 let url = `https://i.imgur.com/SFnk7A6.gif`;
-                pcGif.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">PCBack Gif #${i}</div></div>`; 
+                pcGif.innerHTML += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">PCBack Gif #${i}</div></div>`; 
             }
 
             const psGif = document.getElementById('content-pstyle-gif');
             for(let i=1; i<=16; i++) { 
                 let url = `https://i.imgur.com/rUIzfWU.gif`;
-                psGif.innerHTML += `<div class="card" onclick="openZoom('${url}', true)"><img src="${url}"><div class="label">PStyle Gif #${i}</div></div>`; 
+                psGif.innerHTML += `<div class="card" onclick="openZoom('${url}', 'pstyle')"><img src="${url}"><div class="label">PStyle Gif #${i}</div></div>`; 
             }
 
             const pcEst = document.getElementById('content-pcback-est');
             for(let i=1; i<=10; i++) { 
                 let url = `https://i.imgur.com/OyX4Jwt.png`;
-                pcEst.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">Wallpaper #${i}</div></div>`; 
+                pcEst.innerHTML += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">Wallpaper #${i}</div></div>`; 
             }
 
             const psEst = document.getElementById('content-pstyle-est');
             for(let i=1; i<=8; i++) { 
                 let url = `https://i.imgur.com/zlcL7Dh.png`;
-                psEst.innerHTML += `<div class="card" onclick="openZoom('${url}', true)"><img src="${url}"><div class="label">PStyle Fix #${i}</div></div>`; 
+                psEst.innerHTML += `<div class="card" onclick="openZoom('${url}', 'pstyle')"><img src="${url}"><div class="label">PStyle Fix #${i}</div></div>`; 
             }
 
             const fundos = document.getElementById('content-fundos');
             for(let i=1; i<=10; i++) { 
                 let url = `https://i.imgur.com/eJtGG3D.png`;
-                fundos.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">Fundo #${i}</div></div>`; 
+                fundos.innerHTML += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">Fundo #${i}</div></div>`; 
             }
         }
         window.onload = render;
