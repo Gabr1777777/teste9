@@ -12,6 +12,19 @@
             --deep-blue-bar: rgba(0, 10, 31, 0.5); 
         }
 
+        /* PERSONALIZAÇÃO DA BARRA DE ROLAGEM (FINA E NEON) */
+        .content-area::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-area::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .content-area::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
         /* ESTILOS DO EFEITO DO CURSOR */
         .cursor-star {
             position: absolute;
@@ -63,7 +76,6 @@
             font-size: 14px;
         }
 
-        /* TELA DE ENTRADA */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -133,7 +145,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            overflow: hidden; /* REMOVE A BARRA DE ROLAGEM EXTERNA */
+            overflow: hidden; 
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -186,7 +198,7 @@
             background: rgba(0, 0, 0, 0.4);
             border-right: 1px solid var(--neon-blue);
             z-index: 20;
-            overflow-y: auto; /* Permite rolagem apenas no menu se houver muitos botões */
+            overflow: hidden; /* REMOVE A BARRA DE ROLAGEM DOS BOTÕES */
         }
 
         .nav-btn {
@@ -223,7 +235,7 @@
         .content-area { 
             flex: 1; 
             padding: 30px; 
-            overflow-y: auto; /* MANTÉM A ROLAGEM APENAS AQUI */
+            overflow-y: auto; 
             z-index: 15;
         }
 
