@@ -615,37 +615,31 @@
                 h += `</div>`; gifSec.innerHTML += h;
             });
 
-            // LOGICA RIGOROSA DE LISTAS ESPECÍFICAS
             const configs = [
                 { 
                     id: 'content-pcback-gif', 
                     urls: ['SFnk7A6.gif', 'KKY2zqU.gif', 'fmhynyY.gif'], 
-                    label: 'PCBack Gif', 
-                    count: 15 // Multiplo de 3 para manter a sequência perfeita
+                    label: 'PCBack Gif'
                 },
                 { 
                     id: 'content-pstyle-gif', 
                     urls: ['rUIzfWU.gif', 'dGfJDfh.gif', 'ZXBA6F1.gif'], 
-                    label: 'PStyle Gif', 
-                    count: 15 
+                    label: 'PStyle Gif'
                 },
                 { 
                     id: 'content-pcback-est', 
                     urls: ['OyX4Jwt.png', 'dbSy2Rf.png', 'uBp1ypU.png'], 
-                    label: 'Pcback', 
-                    count: 12 
+                    label: 'Pcback'
                 },
                 { 
                     id: 'content-pstyle-est', 
                     urls: ['Ii4pk4g.png', 'm2Ew85b.png', 'zlcL7Dh.png'], 
-                    label: 'Pstyle', 
-                    count: 12 
+                    label: 'Pstyle'
                 },
                 { 
                     id: 'content-fundos', 
                     urls: ['eJtGG3D.png', 'Q8XwtQZ.png', '6phSrhR.png'], 
-                    label: 'FUNDO', 
-                    count: 12 
+                    label: 'FUNDO'
                 }
             ];
             
@@ -653,15 +647,14 @@
                 const el = document.getElementById(c.id);
                 if (el) {
                     el.innerHTML = "";
-                    for(let i=0; i < c.count; i++) {
-                        const imgId = c.urls[i % c.urls.length];
+                    c.urls.forEach((imgId, index) => {
                         const fullUrl = `https://i.imgur.com/${imgId}`;
                         el.innerHTML += `
                             <div class="card" onclick="openZoom('${fullUrl}')">
                                 <img src="${fullUrl}">
-                                <div class="label">${c.label} - ${(i % c.urls.length) + 1}</div>
+                                <div class="label">${c.label} - ${index + 1}</div>
                             </div>`;
-                    }
+                    });
                 }
             });
         }
