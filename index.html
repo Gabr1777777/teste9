@@ -141,11 +141,11 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
 
-        /* GRID ESPECÍFICO PARA GIFS 100x100 */
+        /* GRID ESPECÍFICO PARA GIFS (Ajustado para 150px) */
         .grid-gifs {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
         }
 
         .card {
@@ -166,15 +166,15 @@
 
         .card img { width: 100%; display: block; object-fit: cover; }
 
-        #content-gifs .card { width: 100px; margin: auto; }
-        #content-gifs .card img { width: 100px; height: 100px; }
+        /* AJUSTE DE TAMANHO RIGOROSO NA ABA GIFS */
+        #content-gifs .card { width: 150px; margin: auto; }
+        #content-gifs .card img { width: 150px; height: 150px; }
 
-        /* AJUSTE RIGOROSO NAS LABELS (NOMES) */
         .card .label { 
             padding: 8px 5px; 
-            font-size: 11px; /* Aumentado de 9px */
-            color: #ffffff;  /* Branco puro */
-            font-weight: bold; /* Negrito */
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: bold;
             background: #0a0a0a; 
             text-transform: uppercase;
         }
