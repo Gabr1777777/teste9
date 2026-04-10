@@ -315,13 +315,12 @@
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
 
-        /* AJUSTE RIGOROSO DO CONTADOR PARA FICAR POR BAIXO DE TUDO */
         #visit-counter {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1; /* Valor mínimo para ficar atrás da área de conteúdo (15) e menu (20) */
-            background: rgba(5, 5, 5, 0.5); /* 50% transparente */
+            z-index: 1; 
+            background: rgba(5, 5, 5, 0.5); 
             border: 1px solid var(--neon-blue);
             padding: 6px 12px;
             border-radius: 4px;
@@ -389,9 +388,17 @@
             <div id="pcback-est" class="section"><div class="grid-container" id="content-pcback-est"></div></div>
             <div id="pstyle-est" class="section"><div class="grid-container" id="content-pstyle-est"></div></div>
             <div id="fundos" class="section"><div class="grid-container" id="content-fundos"></div></div>
-            <div id="player" class="section"><div class="player-container"><div class="track-marquee"><span id="trackName" class="track-name">Selecione uma música...</span></div><div style="display:flex; justify-content:center; align-items:center; gap:10px;"><button class="nav-btn" style="padding:10px" onclick="prevTrack()">«</button><button class="nav-btn" style="padding:10px" id="playBtn" onclick="togglePlay()">▶</button><button class="nav-btn" style="padding:10px" onclick="nextTrack()">»</button>
-            <button class="nav-btn" style="padding:10px; width:45px; text-align:center;" id="volBtn" onclick="cycleVolume()">Vol: 50</button>
-            </div></div></div>
+            <div id="player" class="section">
+                <div class="player-container">
+                    <div class="track-marquee"><span id="trackName" class="track-name">Selecione uma música...</span></div>
+                    <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
+                        <button class="nav-btn" style="padding:10px" onclick="prevTrack()">«</button>
+                        <button class="nav-btn" style="padding:10px" id="playBtn" onclick="togglePlay()">▶</button>
+                        <button class="nav-btn" style="padding:10px" onclick="nextTrack()">»</button>
+                        <button class="nav-btn" style="padding:10px 5px; width:38px; text-align:center; font-size:11px;" id="volBtn" onclick="cycleVolume()">50%</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -412,7 +419,6 @@
                 const valor = dataV.count || dataV.value;
                 document.getElementById('count-number').innerText = valor.toString().padStart(5, '0');
             } catch(e) {
-                console.error("Erro ao carregar contador:", e);
                 document.getElementById('count-number').innerText = "00001";
             }
         }
@@ -453,15 +459,15 @@
 
         function cycleVolume() {
             const btn = document.getElementById('volBtn');
-            if (audio.volume === 0.0) { audio.volume = 0.5; btn.innerText = "Vol: 50"; }
-            else if (audio.volume === 0.5) { audio.volume = 1.0; btn.innerText = "Vol: 100"; }
-            else { audio.volume = 0.0; btn.innerText = "Mudo"; }
+            if (audio.volume === 0.0) { audio.volume = 0.5; btn.innerText = "50%"; }
+            else if (audio.volume === 0.5) { audio.volume = 1.0; btn.innerText = "100%"; }
+            else { audio.volume = 0.0; btn.innerText = "0%"; }
         }
 
         function entrarGaleria() {
             const intro = document.getElementById('intro-screen');
             intro.style.opacity = '0'; intro.style.transform = 'scale(1.1)'; intro.style.visibility = 'hidden';
-            setTimeout(() => { intro.style.display = 'none'; }, 1000); 
+            setTimeout(() => { intro.style.display = 'none'; carregarContadores(); }, 1000); 
             togglePlay(); 
         }
 
@@ -515,7 +521,6 @@
                     for(let i=1; i<=c.count; i++) el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
                 }
             });
-            carregarContadores();
         }
         window.onload = render;
     </script>
