@@ -244,7 +244,6 @@
             overflow-y: auto;
             z-index: 15;
             position: relative;
-            /* Padding-bottom removido para alinhar com a retirada do footer */
         }
 
         .section { display: none; width: 100%; }
@@ -382,7 +381,7 @@
             <div id="pstyle-est" class="section"><div class="grid-container" id="content-pstyle-est"></div></div>
             <div id="fundos" class="section"><div class="grid-container" id="content-fundos"></div></div>
             <div id="player" class="section"><div class="player-container"><div class="track-marquee"><span id="trackName" class="track-name">Selecione uma música...</span></div><div style="display:flex; justify-content:center; align-items:center; gap:10px;"><button class="nav-btn" style="padding:10px" onclick="prevTrack()">«</button><button class="nav-btn" style="padding:10px" id="playBtn" onclick="togglePlay()">▶</button><button class="nav-btn" style="padding:10px" onclick="nextTrack()">»</button>
-            <button class="nav-btn" style="padding:10px; width:45px; text-align:center;" id="volBtn" onclick="cycleVolume()">Vol: 50</button>
+            <button class="nav-btn" style="padding:10px; width:65px; text-align:center;" id="volBtn" onclick="cycleVolume()">Vol: 50</button>
             </div></div></div>
         </div>
     </div>
@@ -422,13 +421,20 @@
 
         let currentTrack = 0; 
         const audio = new Audio();
-        audio.volume = 0.5;
+        audio.volume = 0.5; // INÍCIO EM 50%
 
         function cycleVolume() {
             const btn = document.getElementById('volBtn');
-            if (audio.volume === 0.5) { audio.volume = 1.0; btn.innerText = "Vol: 100"; }
-            else if (audio.volume === 1.0) { audio.volume = 0.0; btn.innerText = "Mudo"; }
-            else { audio.volume = 0.5; btn.innerText = "Vol: 50"; }
+            if (audio.volume === 0.0) { 
+                audio.volume = 0.5; 
+                btn.innerText = "Vol: 50"; 
+            } else if (audio.volume === 0.5) { 
+                audio.volume = 1.0; 
+                btn.innerText = "Vol: 100"; 
+            } else { 
+                audio.volume = 0.0; 
+                btn.innerText = "Mudo"; 
+            }
         }
 
         function entrarGaleria() {
