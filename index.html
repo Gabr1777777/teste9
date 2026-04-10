@@ -9,7 +9,7 @@
             --neon-blue: #0048FF;
             --bg-dark: #050505;
             --card-bg: #111;
-            --deep-blue-grad: linear-gradient(90deg, #000814, #001a57, #000814);
+            --deep-blue-bar: #000a1f; /* Azul escuro sólido para o fundo do letreiro e botões */
         }
 
         body {
@@ -23,7 +23,7 @@
             align-items: center;
         }
 
-        /* PERFIL E TÍTULOS COM GRADIENTE */
+        /* PERFIL */
         .perfil-header {
             text-align: center;
             padding: 30px;
@@ -55,7 +55,7 @@
             animation: moveGradient 5s linear infinite;
         }
 
-        /* NAVEGAÇÃO E BOTÕES ANIMADOS */
+        /* NAVEGAÇÃO E BOTÕES (Texto com Gradiente, Fundo Azul Escuro) */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
@@ -68,23 +68,32 @@
         }
 
         .nav-btn {
-            border: 1px solid #333;
+            background: var(--deep-blue-bar);
+            border: 1px solid #00268a;
             padding: 12px 20px;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
             font-size: 11px;
-            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
-            background-size: 300%;
-            color: #000;
             transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .nav-btn span {
+            background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 3s linear infinite;
         }
 
         .nav-btn:hover, .nav-btn.active {
-            box-shadow: 0 0 15px rgba(0, 72, 255, 0.8);
-            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 72, 255, 0.5);
+            border-color: var(--neon-blue);
         }
 
+        /* SEÇÕES */
         .section {
             display: none;
             width: 100%;
@@ -93,9 +102,9 @@
 
         .section.active { display: block; }
 
-        /* BARRAS DE TÍTULO */
+        /* BARRAS DE TÍTULO (LETREIRO RESTAURADO) */
         .marquee-tag {
-            background: var(--deep-blue-grad);
+            background: var(--deep-blue-bar);
             padding: 12px 0;
             margin: 25px 0 15px 0;
             border: 1px solid #00268a;
@@ -169,14 +178,14 @@
     </div>
 
     <div class="nav-container">
-        <button class="nav-btn active" onclick="showTab('inicio')">Início</button>
-        <button class="nav-btn" onclick="showTab('gifs')">GIFS</button>
-        <button class="nav-btn" onclick="showTab('pcback-gif')">PCBACK GIFS</button>
-        <button class="nav-btn" onclick="showTab('pstyle-gif')">PSTYLE GIFS</button>
-        <button class="nav-btn" onclick="showTab('pcback-est')">PCBACK ESTÁTICO</button>
-        <button class="nav-btn" onclick="showTab('pstyle-est')">PSTYLE ESTÁTICO</button>
-        <button class="nav-btn" onclick="showTab('fundos')">FUNDOS</button>
-        <button class="nav-btn" onclick="showTab('xatspace')">XATSPACE</button>
+        <button class="nav-btn active" onclick="showTab('inicio')"><span>Início</span></button>
+        <button class="nav-btn" onclick="showTab('gifs')"><span>GIFS</span></button>
+        <button class="nav-btn" onclick="showTab('pcback-gif')"><span>PCBACK GIFS</span></button>
+        <button class="nav-btn" onclick="showTab('pstyle-gif')"><span>PSTYLE GIFS</span></button>
+        <button class="nav-btn" onclick="showTab('pcback-est')"><span>PCBACK ESTÁTICO</span></button>
+        <button class="nav-btn" onclick="showTab('pstyle-est')"><span>PSTYLE ESTÁTICO</span></button>
+        <button class="nav-btn" onclick="showTab('fundos')"><span>FUNDOS</span></button>
+        <button class="nav-btn" onclick="showTab('xatspace')"><span>XATSPACE</span></button>
     </div>
 
     <div id="inicio" class="section active">
