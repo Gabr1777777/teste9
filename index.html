@@ -615,24 +615,18 @@
                 h += `</div>`; gifSec.innerHTML += h;
             });
 
-            // LOGICA RIGOROSA DE REPETIÇÃO E ALTERNÂNCIA
             const configs = [
-                { id: 'content-pcback-gif', urls: ['https://i.imgur.com/SFnk7A6.gif', 'https://i.imgur.com/KKY2zqU.gif'], label: 'PCBack Gif', count: 16 },
+                { id: 'content-pcback-gif', url: 'https://i.imgur.com/SFnk7A6.gif', label: 'PCBack Gif', count: 16 },
                 { id: 'content-pstyle-gif', url: 'https://i.imgur.com/rUIzfWU.gif', label: 'PStyle Gif', count: 16 },
-                { id: 'content-pcback-est', url: 'https://i.imgur.com/tcGR4ey.png', label: 'Wallpaper', count: 1 },
-                { id: 'content-pstyle-est', url: 'https://i.imgur.com/zlcL7Dh.png', label: 'PStyle Fix', count: 1 },
-                { id: 'content-fundos', url: 'https://i.imgur.com/Q8XwtQZ.png', label: 'Fundo', count: 1 }
+                { id: 'content-pcback-est', url: 'https://i.imgur.com/OyX4Jwt.png', label: 'Wallpaper', count: 10 },
+                { id: 'content-pstyle-est', url: 'https://i.imgur.com/zlcL7Dh.png', label: 'PStyle Fix', count: 8 },
+                { id: 'content-fundos', url: 'https://i.imgur.com/eJtGG3D.png', label: 'Fundo', count: 10 }
             ];
-            
             configs.forEach(c => {
                 const el = document.getElementById(c.id);
                 if (el) {
                     el.innerHTML = "";
-                    for(let i=1; i<=c.count; i++) {
-                        let finalUrl = c.url;
-                        if(c.urls) finalUrl = c.urls[(i-1) % c.urls.length]; // Alterna um de cada
-                        el.innerHTML += `<div class="card" onclick="openZoom('${finalUrl}')"><img src="${finalUrl}"><div class="label">${c.label} #${i}</div></div>`;
-                    }
+                    for(let i=1; i<=c.count; i++) el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
                 }
             });
         }
