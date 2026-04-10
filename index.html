@@ -72,10 +72,9 @@
             font-weight: bold;
             text-transform: uppercase;
             font-size: 13px;
-            transition: 0.3s; /* Transição suave */
+            transition: 0.3s;
         }
 
-        /* EFEITO HOVER NOS BOTÕES */
         .nav-btn:hover {
             border-color: var(--neon-blue);
             box-shadow: 0 0 15px var(--neon-blue);
@@ -155,10 +154,9 @@
             border-radius: 4px;
             overflow: hidden;
             text-align: center;
-            transition: 0.3s; /* Transição para o efeito neon */
+            transition: 0.3s;
         }
 
-        /* EFEITO HOVER NOS CARDS (GIFS E FOTOS) */
         .card:hover {
             border-color: var(--neon-blue);
             box-shadow: 0 0 20px var(--neon-blue);
@@ -171,7 +169,15 @@
         #content-gifs .card { width: 100px; margin: auto; }
         #content-gifs .card img { width: 100px; height: 100px; }
 
-        .card .label { padding: 5px; font-size: 9px; color: #aaa; background: #0a0a0a; }
+        /* AJUSTE RIGOROSO NAS LABELS (NOMES) */
+        .card .label { 
+            padding: 8px 5px; 
+            font-size: 11px; /* Aumentado de 9px */
+            color: #ffffff;  /* Branco puro */
+            font-weight: bold; /* Negrito */
+            background: #0a0a0a; 
+            text-transform: uppercase;
+        }
 
         .section { display: none; width: 100%; max-width: 1200px; }
         .section.active { display: block; }
