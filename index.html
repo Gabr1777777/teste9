@@ -9,6 +9,7 @@
             --neon-blue: #0048FF;
             --bg-dark: #050505;
             --card-bg: #111;
+            /* Fundo azul escuro gradiente para a barra */
             --deep-blue-grad: linear-gradient(90deg, #000814, #001a57, #000814);
         }
 
@@ -79,33 +80,35 @@
 
         .section.active { display: block; }
 
-        /* BARRAS COM FUNDO AZUL ESCURO E LETRAS COM GRADIENTE ANIMADO */
+        /* BARRAS DE TÍTULO */
         .marquee-tag {
             background: var(--deep-blue-grad);
-            padding: 12px;
+            padding: 12px 0;
             margin: 25px 0 15px 0;
             border: 1px solid #00268a;
-            display: block;
             width: 100%;
-            overflow: hidden;
+            display: block;
         }
 
-        .marquee-tag marquee {
+        /* TEXTO ANIMADO DENTRO DO LETREIRO */
+        .texto-animado {
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 16px;
-            /* Efeito Gradiente nas Letras */
-            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
-            background-size: 300%;
+            /* Efeito Gradiente nas Letras (Azul e Branco) */
+            background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 200% auto;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: textGradient 4s linear infinite;
+            animation: moveGradient 3s linear infinite;
+            display: inline-block;
         }
 
-        @keyframes textGradient {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        @keyframes moveGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         /* GRIDS E CARDS */
@@ -189,15 +192,24 @@
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            event.currentTarget.classList.add('active');
+            if(event) event.currentTarget.classList.add('active');
         }
 
         function render() {
             const gifContainer = document.getElementById('content-gifs');
             dataGifs.forEach(sec => {
-                let html = `<div class="marquee-tag"><marquee scrollamount="4" scrolldelay="0">${sec.marquee}</marquee></div><div class="grid-container">`;
-                sec.ids.forEach((id, i) => { html += `<div class="card"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; });
-                html += `</div>`; gifContainer.innerHTML += html;
+                let html = `
+                <div class="marquee-tag">
+                    <marquee scrollamount="5" scrolldelay="0">
+                        <span class="texto-animado">${sec.marquee}</span>
+                    </marquee>
+                </div>
+                <div class="grid-container">`;
+                sec.ids.forEach((id, i) => { 
+                    html += `<div class="card"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; 
+                });
+                html += `</div>`; 
+                gifContainer.innerHTML += html;
             });
 
             const pcGif = document.getElementById('content-pcback-gif');
