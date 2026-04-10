@@ -26,7 +26,6 @@
             min-height: 100vh;
         }
 
-        /* HEADER FIXO NO TOPO */
         .perfil-header {
             text-align: center;
             padding: 20px;
@@ -46,14 +45,23 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        /* WRAPPER PRINCIPAL (SIDEBAR + CONTEÚDO) */
+        .perfil-header p {
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(-45deg, #ffffff, #000000, #ffffff, #000000);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 5s linear infinite;
+        }
+
         .main-wrapper {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        /* NAVEGAÇÃO LATERAL ESQUERDA */
         .nav-container {
             display: flex;
             flex-direction: column;
@@ -62,7 +70,6 @@
             padding: 20px;
             background: rgba(0, 0, 0, 0.4);
             border-right: 1px solid var(--neon-blue);
-            height: auto;
         }
 
         .nav-btn {
@@ -76,7 +83,6 @@
             transition: 0.3s;
             color: white;
             text-align: left;
-            width: 100%;
         }
 
         .nav-btn:hover, .nav-btn.active {
@@ -94,7 +100,6 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        /* ÁREA DE CONTEÚDO DIREITA */
         .content-area {
             flex: 1;
             padding: 30px;
@@ -105,12 +110,10 @@
         .section { display: none; width: 100%; }
         .section.active { display: block; }
 
-        /* REGRAS ORIGINAIS DE CARDS E GRIDS */
         .info-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            max-width: 100%;
         }
 
         .info-card {
@@ -122,12 +125,25 @@
 
         .info-card.full-width { grid-column: 1 / span 2; }
 
+        .info-card h3 {
+            margin-top: 0;
+            text-transform: uppercase;
+            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 4s linear infinite;
+        }
+
+        .info-card p { line-height: 1.6; color: #eee; font-size: 14px; }
+
         .marquee-container {
             background: var(--deep-blue-bar);
             border: 1px solid rgba(0, 38, 138, 0.5);
             width: 100%;
             overflow: hidden;
-            margin: 0 0 20px 0;
+            margin-bottom: 20px;
             padding: 12px 0;
         }
 
@@ -145,7 +161,7 @@
 
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
         .grid-gifs { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-        
+
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(34, 34, 34, 0.5);
@@ -194,11 +210,13 @@
                     </div>
                     <div class="info-card">
                         <h3>Dicas</h3>
-                        <p>Escolha um modelo, me mande cor, nome e foto.</p>
+                        <p>Escolha um modelo, por exemplo After - 5 ou Canva - 4, me mande cor, nome e foto, se quiser adicionar alguma frase, me diz a frase que eu coloco</p>
                     </div>
                     <div class="info-card full-width">
-                        <h3>Sell ID 10 Digts - 1k each</h3>
-                        <p>1553333005, 1553333013, 1553333024, 1553333040...</p>
+                        <h3>Sell ID 10 Digts - 1k each (Never used)</h3>
+                        <p>
+                            (SOLD 1553333003), 1553333005, 1553333013, 1553333024, 1553333040, 1553333505, 1553333903, 1553333027 1553333484, 1553333494, 1553333579, 1549200800, 1549200900, 1549203020, 1553350006, 1553342014 1480335366, 1484529437, 1484529434, 1484529671, 1480335587, 1480335597, 1484529675, 1480335580 1484529908, 1553350001, 1553350006, 1553350010, 1553350019, 1553350022, 1553350080, 1553358001 1553358004, 1549200788, 1549200822, 1549200844, 1557799002, 1553366005, 1549200844, 1553347776, 1529199110, 1529199070, 1529199294, 1529199883, 1533393277, 1533393300, 1533393338, 1533393573, 1533393580, 1529200133, 1529202490, 1529202505, 1529202530, 1529204010, 1533394241
+                        </p>
                     </div>
                 </div>
             </div>
