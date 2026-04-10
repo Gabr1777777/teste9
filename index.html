@@ -13,7 +13,11 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            /* FUNDO ALTERADO PARA O GIF SOLICITADO */
+            background-image: url('https://i.imgur.com/iWVWXg2.gif');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
             color: white;
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -31,6 +35,7 @@
             width: 100%;
             max-width: 1000px;
             margin-bottom: 30px;
+            background: rgba(5, 5, 5, 0.8); /* Leve transparência para legibilidade */
         }
 
         .perfil-header h1 {
@@ -73,6 +78,7 @@
             text-transform: uppercase;
             font-size: 13px;
             transition: 0.3s;
+            color: white;
         }
 
         .nav-btn:hover {
@@ -90,7 +96,7 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        /* INFO CARDS (INÍCIO) - LAYOUT LADO A LADO */
+        /* INFO CARDS */
         .info-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -101,7 +107,7 @@
         }
 
         .info-card {
-            background: var(--card-bg);
+            background: rgba(17, 17, 17, 0.9);
             border: 1px solid #222;
             padding: 20px;
             border-radius: 4px;
@@ -202,7 +208,7 @@
         }
 
         .card {
-            background: var(--card-bg);
+            background: rgba(17, 17, 17, 0.9);
             border: 1px solid #222;
             border-radius: 4px;
             overflow: hidden;
@@ -246,7 +252,6 @@
             max-width: 80%; max-height: 80%;
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 30px var(--neon-blue);
-            animation: zoomAnim 0.2s ease-out;
             transition: all 0.3s;
         }
 
@@ -306,7 +311,7 @@
     <div id="pcback-est" class="section"><div class="grid-container grid-largo" id="content-pcback-est"></div></div>
     <div id="pstyle-est" class="section"><div class="grid-pstyle" id="content-pstyle-est"></div></div>
     <div id="fundos" class="section"><div class="grid-container grid-largo" id="content-fundos"></div></div>
-    <div id="xatspace" class="section"><h2 style="text-align:center">Modelos XatSpace</h2></div>
+    <div id="xatspace" class="section"><h2 style="text-align:center; background: rgba(0,0,0,0.7);">Modelos XatSpace</h2></div>
 
     <div id="modalZoom" class="modal" onclick="closeZoom()">
         <span class="close-modal">&times;</span>
@@ -315,13 +320,14 @@
 
     <script>
         const dataGifs = [
-            { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
+            { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }
+        ];
 
         function showTab(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            if(event) event.currentTarget.classList.add('active');
+            if(window.event) window.event.currentTarget.classList.add('active');
         }
 
         function openZoom(src, tipo) {
