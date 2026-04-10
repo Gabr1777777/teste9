@@ -90,10 +90,10 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        /* INFO CARDS (INÍCIO) */
+        /* INFO CARDS (INÍCIO) - LAYOUT LADO A LADO */
         .info-cards {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             width: 100%;
             max-width: 900px;
@@ -107,7 +107,10 @@
             border-radius: 4px;
             transition: 0.3s;
             position: relative;
-            overflow: hidden;
+        }
+
+        .info-card.full-width {
+            grid-column: 1 / span 2;
         }
 
         .info-card:hover {
@@ -119,17 +122,20 @@
         .info-card h3 {
             margin-top: 0;
             text-transform: uppercase;
-            font-size: 1.2rem;
-            background: linear-gradient(to right, #0048FF, #ffffff);
+            font-size: 1.3rem;
+            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 300%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: moveGradient 4s linear infinite;
         }
 
         .info-card p {
             line-height: 1.6;
             color: #ccc;
             margin-bottom: 0;
+            font-size: 14px;
         }
 
         /* LETREIRO INFINITO */
@@ -172,7 +178,7 @@
             100% { background-position: 200% center; }
         }
 
-        /* GRIDS */
+        /* GRIDS DE CONTEÚDO */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -214,9 +220,6 @@
 
         .card img { width: 100%; display: block; object-fit: cover; }
 
-        #content-gifs .card { width: 140px; margin: auto; }
-        #content-gifs .card img { width: 140px; height: 140px; }
-
         .card .label { 
             padding: 8px 5px; 
             font-size: 11px;
@@ -234,19 +237,13 @@
             display: none;
             position: fixed;
             z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.98);
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
+            justify-content: center; align-items: center; cursor: zoom-out;
         }
 
         .modal-content {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 80%; max-height: 80%;
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 30px var(--neon-blue);
             animation: zoomAnim 0.2s ease-out;
@@ -260,12 +257,8 @@
 
         .close-modal {
             position: absolute;
-            top: 10px;
-            right: 25px;
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
-            cursor: pointer;
+            top: 10px; right: 25px;
+            color: white; font-size: 50px; font-weight: bold; cursor: pointer;
             z-index: 1001;
         }
     </style>
@@ -298,7 +291,7 @@
                 <h3>Dicas</h3>
                 <p>Escolha um modelo, por exemplo After - 5 ou Canva - 4, me mande cor, nome e foto, se quiser adicionar alguma frase, me diz a frase que eu coloco</p>
             </div>
-            <div class="info-card">
+            <div class="info-card full-width">
                 <h3>Sell ID 10 Digts - 1k each (Never used)</h3>
                 <p>
                     (SOLD 1553333003), 1553333005, 1553333013, 1553333024, 1553333040, 1553333505, 1553333903, 1553333027 1553333484, 1553333494, 1553333579, 1549200800, 1549200900, 1549203020, 1553350006, 1553342014 1480335366, 1484529437, 1484529434, 1484529671, 1480335587, 1480335597, 1484529675, 1480335580 1484529908, 1553350001, 1553350006, 1553350010, 1553350019, 1553350022, 1553350080, 1553358001 1553358004, 1549200788, 1549200822, 1549200844, 1557799002, 1553366005, 1549200844, 1553347776, 1529199110, 1529199070, 1529199294, 1529199883, 1533393277, 1533393300, 1533393338, 1533393573, 1533393580, 1529200133, 1529202490, 1529202505, 1529202530, 1529204010, 1533394241
@@ -349,9 +342,7 @@
             else modalImg.classList.remove('zoom-pstyle-grande');
         }
 
-        function closeZoom() {
-            document.getElementById("modalZoom").style.display = "none";
-        }
+        function closeZoom() { document.getElementById("modalZoom").style.display = "none"; }
 
         function render() {
             const gifContainer = document.getElementById('content-gifs');
