@@ -307,7 +307,7 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        /* CONFIGURAÇÃO RIGOROSA DOS LETREIROS (MARQUEES) */
+        /* MARQUEES */
         .marquee-container { 
             background: var(--deep-blue-bar); 
             border: 1px solid rgba(0, 38, 138, 0.5); 
@@ -325,7 +325,6 @@
             white-space: nowrap; 
             position: absolute;
             will-change: transform;
-            /* Inicia dentro da barra no lado direito (100%) e sai pela esquerda */
             animation: linear-scroll-inside 15s linear infinite; 
         }
 
@@ -338,7 +337,6 @@
             padding: 0 10px;
         }
 
-        /* Animação: Começa no limite direito do container e termina saindo pela esquerda */
         @keyframes linear-scroll-inside { 
             0% { transform: translateX(100%); } 
             100% { transform: translateX(-100%); } 
@@ -384,7 +382,6 @@
             animation: moveGradient 3s linear infinite; 
         }
 
-        /* Animação do Player: Inicia dentro da barra à direita */
         .track-name { 
             position: absolute;
             will-change: transform;
@@ -410,24 +407,22 @@
             backdrop-filter: blur(2px);
         }
 
-        /* ESTILO DO RODAPÉ REDUZIDO NO CANTO INFERIOR ESQUERDO */
+        /* NOVO RODAPÉ ALINHADO NO MENU */
         .exclusive-footer {
-            position: fixed;
-            bottom: 15px; /* Ajuste preciso para a área marcada */
-            left: 15px;
-            z-index: 1; 
+            margin-top: auto; /* Empurra para o final da nav-container */
+            padding-top: 15px;
+            text-align: center;
             font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: 9px; /* Tamanho reduzido para caber */
+            font-size: 9px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.5px; /* Espaçamento ajustado */
+            letter-spacing: 0.5px;
             background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: moveGradient 3s linear infinite;
-            pointer-events: none; 
         }
 
     </style>
@@ -477,6 +472,10 @@
             <button class="nav-btn" onclick="showTab('fundos')"><span>FUNDOS</span></button>
             <a href="https://gabr1777777.github.io/GaleriaXatspace/" target="_blank" class="nav-btn"><span>XATSPACE</span></a>
             <button class="nav-btn" onclick="showTab('player')"><span>Player</span></button>
+            
+            <div class="exclusive-footer">
+                Galeria exclusiva 2026 - By: Gabr (1777777)
+            </div>
         </div>
 
         <div class="content-area">
@@ -510,10 +509,6 @@
         </div>
     </div>
 
-    <div class="exclusive-footer">
-        Galeria exclusiva 2026 - By: Gabr (1777777)
-    </div>
-
     <div id="visit-counter">
         <span style="color: var(--neon-blue); font-size: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Visitas</span>
         <span id="count-number" style="color: #fff; font-size: 18px; font-family: monospace;">...</span>
@@ -523,7 +518,6 @@
 
     <script>
         const ID_VISITAS = "galeria_wrs_2026_v2"; 
-
         async function carregarContadores() {
             try {
                 const resV = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
