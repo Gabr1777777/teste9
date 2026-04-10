@@ -115,9 +115,7 @@
             object-fit: contain;
         }
 
-        .btn-entrar {
-            padding: 15px 60px;
-            font-size: 20px;
+        .btn-entrar, .btn-xat {
             font-weight: bold;
             color: white;
             text-transform: uppercase;
@@ -129,7 +127,33 @@
             animation: moveGradient 4s linear infinite;
             box-shadow: 0 0 20px rgba(0, 72, 255, 0.6);
             transition: 0.3s;
+            margin: 5px;
         }
+
+        .btn-entrar { padding: 15px 60px; font-size: 20px; }
+        .btn-xat { padding: 8px 30px; font-size: 14px; }
+
+        .xat-submenu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--neon-blue);
+        }
+
+        .xat-link {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .xat-link:hover { background: var(--neon-blue); }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -310,7 +334,6 @@
         }
         .track-marquee { width: 100%; overflow: hidden; white-space: nowrap; background: rgba(0, 0, 0, 0.3); padding: 10px 0; margin-bottom: 20px; }
         
-        /* ESTILO GRADIANTE ANIMADO PARA O NOME DA MÚSICA E VOL */
         .track-name, .vol-label { 
             display: inline-block; 
             font-weight: bold; 
@@ -369,6 +392,12 @@
     <div id="intro-screen">
         <div class="moldura-flutuante"><img src="https://i.imgur.com/hqDqtpe.gif"></div>
         <button class="btn-entrar" onclick="entrarGaleria()">Entrar</button>
+        <button class="btn-xat" onclick="toggleXatMenu()">Xat</button>
+        <div id="xat-menu" class="xat-submenu">
+            <a href="https://xat.com/Butecopremium" target="_blank" class="xat-link">Xat Buteco</a>
+            <a href="https://xat.com/TUGA" target="_blank" class="xat-link">Xat TUGA</a>
+            <a href="https://xat.com/trade" target="_blank" class="xat-link">Xat Trade</a>
+        </div>
     </div>
 
     <div class="perfil-header">
@@ -435,10 +464,15 @@
                 const resV = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
                 const dataV = await resV.json();
                 const valor = dataV.count || dataV.value;
-                document.getElementById('count-number').innerText = valor.toString().padStart(5, '0');
+                document.getElementById('count-number').innerText = valor;
             } catch(e) {
-                document.getElementById('count-number').innerText = "00001";
+                document.getElementById('count-number').innerText = "1";
             }
+        }
+
+        function toggleXatMenu() {
+            const menu = document.getElementById('xat-menu');
+            menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
         }
 
         function showAlert() {
@@ -465,7 +499,7 @@
 
         const playlist = [
             { name: "Abraham-Mateo - BAI LALA", url: "https://www.dropbox.com/scl/fi/gw8940zfvm60ul7malxox/Abraham-Mateo-BAI-LALA.mp3?rlkey=puytwnkxllb6tmz35htfr8tmh&st=ud55ktgf&raw=1" },
-            { name: "Alex Warren - Ordinary", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecja08pfyij6k&st=zb53k17t&raw=1" },
+            { name: "Alex Warren - Ordinary", url: "https://dl.dropboxusercontent.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecja08pfyij6k&st=zb53k17t" },
             { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
             { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
             { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/cqqhzkv1ll1p09z7qgylp/Desireless-voyage-voyage.mp3.mp3?rlkey=hscvkehw7n7vvgi2im4rwhom7&st=2ldonj76&raw=1" }
