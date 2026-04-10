@@ -44,7 +44,6 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        /* RESTAURADO: GRADIENTE ANIMADO PROPRIEDADE */
         .propriedade-txt {
             font-weight: bold;
             text-transform: uppercase;
@@ -56,7 +55,7 @@
             animation: moveGradient 5s linear infinite;
         }
 
-        /* NAVEGAÇÃO - BOTÕES DIMINUÍDOS UM POUCO */
+        /* NAVEGAÇÃO */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
@@ -68,11 +67,11 @@
         .nav-btn {
             background: var(--deep-blue-bar);
             border: 2px solid #00268a;
-            padding: 12px 22px; /* Reduzido */
+            padding: 12px 22px;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 12px; /* Reduzido */
+            font-size: 12px;
             transition: all 0.3s ease-in-out;
         }
 
@@ -133,7 +132,7 @@
         /* GRID RIGOROSO: 7 POR LINHA */
         .grid-gifs {
             display: grid;
-            grid-template-columns: repeat(7, 1fr); /* 7 Colunas */
+            grid-template-columns: repeat(7, 1fr);
             gap: 10px;
             width: 100%;
         }
@@ -154,15 +153,18 @@
             text-align: center;
         }
 
-        #content-gifs .card img { width: 100px; height: 100px; object-fit: cover; }
+        /* ABA GIFS: RIGOROSAMENTE 80x80 */
+        #content-gifs .card { width: 80px; margin: auto; }
+        #content-gifs .card img { width: 80px; height: 80px; object-fit: cover; }
+        
+        /* OUTRAS ABAS */
         .card img { width: 100%; display: block; }
 
-        /* NOMES EM BRANCO E NEGRITO */
         .card .label { 
-            padding: 8px; 
-            font-size: 10px; 
-            color: #ffffff; /* Branco */
-            font-weight: bold; /* Negrito */
+            padding: 5px; 
+            font-size: 9px; 
+            color: #ffffff; 
+            font-weight: bold; 
             background: #000; 
         }
 
