@@ -28,6 +28,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    overflow: hidden; /* Impede scroll por causa das gotas */
 
     /* fondo base por si no carga el video */
     background: radial-gradient(circle at top, #0f0c29, #09061a 70%);
@@ -393,7 +394,7 @@ body{
 
 .glass{
     background: rgba(255, 255, 255, 0.08); /* transparencia */
-    backdrop-filter: blur(20px); /* efeito vidro */
+    backdrop-filter: blur(20px); /* efecto vidrio */
     -webkit-backdrop-filter: blur(20px);
 
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -778,7 +779,70 @@ justify-content:center;
     filter: hue-rotate(280deg) saturate(1.8) brightness(1.1);
 }
 
-/* animación flotante */
+/* animação de alerta no rodapé */
+#copyright-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(49, 126, 133, 0.85);
+    backdrop-filter: blur(15px);
+    color: #84fcd8;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1px solid rgba(132, 252, 216, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(132, 252, 216, 0.2);
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 10000;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+    opacity: 0;
+    pointer-events: none;
+    letter-spacing: 1px;
+}
+
+#copyright-alert.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ESTILOS DAS GOTAS DO CURSOR */
+#drop-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Não interfere nos cliques */
+    z-index: 9998; /* Abaixo da intro, acima do resto */
+}
+
+.drop {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #84fcd8; /* Cor neon principal da página */
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.8;
+    /* Efeito Neon suave */
+    box-shadow: 0 0 5px #84fcd8, 0 0 10px rgba(70, 205, 239, 0.6);
+    /* Animação de queda e sumiço suave */
+    animation: fallAndFade 1.2s ease-out forwards;
+}
+
+@keyframes fallAndFade {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(30px) scale(0.2); /* Suave queda de 30px */
+        opacity: 0;
+    }
+}
+
+/* animação flotante */
 @keyframes floatButterfly{
     0%{
         transform:translate(0px, 0px) rotate(0deg);
@@ -799,6 +863,8 @@ justify-content:center;
 </style>
 </head>
 <body>
+<div id="drop-container"></div>
+
 <div class="intro" id="intro">
     <button class="enter-btn" id="enterBtn">ENTRAR</button>
 </div> 
@@ -982,7 +1048,32 @@ justify-content:center;
 
 </div>
 
+<div id="copyright-alert">Copyright - Acesso Proibido</div>
+
 <script>
+// --- EFEITO DE GOTAS DO CURSOR ---
+const dropContainer = document.getElementById('drop-container');
+
+// Ouve o movimento do mouse em toda a janela
+window.addEventListener('mousemove', (e) => {
+    // Cria o elemento da gota
+    const drop = document.createElement('div');
+    drop.classList.add('drop');
+    
+    // Posiciona a gota exatamente onde o cursor está (centralizada)
+    drop.style.left = (e.clientX - 3) + 'px'; //clientX pega a posição X na janela
+    drop.style.top = (e.clientY - 3) + 'px';  //clientY pega a posição Y na janela
+    
+    // Adiciona a gota ao contêiner
+    dropContainer.appendChild(drop);
+    
+    // Remove a gota do DOM após a animação terminar (1.2s) para não pesar
+    setTimeout(() => {
+        drop.remove();
+    }, 1200);
+});
+// ---------------------------------
+
 const audio = document.getElementById("audio");
 const cover = document.getElementById("cover");
 const title = document.getElementById("title");
@@ -1026,7 +1117,7 @@ function togglePlay(){
     playing = !playing;
 }
 
-// seguinte
+// siguiente
 function next(){
     index++;
     if(index >= songs.length) index = 0;
@@ -1087,7 +1178,7 @@ buttons.forEach(btn => {
     });
 });
 
-const text = "Não tenho medo de ser quem sou. Afinal, para que me esconder? É isso o que importa.";
+const text = "Não tenho medo de ser quem som. Afinal, para que me esconder? É isso o que importa.";
 const speed = 40; 
 let i = 0;
 const typing = document.getElementById("typing");
@@ -1156,8 +1247,35 @@ enterBtn.addEventListener("click", () => {
     });
 });
 
-/* Bloqueios de segurança */
-document.addEventListener('contextmenu', e => e.preventDefault());
+/* LÓGICA DE TRAVA E ALERTA DE SEGURANÇA */
+const alertBox = document.getElementById('copyright-alert');
+
+function showAlert() {
+    alertBox.classList.add('show');
+    setTimeout(() => {
+        alertBox.classList.remove('show');
+    }, 2000);
+}
+
+// Bloquear Botão Direito
+document.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    showAlert();
+});
+
+// Bloquear Ctrl + U, Ctrl + S, Ctrl + Shift + I
+document.addEventListener('keydown', e => {
+    if (
+        (e.ctrlKey && (e.key === 'u' || e.key === 's')) || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.key === 'F12')
+    ) {
+        e.preventDefault();
+        showAlert();
+    }
+});
+
+/* Bloqueios extras */
 document.addEventListener('selectstart', e => e.preventDefault());
 document.addEventListener('dragstart', e => e.preventDefault());
 
