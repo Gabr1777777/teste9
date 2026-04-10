@@ -15,12 +15,12 @@
         /* ESTILOS DO EFEITO DO CURSOR (ESTRELA AZUL NEON) */
         .cursor-star {
             position: absolute;
-            background: #fff; /* Centro branco para o efeito neon */
+            background: #fff;
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            pointer-events: none; /* Não atrapalha cliques */
-            z-index: 1000002; /* Acima de tudo */
+            pointer-events: none;
+            z-index: 1000002;
             box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
             animation: trailFade 0.7s linear forwards;
         }
@@ -64,7 +64,6 @@
             font-size: 14px;
         }
 
-        /* BLOQUEIO DE SELEÇÃO */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -130,7 +129,6 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* GALERIA CORPO */
         body {
             background-image: url('https://i.imgur.com/iWVWXg2.gif');
             background-attachment: fixed;
@@ -175,7 +173,7 @@
             animation: moveGradient 5s linear infinite;
         }
 
-        .main-wrapper { display: flex; flex: 1; overflow: hidden; padding-bottom: 60px; /* Espaço para o rodapé */ }
+        .main-wrapper { display: flex; flex: 1; overflow: hidden; padding-bottom: 60px; }
 
         .nav-container {
             display: flex;
@@ -194,7 +192,6 @@
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            /* FONT-SIZE AUMENTADO RIGOROSAMENTE DE 12px PARA 13px */
             font-size: 13px; 
             transition: all 0.3s ease;
             color: white;
@@ -257,7 +254,6 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        /* MARQUEE E PLAYER */
         .marquee-container { background: var(--deep-blue-bar); border: 1px solid rgba(0, 38, 138, 0.5); width: 100%; overflow: hidden; margin-bottom: 20px; padding: 12px 0; }
         .marquee-content { display: inline-block; animation: linear-scroll 15s linear infinite; }
         .texto-animado {
@@ -277,29 +273,7 @@
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
 
-        /* CONTADOR GLOBAL - ATUALIZADO (MENOR E RESTRITO À GALERIA) */
-        #visit-counter {
-            position: fixed;
-            bottom: 60px; /* Ajustado para ficar acima do rodapé */
-            left: 20px;
-            z-index: 9998; /* Logo abaixo da intro, mas acima do resto */
-            /* FUNDO ALTERADO PARA 50% TRANSPARENTE (Restauração/Ajuste) */
-            background: rgba(0, 0, 0, 0.5); 
-            border: 1px solid var(--neon-blue);
-            /* REDUZIDO PADDING */
-            padding: 4px 8px; 
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 0 10px var(--neon-blue);
-            /* ADICIONADO CONTROLE DE EXIBIÇÃO INICIAL */
-            opacity: 0;
-            transition: opacity 1s ease 1s; /* Aparece junto com a galeria */
-            pointer-events: none; /* Não atrapalha cliques antes de aparecer */
-        }
-
-        /* ESTILOS DO RODAPÉ personalizado */
+        /* RODAPÉ E CONTADOR INTEGRADO */
         .perfil-footer {
             text-align: center;
             padding: 15px;
@@ -312,9 +286,22 @@
             font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Classe para o texto com gradiente animado no rodapé */
+        #visit-counter {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+            pointer-events: none;
+        }
+
         .texto-gradiente-animado {
             background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 300%;
@@ -334,11 +321,7 @@
             star.style.left = e.pageX + 'px';
             star.style.top = e.pageY + 'px';
             document.body.appendChild(star);
-
-            // Remove o elemento após a animação acabar (0.7s)
-            setTimeout(() => {
-                star.remove();
-            }, 700);
+            setTimeout(() => { star.remove(); }, 700);
         });
     </script>
 
@@ -390,34 +373,28 @@
         </div>
     </div>
 
-    <div id="visit-counter">
-        <span style="color: var(--neon-blue); font-size: 7px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Visitas</span>
-        <span id="count-number" style="color: #fff; font-size: 14px; font-family: monospace;">...</span>
-    </div>
-
     <footer class="perfil-footer">
+        <div id="visit-counter">
+            <span style="color: var(--neon-blue); font-size: 7px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Visitas</span>
+            <span id="count-number" style="color: #fff; font-size: 14px; font-family: monospace;">...</span>
+        </div>
         <span class="texto-gradiente-animado">Galeria Exclusiva 2026 - By: Gabr Designer</span>
     </footer>
 
     <div id="modalZoom" class="modal" onclick="closeZoom()"><img class="modal-content" id="imgZoom"></div>
 
     <script>
-        // CONTADOR DE VISITAS GLOBAL (API)
         const ID_VISITAS = "galeria_wrs_v1_2026"; 
-        
         async function carregarContadores() {
             try {
                 const res = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
                 const data = await res.json();
                 const total = data.count || data.value;
                 document.getElementById('count-number').innerText = total;
-            } catch(e) {
-                document.getElementById('count-number').innerText = "1";
-            }
+            } catch(e) { document.getElementById('count-number').innerText = "1"; }
         }
         window.addEventListener('load', carregarContadores);
 
-        // SEGURANÇA: ALERTA E BLOQUEIO DE TECLAS
         function showAlert() {
             const alertBox = document.getElementById('copyright-alert');
             alertBox.style.display = 'block';
@@ -426,13 +403,10 @@
 
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83) || e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
-                showAlert();
-                e.preventDefault();
-                return false;
+                showAlert(); e.preventDefault(); return false;
             }
         });
 
-        // TRAVA BARRAS DE LINK
         (function() {
             const links = document.querySelectorAll('a, .nav-btn, .card');
             links.forEach(link => {
@@ -443,8 +417,6 @@
             });
         })();
 
-        // LOGICA DA GALERIA
-        const dataGifs = [{ marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }];
         const playlist = [
             { name: "Abraham-Mateo - BAI LALA", url: "https://www.dropbox.com/scl/fi/gw8940zfvm60ul7malxox/Abraham-Mateo-BAI-LALA.mp3?rlkey=puytwnkxllb6tmz35htfr8tmh&st=ud55ktgf&raw=1" },
             { name: "Alex Warren - Ordinary", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecrja08pfyij6k&st=zb53k17t&raw=1" },
@@ -455,32 +427,20 @@
 
         let currentTrack = 0; 
         const audio = new Audio();
-        audio.volume = 0.5; // Inicializa em 50%
+        audio.volume = 0.5;
 
-        // LÓGICA CÍCLICA DE VOLUME
         function cycleVolume() {
             const btn = document.getElementById('volBtn');
-            if (audio.volume === 0.5) {
-                audio.volume = 1.0;
-                btn.innerText = "Vol: 100";
-            } else if (audio.volume === 1.0) {
-                audio.volume = 0.0;
-                btn.innerText = "Mudo";
-            } else {
-                audio.volume = 0.5;
-                btn.innerText = "Vol: 50";
-            }
+            if (audio.volume === 0.5) { audio.volume = 1.0; btn.innerText = "Vol: 100"; }
+            else if (audio.volume === 1.0) { audio.volume = 0.0; btn.innerText = "Mudo"; }
+            else { audio.volume = 0.5; btn.innerText = "Vol: 50"; }
         }
 
         function entrarGaleria() {
             const intro = document.getElementById('intro-screen');
             const counter = document.getElementById('visit-counter');
-            
             intro.style.opacity = '0'; intro.style.transform = 'scale(1.1)'; intro.style.visibility = 'hidden';
-            
-            // Exibe o contador junto com a galeria
             counter.style.opacity = '1';
-            
             setTimeout(() => { intro.style.display = 'none'; }, 1000); 
             togglePlay(); 
         }
@@ -504,6 +464,7 @@
 
         function render() {
             const gifSec = document.getElementById('gifs');
+            const dataGifs = [{ marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }];
             dataGifs.forEach(sec => {
                 let h = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
                 sec.ids.forEach((id, i) => { h += `<div class="card" onclick="openZoom('https://i.imgur.com/${id}.gif')"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; });
