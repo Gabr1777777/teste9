@@ -55,15 +55,13 @@
             animation: moveGradient 5s linear infinite;
         }
 
-        /* NAVEGAÇÃO */
+        /* NAVEGAÇÃO (Removido o sticky para sumir ao rolar) */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
             margin-bottom: 40px;
-            position: sticky;
-            top: 10px;
             z-index: 100;
         }
 
@@ -87,7 +85,7 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        /* BARRA DE TÍTULO COM LETREIRO INFINITO (SEM PAUSA) */
+        /* LETREIRO INFINITO */
         .marquee-container {
             background: var(--deep-blue-bar);
             border: 1px solid #00268a;
@@ -115,7 +113,7 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: moveGradient 3s linear infinite;
-            padding-right: 100px; /* Espaçamento entre as repetições */
+            padding-right: 100px;
         }
 
         @keyframes linear-scroll {
@@ -131,20 +129,29 @@
         /* GRIDS E CARDS */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 15px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid #222;
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
             text-align: center;
+            width: fit-content;
+            margin: auto;
         }
 
-        .card img { width: 100%; display: block; }
-        .card .label { padding: 10px; font-size: 11px; color: #aaa; background: #0a0a0a; }
+        /* TAMANHO REDUZIDO PARA 100x100 RIGOROSO NOS GIFS */
+        #content-gifs .card img { 
+            width: 100px; 
+            height: 100px; 
+            display: block;
+            object-fit: cover;
+        }
+
+        .card .label { padding: 5px; font-size: 9px; color: #aaa; background: #0a0a0a; }
 
         .section { display: none; width: 100%; max-width: 1200px; }
         .section.active { display: block; }
@@ -200,7 +207,6 @@
         function render() {
             const gifContainer = document.getElementById('content-gifs');
             dataGifs.forEach(sec => {
-                // Duplico o texto dentro do marquee para criar o loop infinito sem buracos
                 let html = `
                 <div class="marquee-container">
                     <div class="marquee-content">
@@ -215,6 +221,10 @@
                 html += `</div>`; 
                 gifContainer.innerHTML += html;
             });
+
+            // Outras abas (tamanhos padrão mantidos)
+            const pcGif = document.getElementById('content-pcback-gif');
+            for(let i=1; i<=16; i++) { pcGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/SFnk7A6.gif" style="width:100%"><div class="label">PCBack Gif #${i}</div></div>`; }
         }
         window.onload = render;
     </script>
