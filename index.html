@@ -8,7 +8,6 @@
         :root {
             --neon-blue: #0048FF;
             --bg-dark: #050505;
-            /* ALTERADO PARA 50% DE TRANSPARÊNCIA */
             --card-bg: rgba(17, 17, 17, 0.5);
             --deep-blue-bar: rgba(0, 10, 31, 0.5); 
         }
@@ -21,25 +20,23 @@
             color: white;
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            min-height: 100vh;
         }
 
-        /* PERFIL HEADER COM 50% TRANSPARÊNCIA */
+        /* HEADER FIXO NO TOPO */
         .perfil-header {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             border-bottom: 2px solid var(--neon-blue);
-            width: 100%;
-            max-width: 1000px;
-            margin-bottom: 30px;
-            background: rgba(5, 5, 5, 0.5); 
+            background: rgba(5, 5, 5, 0.5);
+            z-index: 10;
         }
 
         .perfil-header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin: 0;
             background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 300%;
@@ -49,42 +46,42 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        .perfil-header p {
-            font-weight: bold;
-            text-transform: uppercase;
-            background: linear-gradient(-45deg, #ffffff, #000000, #ffffff, #000000);
-            background-size: 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: moveGradient 5s linear infinite;
+        /* WRAPPER PRINCIPAL (SIDEBAR + CONTEÚDO) */
+        .main-wrapper {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
         }
 
-        /* NAVEGAÇÃO */
+        /* NAVEGAÇÃO LATERAL ESQUERDA */
         .nav-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            width: 250px;
             gap: 10px;
-            justify-content: center;
-            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-right: 1px solid var(--neon-blue);
+            height: auto;
         }
 
         .nav-btn {
             background: var(--deep-blue-bar);
             border: 1px solid rgba(0, 38, 138, 0.5);
-            padding: 14px 24px;
+            padding: 15px;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 12px;
             transition: 0.3s;
             color: white;
+            text-align: left;
+            width: 100%;
         }
 
-        .nav-btn:hover {
+        .nav-btn:hover, .nav-btn.active {
             border-color: var(--neon-blue);
             box-shadow: 0 0 15px var(--neon-blue);
-            transform: translateY(-2px);
             background: rgba(0, 72, 255, 0.3);
         }
 
@@ -97,14 +94,23 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        /* INFO CARDS COM 50% TRANSPARÊNCIA */
+        /* ÁREA DE CONTEÚDO DIREITA */
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            max-height: calc(100vh - 120px);
+        }
+
+        .section { display: none; width: 100%; }
+        .section.active { display: block; }
+
+        /* REGRAS ORIGINAIS DE CARDS E GRIDS */
         .info-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
+            max-width: 100%;
         }
 
         .info-card {
@@ -112,163 +118,52 @@
             border: 1px solid rgba(34, 34, 34, 0.5);
             padding: 20px;
             border-radius: 4px;
-            transition: 0.3s;
-            position: relative;
         }
 
-        .info-card.full-width {
-            grid-column: 1 / span 2;
-        }
+        .info-card.full-width { grid-column: 1 / span 2; }
 
-        .info-card:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue);
-            transform: scale(1.01);
-            background: rgba(17, 17, 17, 0.7);
-        }
-
-        .info-card h3 {
-            margin-top: 0;
-            text-transform: uppercase;
-            font-size: 1.3rem;
-            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
-            background-size: 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: moveGradient 4s linear infinite;
-        }
-
-        .info-card p {
-            line-height: 1.6;
-            color: #eee; /* Aumentado o brilho para compensar transparência */
-            margin-bottom: 0;
-            font-size: 14px;
-        }
-
-        /* LETREIRO INFINITO */
         .marquee-container {
             background: var(--deep-blue-bar);
             border: 1px solid rgba(0, 38, 138, 0.5);
             width: 100%;
             overflow: hidden;
-            margin: 25px 0 15px 0;
+            margin: 0 0 20px 0;
             padding: 12px 0;
-            white-space: nowrap;
         }
 
-        .marquee-content {
-            display: inline-block;
-            animation: linear-scroll 15s linear infinite;
-        }
-
+        .marquee-content { display: inline-block; animation: linear-scroll 15s linear infinite; }
         .texto-animado {
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 16px;
+            font-weight: bold; font-size: 16px;
             background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: moveGradient 3s linear infinite;
-            padding-right: 100px;
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            animation: moveGradient 3s linear infinite; padding-right: 100px;
         }
 
-        @keyframes linear-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes linear-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes moveGradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
-        @keyframes moveGradient {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-
-        /* GRIDS DE CONTEÚDO */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        .grid-largo {
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        }
-
-        .grid-gifs {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-        }
-
-        .grid-pstyle {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .grid-gifs { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(34, 34, 34, 0.5);
-            border-radius: 4px;
-            overflow: hidden;
-            text-align: center;
-            transition: 0.3s;
-            cursor: zoom-in;
+            border-radius: 4px; overflow: hidden; text-align: center; cursor: zoom-in; transition: 0.3s;
         }
 
-        .card:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue);
-            transform: scale(1.03);
-            z-index: 10;
-            background: rgba(17, 17, 17, 0.8);
-        }
+        .card:hover { border-color: var(--neon-blue); transform: scale(1.03); background: rgba(17, 17, 17, 0.8); }
+        .card img { width: 100%; display: block; }
+        .card .label { padding: 8px 5px; font-size: 11px; background: rgba(10, 10, 10, 0.6); text-transform: uppercase; font-weight: bold; }
 
-        .card img { width: 100%; display: block; object-fit: cover; }
-
-        .card .label { 
-            padding: 8px 5px; 
-            font-size: 11px;
-            color: #ffffff;
-            font-weight: bold;
-            background: rgba(10, 10, 10, 0.6); 
-            text-transform: uppercase;
-        }
-
-        .section { display: none; width: 100%; max-width: 1200px; }
-        .section.active { display: block; }
-
-        /* MODAL DE ZOOM */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
+            display: none; position: fixed; z-index: 1000;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            justify-content: center; align-items: center; cursor: zoom-out;
+            background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center;
         }
 
-        .modal-content {
-            max-width: 80%; max-height: 80%;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 30px var(--neon-blue);
-            transition: all 0.3s;
-        }
-
-        .zoom-pstyle-grande {
-            max-width: 98% !important;
-            max-height: 98% !important;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px; right: 25px;
-            color: white; font-size: 50px; font-weight: bold; cursor: pointer;
-            z-index: 1001;
-        }
+        .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
+        .close-modal { position: absolute; top: 10px; right: 25px; color: white; font-size: 50px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -278,43 +173,45 @@
         <p>Propriedade de Gabr (1777777)</p>
     </div>
 
-    <div class="nav-container">
-        <button class="nav-btn active" onclick="showTab('inicio')"><span>Início</span></button>
-        <button class="nav-btn" onclick="showTab('gifs')"><span>GIFS</span></button>
-        <button class="nav-btn" onclick="showTab('pcback-gif')"><span>PCBACK GIFS</span></button>
-        <button class="nav-btn" onclick="showTab('pstyle-gif')"><span>PSTYLE GIFS</span></button>
-        <button class="nav-btn" onclick="showTab('pcback-est')"><span>PCBACK ESTÁTICO</span></button>
-        <button class="nav-btn" onclick="showTab('pstyle-est')"><span>PSTYLE ESTÁTICO</span></button>
-        <button class="nav-btn" onclick="showTab('fundos')"><span>FUNDOS</span></button>
-        <button class="nav-btn" onclick="showTab('xatspace')"><span>XATSPACE</span></button>
-    </div>
+    <div class="main-wrapper">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showTab('inicio')"><span>Início</span></button>
+            <button class="nav-btn" onclick="showTab('gifs')"><span>GIFS</span></button>
+            <button class="nav-btn" onclick="showTab('pcback-gif')"><span>PCBACK GIFS</span></button>
+            <button class="nav-btn" onclick="showTab('pstyle-gif')"><span>PSTYLE GIFS</span></button>
+            <button class="nav-btn" onclick="showTab('pcback-est')"><span>PCBACK ESTÁTICO</span></button>
+            <button class="nav-btn" onclick="showTab('pstyle-est')"><span>PSTYLE ESTÁTICO</span></button>
+            <button class="nav-btn" onclick="showTab('fundos')"><span>FUNDOS</span></button>
+            <button class="nav-btn" onclick="showTab('xatspace')"><span>XATSPACE</span></button>
+        </div>
 
-    <div id="inicio" class="section active">
-        <div class="info-cards">
-            <div class="info-card">
-                <h3>Sobre mim</h3>
-                <p>Vendo Gifs, Pcback, Pstyle e Fundos para XAT, DJ nas horas vagas - Married Mnna (1013) ❤️</p>
+        <div class="content-area">
+            <div id="inicio" class="section active">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h3>Sobre mim</h3>
+                        <p>Vendo Gifs, Pcback, Pstyle e Fundos para XAT, DJ nas horas vagas - Married Mnna (1013) ❤️</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Dicas</h3>
+                        <p>Escolha um modelo, me mande cor, nome e foto.</p>
+                    </div>
+                    <div class="info-card full-width">
+                        <h3>Sell ID 10 Digts - 1k each</h3>
+                        <p>1553333005, 1553333013, 1553333024, 1553333040...</p>
+                    </div>
+                </div>
             </div>
-            <div class="info-card">
-                <h3>Dicas</h3>
-                <p>Escolha um modelo, por exemplo After - 5 ou Canva - 4, me mande cor, nome e foto, se quiser adicionar alguma frase, me diz a frase que eu coloco</p>
-            </div>
-            <div class="info-card full-width">
-                <h3>Sell ID 10 Digts - 1k each (Never used)</h3>
-                <p>
-                    (SOLD 1553333003), 1553333005, 1553333013, 1553333024, 1553333040, 1553333505, 1553333903, 1553333027 1553333484, 1553333494, 1553333579, 1549200800, 1549200900, 1549203020, 1553350006, 1553342014 1480335366, 1484529437, 1484529434, 1484529671, 1480335587, 1480335597, 1484529675, 1480335580 1484529908, 1553350001, 1553350006, 1553350010, 1553350019, 1553350022, 1553350080, 1553358001 1553358004, 1549200788, 1549200822, 1549200844, 1557799002, 1553366005, 1549200844, 1553347776, 1529199110, 1529199070, 1529199294, 1529199883, 1533393277, 1533393300, 1533393338, 1533393573, 1533393580, 1529200133, 1529202490, 1529202505, 1529202530, 1529204010, 1533394241
-                </p>
-            </div>
+
+            <div id="gifs" class="section"><div id="content-gifs"></div></div>
+            <div id="pcback-gif" class="section"><div class="grid-container" id="content-pcback-gif"></div></div>
+            <div id="pstyle-gif" class="section"><div class="grid-container" id="content-pstyle-gif"></div></div>
+            <div id="pcback-est" class="section"><div class="grid-container" id="content-pcback-est"></div></div>
+            <div id="pstyle-est" class="section"><div class="grid-container" id="content-pstyle-est"></div></div>
+            <div id="fundos" class="section"><div class="grid-container" id="content-fundos"></div></div>
+            <div id="xatspace" class="section"><h2 style="text-align:center; background: rgba(0,0,0,0.5); padding: 20px;">Modelos XatSpace</h2></div>
         </div>
     </div>
-
-    <div id="gifs" class="section"><div id="content-gifs"></div></div>
-    <div id="pcback-gif" class="section"><div class="grid-container grid-largo" id="content-pcback-gif"></div></div>
-    <div id="pstyle-gif" class="section"><div class="grid-pstyle" id="content-pstyle-gif"></div></div>
-    <div id="pcback-est" class="section"><div class="grid-container grid-largo" id="content-pcback-est"></div></div>
-    <div id="pstyle-est" class="section"><div class="grid-pstyle" id="content-pstyle-est"></div></div>
-    <div id="fundos" class="section"><div class="grid-container grid-largo" id="content-fundos"></div></div>
-    <div id="xatspace" class="section"><h2 style="text-align:center; background: rgba(0,0,0,0.5);">Modelos XatSpace</h2></div>
 
     <div id="modalZoom" class="modal" onclick="closeZoom()">
         <span class="close-modal">&times;</span>
@@ -322,9 +219,7 @@
     </div>
 
     <script>
-        const dataGifs = [
-            { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }
-        ];
+        const dataGifs = [{ marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }];
 
         function showTab(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -333,13 +228,10 @@
             if(window.event) window.event.currentTarget.classList.add('active');
         }
 
-        function openZoom(src, tipo) {
+        function openZoom(src) {
             const modal = document.getElementById("modalZoom");
-            const modalImg = document.getElementById("imgZoom");
+            document.getElementById("imgZoom").src = src;
             modal.style.display = "flex";
-            modalImg.src = src;
-            if(tipo === 'pstyle') modalImg.classList.add('zoom-pstyle-grande');
-            else modalImg.classList.remove('zoom-pstyle-grande');
         }
 
         function closeZoom() { document.getElementById("modalZoom").style.display = "none"; }
@@ -350,40 +242,25 @@
                 let html = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
                 sec.ids.forEach((id, i) => { 
                     let url = `https://i.imgur.com/${id}.gif`;
-                    html += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">${sec.prefix}${i+1}</div></div>`; 
+                    html += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">${sec.prefix}${i+1}</div></div>`; 
                 });
                 html += `</div>`; gifContainer.innerHTML += html;
             });
 
-            const pcGif = document.getElementById('content-pcback-gif');
-            for(let i=1; i<=16; i++) { 
-                let url = `https://i.imgur.com/SFnk7A6.gif`;
-                pcGif.innerHTML += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">PCBack Gif #${i}</div></div>`; 
-            }
+            const configs = [
+                { id: 'content-pcback-gif', url: 'https://i.imgur.com/SFnk7A6.gif', label: 'PCBack Gif', count: 16 },
+                { id: 'content-pstyle-gif', url: 'https://i.imgur.com/rUIzfWU.gif', label: 'PStyle Gif', count: 16 },
+                { id: 'content-pcback-est', url: 'https://i.imgur.com/OyX4Jwt.png', label: 'Wallpaper', count: 10 },
+                { id: 'content-pstyle-est', url: 'https://i.imgur.com/zlcL7Dh.png', label: 'PStyle Fix', count: 8 },
+                { id: 'content-fundos', url: 'https://i.imgur.com/eJtGG3D.png', label: 'Fundo', count: 10 }
+            ];
 
-            const psGif = document.getElementById('content-pstyle-gif');
-            for(let i=1; i<=16; i++) { 
-                let url = `https://i.imgur.com/rUIzfWU.gif`;
-                psGif.innerHTML += `<div class="card" onclick="openZoom('${url}', 'pstyle')"><img src="${url}"><div class="label">PStyle Gif #${i}</div></div>`; 
-            }
-
-            const pcEst = document.getElementById('content-pcback-est');
-            for(let i=1; i<=10; i++) { 
-                let url = `https://i.imgur.com/OyX4Jwt.png`;
-                pcEst.innerHTML += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">Wallpaper #${i}</div></div>`; 
-            }
-
-            const psEst = document.getElementById('content-pstyle-est');
-            for(let i=1; i<=8; i++) { 
-                let url = `https://i.imgur.com/zlcL7Dh.png`;
-                psEst.innerHTML += `<div class="card" onclick="openZoom('${url}', 'pstyle')"><img src="${url}"><div class="label">PStyle Fix #${i}</div></div>`; 
-            }
-
-            const fundos = document.getElementById('content-fundos');
-            for(let i=1; i<=10; i++) { 
-                let url = `https://i.imgur.com/eJtGG3D.png`;
-                fundos.innerHTML += `<div class="card" onclick="openZoom('${url}', 'comum')"><img src="${url}"><div class="label">Fundo #${i}</div></div>`; 
-            }
+            configs.forEach(c => {
+                const el = document.getElementById(c.id);
+                for(let i=1; i<=c.count; i++) {
+                    el.innerHTML += `<div class="card" onclick="openZoom('${c.url}')"><img src="${c.url}"><div class="label">${c.label} #${i}</div></div>`;
+                }
+            });
         }
         window.onload = render;
     </script>
