@@ -44,11 +44,23 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        /* NAVEGAÇÃO - BOTÕES MAIORES E NEON */
+        /* RESTAURADO: GRADIENTE ANIMADO PROPRIEDADE */
+        .propriedade-txt {
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(-45deg, #ffffff, #0048FF, #ffffff, #0048FF);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 5s linear infinite;
+        }
+
+        /* NAVEGAÇÃO - BOTÕES DIMINUÍDOS UM POUCO */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             margin-bottom: 40px;
         }
@@ -56,11 +68,11 @@
         .nav-btn {
             background: var(--deep-blue-bar);
             border: 2px solid #00268a;
-            padding: 18px 35px;
+            padding: 12px 22px; /* Reduzido */
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 14px;
+            font-size: 12px; /* Reduzido */
             transition: all 0.3s ease-in-out;
         }
 
@@ -74,9 +86,8 @@
         }
 
         .nav-btn:hover, .card:hover {
-            box-shadow: 0 0 25px var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
             border-color: #ffffff;
-            transform: translateY(-3px);
         }
 
         /* LETREIRO INFINITO */
@@ -86,7 +97,7 @@
             width: 100%;
             overflow: hidden;
             margin: 25px 0 15px 0;
-            padding: 15px 0;
+            padding: 12px 0;
             white-space: nowrap;
         }
 
@@ -99,7 +110,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 18px;
+            font-size: 16px;
             background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 200% auto;
             -webkit-background-clip: text;
@@ -119,33 +130,41 @@
             100% { background-position: 200% center; }
         }
 
-        /* GRIDS */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
+        /* GRID RIGOROSO: 7 POR LINHA */
         .grid-gifs {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 15px;
-            justify-items: center;
+            grid-template-columns: repeat(7, 1fr); /* 7 Colunas */
+            gap: 10px;
+            width: 100%;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid #222;
-            border-radius: 5px;
+            border-radius: 4px;
             overflow: hidden;
             transition: 0.3s;
             cursor: pointer;
+            text-align: center;
         }
 
-        #content-gifs .card { width: 100px; height: auto; }
         #content-gifs .card img { width: 100px; height: 100px; object-fit: cover; }
         .card img { width: 100%; display: block; }
-        .card .label { padding: 8px; font-size: 10px; color: #fff; background: #000; }
+
+        /* NOMES EM BRANCO E NEGRITO */
+        .card .label { 
+            padding: 8px; 
+            font-size: 10px; 
+            color: #ffffff; /* Branco */
+            font-weight: bold; /* Negrito */
+            background: #000; 
+        }
 
         .section { display: none; width: 100%; max-width: 1200px; }
         .section.active { display: block; }
@@ -155,7 +174,7 @@
 
     <div class="perfil-header">
         <h1>GABRIEL GALLERY</h1>
-        <p>Propriedade de Gabr (1777777)</p>
+        <p class="propriedade-txt">Propriedade de Gabr (1777777)</p>
     </div>
 
     <div class="nav-container">
@@ -169,7 +188,7 @@
         <button class="nav-btn" onclick="showTab('xatspace')"><span>XATSPACE</span></button>
     </div>
 
-    <div id="inicio" class="section active"><h2 style="text-align:center">Galeria WRS Restaurada</h2></div>
+    <div id="inicio" class="section active"><h2 style="text-align:center">Galeria WRS</h2></div>
     <div id="gifs" class="section"><div id="content-gifs"></div></div>
     <div id="pcback-gif" class="section"><div class="grid-container" id="content-pcback-gif"></div></div>
     <div id="pstyle-gif" class="section"><div class="grid-container" id="content-pstyle-gif"></div></div>
@@ -181,11 +200,7 @@
     <script>
         const dataGifs = [
             { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
-            { marquee: "Blufftitler - Nome + Photo - 350 Xats", prefix: "Blufftitler - ", ids: ["F0b4mnJ", "65bzz5V", "ZetkVFF", "JqzxOwt", "NK9Z8rU", "RNIlFI3", "bSmUjsQ", "R6klF5K", "cgyGLHQ", "ctF1vyH", "Ge90Xy7", "7Z8xEC8", "G8HFkiG", "sh7u3UM", "y0WgmxJ", "Vvw2SMU", "uoNJlEe"] },
-            { marquee: "Canva Name + Photo - 300 Xats", prefix: "Canva - ", ids: ["hWVyLox", "Uxlzu5C", "Crt716T", "xo4npxf", "jUG54d4", "gMQ3Fo9", "xvM1ixb", "cwRIh51", "db8sdi9", "nRJQ0BB"] },
-            { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd", "HVFwoO9", "ueBRxvV", "XkwoKCf", "ULcq67R", "afxBCK8", "NKjJIGs", "xDhKvCC", "vvcOaEK", "ups9FgX", "JeY6A7M", "zDyoEgZ", "0FklDw9", "FX6gdFw", "V3LO0YG", "r9yfJNZ", "R3sO6Dv", "P8DpN4L", "fRfZuO7", "BPgPihm", "5HxfNaB", "FILAVQP", "5IoR515", "KUQ1WsX", "ZuaO9n5", "eYUpRds", "EkhA4lw", "ufOP9QG", "w2URYst", "1uMiE0k", "JQaMJ7U", "JeVcLkk", "un368jG", "LaClQL2", "l3Az3Nz", "8ME12WB", "SWSOcvf", "HizA7mV", "HnIaNDX", "POgiaNY", "CgwrMHf", "MtDrchh", "P4UINMY", "F0ujERT", "lHdM40L", "vWKX5Fb", "UHq0679", "2tRaU1S", "XQJ8R9h", "n4sAIhn", "LaJAK5L", "RIDkkSc", "ogHzac1", "aV63fjn", "tSuJOKg", "MxeKAfQ", "A4chzU3", "bAXpFow", "1YlDoNZ", "IXCqwlR", "kv1EWDW", "FIulKIF", "qLhMZAE", "R9nl6Ch", "uCXDGTg"] },
-            { marquee: "AfterEffects - Name + (2) Photo - 500 Xats", prefix: "Love - ", ids: ["NnEIlrv", "8hrgq1D", "MqnmO8R", "oRvL0X3", "9z2OuGk"] },
-            { marquee: "PhotoScape - Parpadeo - 100 Xats", prefix: "Parpadeo - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
+            { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd"] }
         ];
 
         function showTab(id) {
@@ -218,11 +233,10 @@
                 }
             };
 
-            fill('pcback-gif', 'https://i.imgur.com/SFnk7A6.gif', 'PCBack Gif', 16);
-            fill('pstyle-gif', 'https://i.imgur.com/rUIzfWU.gif', 'PStyle Gif', 16);
-            fill('pcback-est', 'https://i.imgur.com/OyX4Jwt.png', 'Wallpaper', 10);
-            fill('pstyle-est', 'https://i.imgur.com/zlcL7Dh.png', 'PStyle Fix', 10);
-            fill('fundos', 'https://i.imgur.com/eJtGG3D.png', 'Fundo', 12);
+            fill('pcback-gif', 'https://i.imgur.com/SFnk7A6.gif', 'PCBack Gif', 14);
+            fill('pstyle-gif', 'https://i.imgur.com/rUIzfWU.gif', 'PStyle Gif', 14);
+            fill('pcback-est', 'https://i.imgur.com/OyX4Jwt.png', 'Wallpaper', 14);
+            fill('fundos', 'https://i.imgur.com/eJtGG3D.png', 'Fundo', 14);
         }
         window.onload = render;
     </script>
