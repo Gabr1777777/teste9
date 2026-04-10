@@ -257,6 +257,22 @@
 
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
         .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
+
+        /* CONTADOR GLOBAL - POSIÇÃO: INFERIOR ESQUERDO */
+        #visit-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000001;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--neon-blue);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
     </style>
 </head>
 <body oncontextmenu="showAlert(); return false;">
@@ -274,6 +290,9 @@
     <div class="perfil-header">
         <h1>GABRIEL GALLERY</h1>
         <p>Propriedade de Gabr (1777777)</p>
+        <div style="margin-top: 15px; font-family: monospace; color: var(--neon-blue); font-size: 0.8rem; letter-spacing: 2px;">
+            VISITAS: <span id="v-count">00000</span>
+        </div>
     </div>
 
     <div class="main-wrapper">
@@ -307,9 +326,31 @@
         </div>
     </div>
 
+    <div id="visit-counter">
+        <span style="color: var(--neon-blue); font-size: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Visitas</span>
+        <span id="count-number" style="color: #fff; font-size: 18px; font-family: monospace;">...</span>
+    </div>
+
     <div id="modalZoom" class="modal" onclick="closeZoom()"><img class="modal-content" id="imgZoom"></div>
 
     <script>
+        // CONTADOR DE VISITAS GLOBAL (API)
+        const ID_VISITAS = "galeria_wrs_v1_2026"; 
+        
+        async function carregarContadores() {
+            try {
+                const res = await fetch(`https://api.counterapi.dev/v1/wrs-galeria/${ID_VISITAS}/up`);
+                const data = await res.json();
+                const total = data.count || data.value;
+                document.getElementById('count-number').innerText = total;
+                document.getElementById('v-count').innerText = total.toString().padStart(5, '0');
+            } catch(e) {
+                document.getElementById('count-number').innerText = "1";
+                document.getElementById('v-count').innerText = "00001";
+            }
+        }
+        window.addEventListener('load', carregarContadores);
+
         // SEGURANÇA: ALERTA E BLOQUEIO DE TECLAS
         function showAlert() {
             const alertBox = document.getElementById('copyright-alert');
@@ -318,7 +359,6 @@
         }
 
         document.addEventListener('keydown', function(e) {
-            // Bloqueia Ctrl+U, F12, Ctrl+Shift+I, Ctrl+S
             if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83) || e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
                 showAlert();
                 e.preventDefault();
