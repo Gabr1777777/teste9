@@ -23,7 +23,7 @@
             align-items: center;
         }
 
-        /* PERFIL */
+        /* PERFIL HEADER */
         .perfil-header {
             text-align: center;
             padding: 30px;
@@ -90,7 +90,49 @@
             animation: moveGradient 3s linear infinite;
         }
 
-        /* LETREIRO INFINITO CSS */
+        /* INFO CARDS (INÍCIO) */
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            padding: 20px;
+            border-radius: 4px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+            transform: scale(1.01);
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            background: linear-gradient(to right, #0048FF, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .info-card p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 0;
+        }
+
+        /* LETREIRO INFINITO */
         .marquee-container {
             background: var(--deep-blue-bar);
             border: 1px solid #00268a;
@@ -211,17 +253,9 @@
             transition: all 0.3s;
         }
 
-        /* ZOOM MÁXIMO PARA PSTYLE */
         .zoom-pstyle-grande {
             max-width: 98% !important;
             max-height: 98% !important;
-            width: auto;
-            height: auto;
-        }
-
-        @keyframes zoomAnim {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .close-modal {
@@ -255,8 +289,22 @@
     </div>
 
     <div id="inicio" class="section active">
-        <h2 style="text-align:center">Bem-vindo à Galeria Gabriel</h2>
-        <p style="text-align:center">Selecione uma categoria para explorar os conteúdos.</p>
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>Sobre mim</h3>
+                <p>Vendo Gifs, Pcback, Pstyle e Fundos para XAT, DJ nas horas vagas - Married Mnna (1013) ❤️</p>
+            </div>
+            <div class="info-card">
+                <h3>Dicas</h3>
+                <p>Escolha um modelo, por exemplo After - 5 ou Canva - 4, me mande cor, nome e foto, se quiser adicionar alguma frase, me diz a frase que eu coloco</p>
+            </div>
+            <div class="info-card">
+                <h3>Sell ID 10 Digts - 1k each (Never used)</h3>
+                <p>
+                    (SOLD 1553333003), 1553333005, 1553333013, 1553333024, 1553333040, 1553333505, 1553333903, 1553333027 1553333484, 1553333494, 1553333579, 1549200800, 1549200900, 1549203020, 1553350006, 1553342014 1480335366, 1484529437, 1484529434, 1484529671, 1480335587, 1480335597, 1484529675, 1480335580 1484529908, 1553350001, 1553350006, 1553350010, 1553350019, 1553350022, 1553350080, 1553358001 1553358004, 1549200788, 1549200822, 1549200844, 1557799002, 1553366005, 1549200844, 1553347776, 1529199110, 1529199070, 1529199294, 1529199883, 1533393277, 1533393300, 1533393338, 1533393573, 1533393580, 1529200133, 1529202490, 1529202505, 1529202530, 1529204010, 1533394241
+                </p>
+            </div>
+        </div>
     </div>
 
     <div id="gifs" class="section"><div id="content-gifs"></div></div>
@@ -297,13 +345,8 @@
             const modalImg = document.getElementById("imgZoom");
             modal.style.display = "flex";
             modalImg.src = src;
-            
-            // Força o zoom máximo se for pstyle
-            if(tipo === 'pstyle') {
-                modalImg.classList.add('zoom-pstyle-grande');
-            } else {
-                modalImg.classList.remove('zoom-pstyle-grande');
-            }
+            if(tipo === 'pstyle') modalImg.classList.add('zoom-pstyle-grande');
+            else modalImg.classList.remove('zoom-pstyle-grande');
         }
 
         function closeZoom() {
