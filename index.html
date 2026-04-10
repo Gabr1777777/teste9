@@ -129,17 +129,19 @@
             100% { background-position: 200% center; }
         }
 
-        /* GRID RIGOROSO: 7 POR LINHA */
+        /* GRID RIGOROSO: 7 POR LINHA ALINHADO À ESQUERDA */
         .grid-gifs {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(7, 80px); /* 7 Colunas fixas de 80px */
+            gap: 15px;
             width: 100%;
+            justify-content: start; /* Alinha um do lado do outro desde o início */
+            margin-bottom: 30px;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
         }
 
@@ -153,11 +155,10 @@
             text-align: center;
         }
 
-        /* ABA GIFS: RIGOROSAMENTE 80x80 */
-        #content-gifs .card { width: 80px; margin: auto; }
+        /* GIFS: RIGOROSAMENTE 80x80 */
+        #content-gifs .card { width: 80px; height: auto; }
         #content-gifs .card img { width: 80px; height: 80px; object-fit: cover; }
         
-        /* OUTRAS ABAS */
         .card img { width: 100%; display: block; }
 
         .card .label { 
@@ -166,6 +167,8 @@
             color: #ffffff; 
             font-weight: bold; 
             background: #000; 
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         .section { display: none; width: 100%; max-width: 1200px; }
@@ -202,7 +205,11 @@
     <script>
         const dataGifs = [
             { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
-            { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd"] }
+            { marquee: "Blufftitler - Nome + Photo - 350 Xats", prefix: "Bluff - ", ids: ["F0b4mnJ", "65bzz5V", "ZetkVFF", "JqzxOwt", "NK9Z8rU", "RNIlFI3", "bSmUjsQ", "R6klF5K", "cgyGLHQ", "ctF1vyH", "Ge90Xy7", "7Z8xEC8", "G8HFkiG", "sh7u3UM", "y0WgmxJ", "Vvw2SMU", "uoNJlEe"] },
+            { marquee: "Canva Name + Photo - 300 Xats", prefix: "Canva - ", ids: ["hWVyLox", "Uxlzu5C", "Crt716T", "xo4npxf", "jUG54d4", "gMQ3Fo9", "xvM1ixb", "cwRIh51", "db8sdi9", "nRJQ0BB"] },
+            { marquee: "AfterEffects - Name + Photo - 400 Xats", prefix: "After - ", ids: ["S5pXaVI", "qQB5w4C", "QlniJvg", "shyBpPS", "LzTvWk4", "aLBEkKq", "kJmAoul", "uOwOmwM", "u0Cse5Q", "ioDaClP", "PD03EYd", "HVFwoO9", "ueBRxvV", "XkwoKCf", "ULcq67R", "afxBCK8", "NKjJIGs", "xDhKvCC", "vvcOaEK", "ups9FgX", "JeY6A7M", "zDyoEgZ", "0FklDw9", "FX6gdFw", "V3LO0YG", "r9yfJNZ", "R3sO6Dv", "P8DpN4L", "fRfZuO7", "BPgPihm", "5HxfNaB", "FILAVQP", "5IoR515", "KUQ1WsX", "ZuaO9n5", "eYUpRds", "EkhA4lw", "ufOP9QG", "w2URYst", "1uMiE0k", "JQaMJ7U", "JeVcLkk", "un368jG", "LaClQL2", "l3Az3Nz", "8ME12WB", "SWSOcvf", "HizA7mV", "HnIaNDX", "POgiaNY", "CgwrMHf", "MtDrchh", "P4UINMY", "F0ujERT", "lHdM40L", "vWKX5Fb", "UHq0679", "2tRaU1S", "XQJ8R9h", "n4sAIhn", "LaJAK5L", "RIDkkSc", "ogHzac1", "aV63fjn", "tSuJOKg", "MxeKAfQ", "A4chzU3", "bAXpFow", "1YlDoNZ", "IXCqwlR", "kv1EWDW", "FIulKIF", "qLhMZAE", "R9nl6Ch", "uCXDGTg"] },
+            { marquee: "Love - 500 Xats", prefix: "Love - ", ids: ["NnEIlrv", "8hrgq1D", "MqnmO8R", "oRvL0X3", "9z2OuGk"] },
+            { marquee: "PhotoScape - 100 Xats", prefix: "P - ", ids: ["bXTTG5V", "MdemxH0", "VpU6eOY", "NUIGQ3f", "NP25oCb", "mXHqKwc", "bKcj9xf"] }
         ];
 
         function showTab(id) {
@@ -235,10 +242,11 @@
                 }
             };
 
-            fill('pcback-gif', 'https://i.imgur.com/SFnk7A6.gif', 'PCBack Gif', 14);
-            fill('pstyle-gif', 'https://i.imgur.com/rUIzfWU.gif', 'PStyle Gif', 14);
-            fill('pcback-est', 'https://i.imgur.com/OyX4Jwt.png', 'Wallpaper', 14);
-            fill('fundos', 'https://i.imgur.com/eJtGG3D.png', 'Fundo', 14);
+            fill('pcback-gif', 'https://i.imgur.com/SFnk7A6.gif', 'PCBack Gif', 16);
+            fill('pstyle-gif', 'https://i.imgur.com/rUIzfWU.gif', 'PStyle Gif', 16);
+            fill('pcback-est', 'https://i.imgur.com/OyX4Jwt.png', 'Wallpaper', 12);
+            fill('pstyle-est', 'https://i.imgur.com/zlcL7Dh.png', 'PStyle Fix', 10);
+            fill('fundos', 'https://i.imgur.com/eJtGG3D.png', 'Fundo', 12);
         }
         window.onload = render;
     </script>
