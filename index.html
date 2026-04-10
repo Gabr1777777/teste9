@@ -12,30 +12,20 @@
             --deep-blue-bar: rgba(0, 10, 31, 0.5); 
         }
 
-        /* PERSONALIZAÇÃO DA BARRA DE ROLAGEM GLOBAL */
-        body::-webkit-scrollbar {
+        /* PERSONALIZAÇÃO DAS BARRAS DE ROLAGEM (APLICADO AOS CONTAINERS SEPARADOS) */
+        .nav-container::-webkit-scrollbar,
+        .content-area::-webkit-scrollbar {
             width: 8px;
         }
-        body::-webkit-scrollbar-track {
+        .nav-container::-webkit-scrollbar-track,
+        .content-area::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.3);
         }
-        body::-webkit-scrollbar-thumb {
+        .nav-container::-webkit-scrollbar-thumb,
+        .content-area::-webkit-scrollbar-thumb {
             background: var(--neon-blue);
             border-radius: 10px;
             box-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        /* BARRA DE ROLAGEM DOS BOTÕES (MESMA COR E ESTILO) */
-        .nav-container::-webkit-scrollbar {
-            width: 5px;
-        }
-        .nav-container::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        .nav-container::-webkit-scrollbar-thumb {
-            background: var(--neon-blue);
-            border-radius: 10px;
-            box-shadow: 0 0 8px var(--neon-blue);
         }
 
         /* ESTILOS DO EFEITO DO CURSOR */
@@ -157,8 +147,8 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            overflow: auto;
+            height: 100vh; /* FIXO NA ALTURA DA TELA */
+            overflow: hidden; /* REMOVIDA ROLAGEM GLOBAL */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -199,8 +189,7 @@
         .main-wrapper { 
             display: flex; 
             flex: 1; 
-            overflow: visible;
-            padding-bottom: 60px; 
+            overflow: hidden; /* O WRAPPER NÃO ROLA, OS FILHOS SIM */
             position: relative;
         }
 
@@ -208,13 +197,12 @@
             display: flex;
             flex-direction: column;
             width: 250px;
-            max-height: calc(100vh - 120px); /* LIMITA A ALTURA PARA ATIVAR ROLAGEM */
             gap: 10px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.4);
             border-right: 1px solid var(--neon-blue);
             z-index: 20;
-            overflow-y: auto; /* ATIVA A ROLAGEM NOS BOTÕES */
+            overflow-y: auto; /* ROLAGEM INDEPENDENTE PARA BOTÕES */
             flex-shrink: 0;
         }
 
@@ -253,9 +241,10 @@
         .content-area { 
             flex: 1; 
             padding: 30px; 
-            overflow-y: visible;
+            overflow-y: auto; /* ROLAGEM INDEPENDENTE PARA CONTEÚDO/GIFS */
             z-index: 15;
             position: relative;
+            padding-bottom: 100px; /* ESPAÇO PARA O FOOTER NÃO TAPAR O FINAL */
         }
 
         .section { display: none; width: 100%; }
@@ -330,11 +319,11 @@
         .perfil-footer {
             text-align: center;
             padding: 15px;
-            background: transparent;
+            background: rgba(5, 5, 5, 0.8);
             position: fixed;
             bottom: 0;
             width: 100%;
-            z-index: 1; 
+            z-index: 100; 
             font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
             font-weight: bold;
@@ -342,6 +331,7 @@
             justify-content: center;
             align-items: center;
             pointer-events: none;
+            border-top: 1px solid var(--neon-blue);
         }
 
         #visit-counter {
@@ -388,8 +378,8 @@
     </div>
 
     <div class="perfil-header">
-        <h1>GALERIA DE GIFS</h1>
-        <p>Gabr (1777777)</p>
+        <h1>GABRIEL GALLERY</h1>
+        <p>Propriedade de Gabr (1777777)</p>
     </div>
 
     <div class="main-wrapper">
