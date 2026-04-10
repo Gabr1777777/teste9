@@ -141,11 +141,18 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
 
-        /* GRID ESPECÍFICO PARA GIFS (Ajustado para caber 7 por linha em 1200px) */
+        /* GRID ESPECÍFICO PARA GIFS (7 por linha) */
         .grid-gifs {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 12px;
+        }
+
+        /* GRID ESPECÍFICO PARA PSTYLE (Ajustado para 4 por linha) */
+        .grid-pstyle {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .card {
@@ -166,7 +173,6 @@
 
         .card img { width: 100%; display: block; object-fit: cover; }
 
-        /* AJUSTE RIGOROSO PARA 7 POR LINHA NA ABA GIFS */
         #content-gifs .card { width: 140px; margin: auto; }
         #content-gifs .card img { width: 140px; height: 140px; }
 
@@ -208,9 +214,9 @@
 
     <div id="gifs" class="section"><div id="content-gifs"></div></div>
     <div id="pcback-gif" class="section"><div class="grid-container grid-largo" id="content-pcback-gif"></div></div>
-    <div id="pstyle-gif" class="section"><div class="grid-container" id="content-pstyle-gif"></div></div>
+    <div id="pstyle-gif" class="section"><div class="grid-pstyle" id="content-pstyle-gif"></div></div>
     <div id="pcback-est" class="section"><div class="grid-container grid-largo" id="content-pcback-est"></div></div>
-    <div id="pstyle-est" class="section"><div class="grid-container" id="content-pstyle-est"></div></div>
+    <div id="pstyle-est" class="section"><div class="grid-pstyle" id="content-pstyle-est"></div></div>
     <div id="fundos" class="section"><div class="grid-container grid-largo" id="content-fundos"></div></div>
     <div id="xatspace" class="section"><h2 style="text-align:center">Modelos XatSpace</h2></div>
 
