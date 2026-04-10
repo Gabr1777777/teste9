@@ -9,7 +9,6 @@
             --neon-blue: #0048FF;
             --bg-dark: #050505;
             --card-bg: #111;
-            /* Fundo azul escuro gradiente para a barra */
             --deep-blue-grad: linear-gradient(90deg, #000814, #001a57, #000814);
         }
 
@@ -24,7 +23,7 @@
             align-items: center;
         }
 
-        /* PERFIL */
+        /* PERFIL E TÍTULOS COM GRADIENTE */
         .perfil-header {
             text-align: center;
             padding: 30px;
@@ -37,11 +36,26 @@
         .perfil-header h1 {
             font-size: 3rem;
             margin: 0;
-            color: var(--neon-blue);
-            text-shadow: 0 0 20px var(--neon-blue);
+            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 4s linear infinite;
         }
 
-        /* NAVEGAÇÃO */
+        .perfil-header p {
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(-45deg, #ffffff, #000000, #ffffff, #000000);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 5s linear infinite;
+        }
+
+        /* NAVEGAÇÃO E BOTÕES ANIMADOS */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
@@ -54,22 +68,21 @@
         }
 
         .nav-btn {
-            background: #1a1a1a;
-            color: #888;
             border: 1px solid #333;
             padding: 12px 20px;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
             font-size: 11px;
+            background: linear-gradient(-45deg, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 300%;
+            color: #000;
             transition: 0.3s;
         }
 
         .nav-btn:hover, .nav-btn.active {
-            border-color: var(--neon-blue);
-            color: white;
-            background: #001240;
-            box-shadow: 0 0 15px rgba(0, 72, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 72, 255, 0.8);
+            transform: scale(1.05);
         }
 
         .section {
@@ -90,13 +103,11 @@
             display: block;
         }
 
-        /* TEXTO ANIMADO DENTRO DO LETREIRO */
         .texto-animado {
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 16px;
-            /* Efeito Gradiente nas Letras (Azul e Branco) */
             background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 200% auto;
             -webkit-background-clip: text;
@@ -158,7 +169,8 @@
     </div>
 
     <div class="nav-container">
-        <button class="nav-btn active" onclick="showTab('gifs')">GIFS</button>
+        <button class="nav-btn active" onclick="showTab('inicio')">Início</button>
+        <button class="nav-btn" onclick="showTab('gifs')">GIFS</button>
         <button class="nav-btn" onclick="showTab('pcback-gif')">PCBACK GIFS</button>
         <button class="nav-btn" onclick="showTab('pstyle-gif')">PSTYLE GIFS</button>
         <button class="nav-btn" onclick="showTab('pcback-est')">PCBACK ESTÁTICO</button>
@@ -167,7 +179,12 @@
         <button class="nav-btn" onclick="showTab('xatspace')">XATSPACE</button>
     </div>
 
-    <div id="gifs" class="section active"><div id="content-gifs"></div></div>
+    <div id="inicio" class="section active">
+        <h2 style="text-align:center">Bem-vindo à Galeria Gabriel</h2>
+        <p style="text-align:center">Selecione uma categoria acima para visualizar os modelos.</p>
+    </div>
+
+    <div id="gifs" class="section"><div id="content-gifs"></div></div>
     <div id="pcback-gif" class="section"><div class="grid-container grid-largo" id="content-pcback-gif"></div></div>
     <div id="pstyle-gif" class="section"><div class="grid-container" id="content-pstyle-gif"></div></div>
     <div id="pcback-est" class="section"><div class="grid-container grid-largo" id="content-pcback-est"></div></div>
