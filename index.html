@@ -141,11 +141,11 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
 
-        /* GRID ESPECÍFICO PARA GIFS (Ajustado para 150px) */
+        /* GRID ESPECÍFICO PARA GIFS (Ajustado para caber 7 por linha em 1200px) */
         .grid-gifs {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
         }
 
         .card {
@@ -166,9 +166,9 @@
 
         .card img { width: 100%; display: block; object-fit: cover; }
 
-        /* AJUSTE DE TAMANHO RIGOROSO NA ABA GIFS */
-        #content-gifs .card { width: 150px; margin: auto; }
-        #content-gifs .card img { width: 150px; height: 150px; }
+        /* AJUSTE RIGOROSO PARA 7 POR LINHA NA ABA GIFS */
+        #content-gifs .card { width: 140px; margin: auto; }
+        #content-gifs .card img { width: 140px; height: 140px; }
 
         .card .label { 
             padding: 8px 5px; 
