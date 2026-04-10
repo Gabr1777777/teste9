@@ -137,7 +137,29 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        /* ESTILO DO PLAYER */
+        .info-card p { line-height: 1.6; color: #eee; font-size: 14px; }
+
+        .marquee-container {
+            background: var(--deep-blue-bar);
+            border: 1px solid rgba(0, 38, 138, 0.5);
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            padding: 12px 0;
+        }
+
+        .marquee-content { display: inline-block; animation: linear-scroll 15s linear infinite; }
+        .texto-animado {
+            font-weight: bold; font-size: 16px;
+            background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            animation: moveGradient 3s linear infinite; padding-right: 100px;
+        }
+
+        @keyframes linear-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes moveGradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
         .player-container {
             max-width: 400px;
             margin: 50px auto;
@@ -168,18 +190,9 @@
             text-transform: uppercase;
         }
 
-        @keyframes player-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
+        @keyframes player-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        .player-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 20px; }
         .play-pause-btn {
             background: var(--neon-blue);
             border: none;
@@ -188,28 +201,14 @@
             height: 35px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: 0.3s;
         }
 
-        .play-pause-btn:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--neon-blue); }
+        .volume-slider { width: 80px; accent-color: var(--neon-blue); }
 
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .volume-slider {
-            width: 80px;
-            cursor: pointer;
-            accent-color: var(--neon-blue);
-        }
-
-        /* GRID E CARDS ORIGINAIS */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
         .grid-gifs { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
         .card {
@@ -221,15 +220,8 @@
         .card img { width: 100%; display: block; }
         .card .label { padding: 8px 5px; font-size: 11px; background: rgba(10, 10, 10, 0.6); text-transform: uppercase; font-weight: bold; }
 
-        .marquee-container { background: var(--deep-blue-bar); border: 1px solid rgba(0, 38, 138, 0.5); width: 100%; overflow: hidden; margin-bottom: 20px; padding: 12px 0; }
-        .marquee-content { display: inline-block; animation: linear-scroll 15s linear infinite; }
-        .texto-animado { font-weight: bold; font-size: 16px; background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: moveGradient 3s linear infinite; padding-right: 100px; }
-
-        @keyframes linear-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes moveGradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
-        .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); }
+        .modal-content { max-width: 80%; max-height: 80%; border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
         .close-modal { position: absolute; top: 10px; right: 25px; color: white; font-size: 50px; cursor: pointer; }
     </style>
 </head>
@@ -266,7 +258,9 @@
                     </div>
                     <div class="info-card full-width">
                         <h3>Sell ID 10 Digts - 1k each (Never used)</h3>
-                        <p>(SOLD 1553333003), 1553333005, 1553333013, 1553333024, 1553333040, 1553333505, 1553333903, 1553333027...</p>
+                        <p>
+                            (SOLD 1553333003), 1553333005, 1553333013, 1553333024, 1553333040, 1553333505, 1553333903, 1553333027 1553333484, 1553333494, 1553333579, 1549200800, 1549200900, 1549203020, 1553350006, 1553342014 1480335366, 1484529437, 1484529434, 1484529671, 1480335587, 1480335597, 1484529675, 1480335580 1484529908, 1553350001, 1553350006, 1553350010, 1553350019, 1553350022, 1553350080, 1553358001 1553358004, 1549200788, 1549200822, 1549200844, 1557799002, 1553366005, 1549200844, 1553347776, 1529199110, 1529199070, 1529199294, 1529199883, 1533393277, 1533393300, 1533393338, 1533393573, 1533393580, 1529200133, 1529202490, 1529202505, 1529202530, 1529204010, 1533394241
+                        </p>
                     </div>
                 </div>
             </div>
@@ -281,13 +275,11 @@
 
             <div id="player" class="section">
                 <div class="player-container">
-                    <div class="track-marquee">
-                        <span id="trackName" class="track-name">Selecione uma música...</span>
-                    </div>
+                    <div class="track-marquee"><span id="trackName" class="track-name">Selecione uma música...</span></div>
                     <div class="player-controls">
-                        <button class="play-pause-btn" id="prevBtn" onclick="prevTrack()">«</button>
+                        <button class="play-pause-btn" onclick="prevTrack()">«</button>
                         <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                        <button class="play-pause-btn" id="nextBtn" onclick="nextTrack()">»</button>
+                        <button class="play-pause-btn" onclick="nextTrack()">»</button>
                         <div class="volume-control">
                             <span style="font-size: 10px;">VOL</span>
                             <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" oninput="changeVolume()">
@@ -304,9 +296,10 @@
     </div>
 
     <script>
+        const dataGifs = [{ marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] }];
         const playlist = [
             { name: "Abraham-Mateo - BAI LALA", url: "https://www.dropbox.com/scl/fi/gw8940zfvm60ul7malxox/Abraham-Mateo-BAI-LALA.mp3?rlkey=puytwnkxllb6tmz35htfr8tmh&st=ud55ktgf&raw=1" },
-            { name: "Alex Warren - Ordinary", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecrja08pfyij6k&st=zb53k17t&raw=1" },          
+            { name: "Alex Warren - Ordinary", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecrja08pfyij6k&st=zb53k17t&raw=1" },
             { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
             { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
             { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/cqqhzkv1ll1p09z7qgylp/Desireless-voyage-voyage.mp3.mp3?rlkey=hscvkehw7n7vvgi2im4rwhom7&st=2ldonj76&raw=1" }
@@ -314,43 +307,6 @@
 
         let currentTrack = 0;
         const audio = new Audio();
-        audio.volume = 0.5;
-
-        function loadTrack(index) {
-            audio.src = playlist[index].url;
-            document.getElementById('trackName').innerText = playlist[index].name;
-        }
-
-        function togglePlay() {
-            if (audio.paused) {
-                if (!audio.src) loadTrack(currentTrack);
-                audio.play();
-                document.getElementById('playBtn').innerText = '||';
-            } else {
-                audio.pause();
-                document.getElementById('playBtn').innerText = '▶';
-            }
-        }
-
-        function nextTrack() {
-            currentTrack = (currentTrack + 1) % playlist.length;
-            loadTrack(currentTrack);
-            audio.play();
-            document.getElementById('playBtn').innerText = '||';
-        }
-
-        function prevTrack() {
-            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-            loadTrack(currentTrack);
-            audio.play();
-            document.getElementById('playBtn').innerText = '||';
-        }
-
-        function changeVolume() {
-            audio.volume = document.getElementById('volumeSlider').value;
-        }
-
-        audio.onended = nextTrack;
 
         function showTab(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -359,10 +315,30 @@
             if(window.event) window.event.currentTarget.classList.add('active');
         }
 
+        function loadTrack(index) { audio.src = playlist[index].url; document.getElementById('trackName').innerText = playlist[index].name; }
+        function togglePlay() { 
+            if (audio.paused) { if (!audio.src) loadTrack(currentTrack); audio.play(); document.getElementById('playBtn').innerText = '||'; } 
+            else { audio.pause(); document.getElementById('playBtn').innerText = '▶'; } 
+        }
+        function nextTrack() { currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); audio.play(); document.getElementById('playBtn').innerText = '||'; }
+        function prevTrack() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; loadTrack(currentTrack); audio.play(); document.getElementById('playBtn').innerText = '||'; }
+        function changeVolume() { audio.volume = document.getElementById('volumeSlider').value; }
+        audio.onended = nextTrack;
+
         function openZoom(src) { document.getElementById("imgZoom").src = src; document.getElementById("modalZoom").style.display = "flex"; }
         function closeZoom() { document.getElementById("modalZoom").style.display = "none"; }
 
         function render() {
+            const gifContainer = document.getElementById('content-gifs');
+            dataGifs.forEach(sec => {
+                let html = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
+                sec.ids.forEach((id, i) => { 
+                    let url = `https://i.imgur.com/${id}.gif`;
+                    html += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">${sec.prefix}${i+1}</div></div>`; 
+                });
+                html += `</div>`; gifContainer.innerHTML += html;
+            });
+
             const configs = [
                 { id: 'content-pcback-gif', url: 'https://i.imgur.com/SFnk7A6.gif', label: 'PCBack Gif', count: 16 },
                 { id: 'content-pstyle-gif', url: 'https://i.imgur.com/rUIzfWU.gif', label: 'PStyle Gif', count: 16 },
