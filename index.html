@@ -393,7 +393,7 @@ body{
 
 .glass{
     background: rgba(255, 255, 255, 0.08); /* transparencia */
-    backdrop-filter: blur(20px); /* efecto vidrio */
+    backdrop-filter: blur(20px); /* efeito vidro */
     -webkit-backdrop-filter: blur(20px);
 
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -991,23 +991,24 @@ const progress = document.getElementById("progress");
 const playBtn = document.getElementById("playBtn");
 const player = document.querySelector(".player");
 
-// 🎵 TUS CANCIONES (CAMBIÁ NOMBRES SEGÚN TU CARPETA)
+// 🎵 AJUSTE RIGOROSO: Removido o prefixo "music/" para aceitar links do Imgur
 const songs = [
     {
-        name: "Carlos Rivera - Que lo nuestro se quede nuestro.mp3",
+        name: "Carlos Rivera - Que lo nuestro se quede nosso.mp3",
         title: "Que lo nuestro se quede nuestro",
         artist: "Carlos Rivera",
-        cover: "album.jpg"
+        cover: "https://i.imgur.com/MXo7l6I.jpeg"
     }
 ];
 
 let index = 0;
 let playing = false;
 
-// cargar canción
+// carregar canção
 function loadSong(song){
-    audio.src = "music/" + song.name;
-    cover.src = "music/" + song.cover;
+    // Se for link externo (Imgur/Dropbox), carrega direto. Se for apenas nome, usa pasta music/
+    audio.src = song.name.includes("http") ? song.name : "music/" + song.name;
+    cover.src = song.cover.includes("http") ? song.cover : "music/" + song.cover;
     title.textContent = song.title;
     artist.textContent = song.artist;
 }
@@ -1026,7 +1027,7 @@ function togglePlay(){
     playing = !playing;
 }
 
-// siguiente
+// seguinte
 function next(){
     index++;
     if(index >= songs.length) index = 0;
@@ -1048,13 +1049,13 @@ function prev(){
     playing = true;
 }
 
-// progreso automático
+// progresso automático
 audio.addEventListener("timeupdate", () => {
     const percent = (audio.currentTime / audio.duration) * 100;
     progress.style.width = percent + "%";
 });
 
-// click en barra
+// click em barra
 function setProgress(e){
     const width = e.currentTarget.clientWidth;
     const clickX = e.offsetX;
@@ -1078,7 +1079,7 @@ window.addEventListener("load", () => {
     });
 });
 
-// siguiente automático
+// seguinte automático
 audio.addEventListener("ended", next);
 
 title.parentElement.classList.add("change");
@@ -1105,7 +1106,7 @@ buttons.forEach(btn => {
 
         if(id.includes('perfil')) document.getElementById('perfil').classList.add('active');
         if(id.includes('amigos')) document.getElementById('amigos').classList.add('active');
-        if(id.includes('galería')) document.getElementById('galeria').classList.add('active');
+        if(id.includes('galeria')) document.getElementById('galeria').classList.add('active');
     });
 });
 
@@ -1156,7 +1157,7 @@ items.forEach(item => {
 items[0].offsetHeight;
 
 
-// efecto "repartir cartas"
+// efeito "repartir cartas"
 items.forEach((item, i) => {
 
     const angle = (360 / total) * i;
@@ -1182,13 +1183,13 @@ enterBtn.addEventListener("click", () => {
     // animación intro
     intro.classList.add("hide");
 
-    // mostrar contenido con blur
+    // mostrar conteúdo com blur
     setTimeout(() => {
         intro.style.display = "none";
         wrapper.classList.add("show");
     }, 800);
 
-    // 🔊 reproducir música
+    // 🔊 reproduzir música
     loadSong(songs[index]);
 
     audio.volume = 0.5;
@@ -1203,17 +1204,17 @@ enterBtn.addEventListener("click", () => {
 
 });
 
-/* Bloquear clic derecho */
+/* Bloquear clic direito */
 document.addEventListener('contextmenu', function(e){
   e.preventDefault();
 });
 
-/* Bloquear selección de texto */
+/* Bloquear seleção de texto */
 document.addEventListener('selectstart', function(e){
   e.preventDefault();
 });
 
-/* Bloquear arrastrar imágenes/texto */
+/* Bloquear arrastar imagens/texto */
 document.addEventListener('dragstart', function(e){
   e.preventDefault();
 });
