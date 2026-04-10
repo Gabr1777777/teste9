@@ -309,7 +309,22 @@
             z-index: 10;
         }
         .track-marquee { width: 100%; overflow: hidden; white-space: nowrap; background: rgba(0, 0, 0, 0.3); padding: 10px 0; margin-bottom: 20px; }
-        .track-name { display: inline-block; padding-left: 100%; animation: player-scroll 15s linear infinite; font-weight: bold; color: var(--neon-blue); }
+        
+        /* ESTILO GRADIANTE ANIMADO PARA O NOME DA MÚSICA E VOL */
+        .track-name, .vol-label { 
+            display: inline-block; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
+            background-size: 200% auto; 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 3s linear infinite; 
+        }
+
+        .track-name { padding-left: 100%; animation: player-scroll 15s linear infinite, moveGradient 3s linear infinite; }
+
         @keyframes player-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
         .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
@@ -395,7 +410,10 @@
                         <button class="nav-btn" style="padding:10px" onclick="prevTrack()">«</button>
                         <button class="nav-btn" style="padding:10px" id="playBtn" onclick="togglePlay()">▶</button>
                         <button class="nav-btn" style="padding:10px" onclick="nextTrack()">»</button>
-                        <button class="nav-btn" style="padding:10px 5px; width:38px; text-align:center; font-size:11px;" id="volBtn" onclick="cycleVolume()">50%</button>
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                            <span class="vol-label" style="font-size: 10px;">Vol</span>
+                            <button class="nav-btn" style="padding:10px 5px; width:38px; text-align:center; font-size:11px;" id="volBtn" onclick="cycleVolume()">50%</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -447,7 +465,7 @@
 
         const playlist = [
             { name: "Abraham-Mateo - BAI LALA", url: "https://www.dropbox.com/scl/fi/gw8940zfvm60ul7malxox/Abraham-Mateo-BAI-LALA.mp3?rlkey=puytwnkxllb6tmz35htfr8tmh&st=ud55ktgf&raw=1" },
-            { name: "Alex Warren - Ordinary", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecrja08pfyij6k&st=zb53k17t&raw=1" },
+            { name: "Alex Warren - Ordinary", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecja08pfyij6k&st=zb53k17t&raw=1" },
             { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
             { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
             { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/cqqhzkv1ll1p09z7qgylp/Desireless-voyage-voyage.mp3.mp3?rlkey=hscvkehw7n7vvgi2im4rwhom7&st=2ldonj76&raw=1" }
