@@ -208,7 +208,7 @@
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 15px; /* TEXTO UM POUCO MAIOR */
+            font-size: 17px; /* AUMENTADO CONFORME SOLICITADO */
             transition: all 0.3s ease;
             color: white;
             text-align: left;
@@ -223,7 +223,6 @@
             transform: translateX(8px);
         }
 
-        /* EFEITO DE LETREIRO GRADIENTE NOS TÍTULOS DA BARRA */
         .nav-btn span {
             background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 200% auto;
@@ -277,10 +276,12 @@
             animation: moveGradient 4s linear infinite;
         }
 
-        .marquee-container { background: var(--deep-blue-bar); border: 1px solid rgba(0, 38, 138, 0.5); width: 100%; overflow: hidden; margin-bottom: 20px; padding: 12px 0; }
+        .marquee-container { background: var(--deep-blue-bar); border: 1px solid rgba(0, 38, 138, 0.5); width: 100%; overflow: hidden; margin-bottom: 20px; padding: 15px 0; }
         .marquee-content { display: inline-block; animation: linear-scroll 15s linear infinite; }
         .texto-animado {
-            font-weight: bold; font-size: 16px; background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
+            font-weight: bold; 
+            font-size: 22px; /* AUMENTADO PARA DESTAQUE NAS SEÇÕES */
+            background: linear-gradient(to right, #0048FF, #ffffff, #0048FF, #ffffff);
             background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
             animation: moveGradient 3s linear infinite; padding-right: 100px;
         }
