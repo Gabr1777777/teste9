@@ -148,7 +148,7 @@
             gap: 12px;
         }
 
-        /* GRID ESPECÍFICO PARA PSTYLE (Ajustado para 4 por linha) */
+        /* GRID ESPECÍFICO PARA PSTYLE (4 por linha) */
         .grid-pstyle {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -162,6 +162,7 @@
             overflow: hidden;
             text-align: center;
             transition: 0.3s;
+            cursor: zoom-in;
         }
 
         .card:hover {
@@ -187,6 +188,44 @@
 
         .section { display: none; width: 100%; max-width: 1200px; }
         .section.active { display: block; }
+
+        /* MODAL DE ZOOM (LIGHTBOX) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue);
+            animation: zoomAnim 0.3s ease-out;
+        }
+
+        @keyframes zoomAnim {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -220,6 +259,11 @@
     <div id="fundos" class="section"><div class="grid-container grid-largo" id="content-fundos"></div></div>
     <div id="xatspace" class="section"><h2 style="text-align:center">Modelos XatSpace</h2></div>
 
+    <div id="modalZoom" class="modal" onclick="closeZoom()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="imgZoom">
+    </div>
+
     <script>
         const dataGifs = [
             { marquee: "Blufftitler - Only Name - 250 Xats", prefix: "Gifs - ", ids: ["bidwh1D", "wR2NpTV", "IMrOUcP", "Hdi04Sg", "OcGaTXA", "wJZiwkG", "jDgxhBQ", "USQgVk8", "4bhAWa5", "0LL3muu"] },
@@ -240,28 +284,58 @@
             if(event) event.currentTarget.classList.add('active');
         }
 
+        // FUNÇÃO DE ZOOM
+        function openZoom(src) {
+            const modal = document.getElementById("modalZoom");
+            const modalImg = document.getElementById("imgZoom");
+            modal.style.display = "flex";
+            modalImg.src = src;
+        }
+
+        function closeZoom() {
+            document.getElementById("modalZoom").style.display = "none";
+        }
+
         function render() {
             const gifContainer = document.getElementById('content-gifs');
             dataGifs.forEach(sec => {
                 let html = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
-                sec.ids.forEach((id, i) => { html += `<div class="card"><img src="https://i.imgur.com/${id}.gif"><div class="label">${sec.prefix}${i+1}</div></div>`; });
+                sec.ids.forEach((id, i) => { 
+                    let url = `https://i.imgur.com/${id}.gif`;
+                    html += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">${sec.prefix}${i+1}</div></div>`; 
+                });
                 html += `</div>`; gifContainer.innerHTML += html;
             });
 
             const pcGif = document.getElementById('content-pcback-gif');
-            for(let i=1; i<=16; i++) { pcGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/SFnk7A6.gif"><div class="label">PCBack Gif #${i}</div></div>`; }
+            for(let i=1; i<=16; i++) { 
+                let url = `https://i.imgur.com/SFnk7A6.gif`;
+                pcGif.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">PCBack Gif #${i}</div></div>`; 
+            }
 
             const psGif = document.getElementById('content-pstyle-gif');
-            for(let i=1; i<=16; i++) { psGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/rUIzfWU.gif"><div class="label">PStyle Gif #${i}</div></div>`; }
+            for(let i=1; i<=16; i++) { 
+                let url = `https://i.imgur.com/rUIzfWU.gif`;
+                psGif.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">PStyle Gif #${i}</div></div>`; 
+            }
 
             const pcEst = document.getElementById('content-pcback-est');
-            for(let i=1; i<=10; i++) { pcEst.innerHTML += `<div class="card"><img src="https://i.imgur.com/OyX4Jwt.png"><div class="label">Wallpaper #${i}</div></div>`; }
+            for(let i=1; i<=10; i++) { 
+                let url = `https://i.imgur.com/OyX4Jwt.png`;
+                pcEst.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">Wallpaper #${i}</div></div>`; 
+            }
 
             const psEst = document.getElementById('content-pstyle-est');
-            for(let i=1; i<=8; i++) { psEst.innerHTML += `<div class="card"><img src="https://i.imgur.com/zlcL7Dh.png"><div class="label">PStyle Fix #${i}</div></div>`; }
+            for(let i=1; i<=8; i++) { 
+                let url = `https://i.imgur.com/zlcL7Dh.png`;
+                psEst.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">PStyle Fix #${i}</div></div>`; 
+            }
 
             const fundos = document.getElementById('content-fundos');
-            for(let i=1; i<=10; i++) { fundos.innerHTML += `<div class="card"><img src="https://i.imgur.com/eJtGG3D.png"><div class="label">Fundo #${i}</div></div>`; }
+            for(let i=1; i<=10; i++) { 
+                let url = `https://i.imgur.com/eJtGG3D.png`;
+                fundos.innerHTML += `<div class="card" onclick="openZoom('${url}')"><img src="${url}"><div class="label">Fundo #${i}</div></div>`; 
+            }
         }
         window.onload = render;
     </script>
