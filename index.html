@@ -55,7 +55,7 @@
             animation: moveGradient 5s linear infinite;
         }
 
-        /* NAVEGAÇÃO (Sem sticky - some ao rolar) */
+        /* NAVEGAÇÃO */
         .nav-container {
             display: flex;
             flex-wrap: wrap;
@@ -67,11 +67,11 @@
         .nav-btn {
             background: var(--deep-blue-bar);
             border: 1px solid #00268a;
-            padding: 12px 20px;
+            padding: 14px 24px; /* Aumentado conforme solicitado */
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 11px;
+            font-size: 13px; /* Aumentado conforme solicitado */
             transition: 0.3s;
         }
 
@@ -150,10 +150,8 @@
             text-align: center;
         }
 
-        /* Estilo para imagens normais */
         .card img { width: 100%; display: block; object-fit: cover; }
 
-        /* Estilo RIGOROSO 100x100 apenas para a aba GIFS */
         #content-gifs .card { width: 100px; margin: auto; }
         #content-gifs .card img { width: 100px; height: 100px; }
 
@@ -215,7 +213,6 @@
         }
 
         function render() {
-            // Render Gifs
             const gifContainer = document.getElementById('content-gifs');
             dataGifs.forEach(sec => {
                 let html = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
@@ -223,23 +220,18 @@
                 html += `</div>`; gifContainer.innerHTML += html;
             });
 
-            // PCBack Gif
             const pcGif = document.getElementById('content-pcback-gif');
             for(let i=1; i<=16; i++) { pcGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/SFnk7A6.gif"><div class="label">PCBack Gif #${i}</div></div>`; }
 
-            // PStyle Gif
             const psGif = document.getElementById('content-pstyle-gif');
             for(let i=1; i<=16; i++) { psGif.innerHTML += `<div class="card"><img src="https://i.imgur.com/rUIzfWU.gif"><div class="label">PStyle Gif #${i}</div></div>`; }
 
-            // PCBack Estático
             const pcEst = document.getElementById('content-pcback-est');
             for(let i=1; i<=10; i++) { pcEst.innerHTML += `<div class="card"><img src="https://i.imgur.com/OyX4Jwt.png"><div class="label">Wallpaper #${i}</div></div>`; }
 
-            // PStyle Estático
             const psEst = document.getElementById('content-pstyle-est');
             for(let i=1; i<=8; i++) { psEst.innerHTML += `<div class="card"><img src="https://i.imgur.com/zlcL7Dh.png"><div class="label">PStyle Fix #${i}</div></div>`; }
 
-            // Fundos
             const fundos = document.getElementById('content-fundos');
             for(let i=1; i<=10; i++) { fundos.innerHTML += `<div class="card"><img src="https://i.imgur.com/eJtGG3D.png"><div class="label">Fundo #${i}</div></div>`; }
         }
