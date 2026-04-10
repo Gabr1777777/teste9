@@ -991,14 +991,13 @@ const progress = document.getElementById("progress");
 const playBtn = document.getElementById("playBtn");
 const player = document.querySelector(".player");
 
-// 🎵 AJUSTE RIGOROSO: Removido o prefixo "music/" para aceitar links do Imgur
+// 🎵 PLAYLIST ATUALIZADA (DROPBOX)
 const songs = [
-    {
-        name: "Carlos Rivera - Que lo nuestro se quede nosso.mp3",
-        title: "Que lo nuestro se quede nuestro",
-        artist: "Carlos Rivera",
-        cover: "https://i.imgur.com/MXo7l6I.jpeg"
-    }
+    { name: "Abraham-Mateo - BAI LALA", artist: "Abraham Mateo", url: "https://www.dropbox.com/scl/fi/gw8940zfvm60ul7malxox/Abraham-Mateo-BAI-LALA.mp3?rlkey=puytwnkxllb6tmz35htfr8tmh&st=ud55ktgf&raw=1" },
+    { name: "Alex Warren - Ordinary", artist: "Alex Warren", url: "https://www.dropbox.com/scl/fi/lpcx92wv63wzcm6z56l7q/Alex-Warren-Ordinary.mp3?rlkey=pdxjo778t66ecrja08pfyij6k&st=zb53k17t&raw=1" },
+    { name: "Eminem - You dont know", artist: "Eminem", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
+    { name: "The Sound of Silence – Rising to the Night", artist: "Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
+    { name: "Desireless - Voyage Voyage", artist: "Desireless", url: "https://www.dropbox.com/scl/fi/cqqhzkv1ll1p09z7qgylp/Desireless-voyage-voyage.mp3.mp3?rlkey=hscvkehw7n7vvgi2im4rwhom7&st=2ldonj76&raw=1" }
 ];
 
 let index = 0;
@@ -1006,11 +1005,11 @@ let playing = false;
 
 // carregar canção
 function loadSong(song){
-    // Se for link externo (Imgur/Dropbox), carrega direto. Se for apenas nome, usa pasta music/
-    audio.src = song.name.includes("http") ? song.name : "music/" + song.name;
-    cover.src = song.cover.includes("http") ? song.cover : "music/" + song.cover;
-    title.textContent = song.title;
+    audio.src = song.url;
+    title.textContent = song.name;
     artist.textContent = song.artist;
+    // Capa do disco fixa conforme solicitado anteriormente
+    cover.src = "https://i.imgur.com/MXo7l6I.jpeg";
 }
 
 // play / pause
@@ -1064,46 +1063,24 @@ function setProgress(e){
     audio.currentTime = (clickX / width) * duration;
 }
 
-// autoplay
-window.addEventListener("load", () => {
-    loadSong(songs[index]);
-
-    audio.volume = 0.5;
-
-    audio.play().then(()=>{
-        playing = true;
-        playBtn.textContent = "⏸";
-        player.classList.add("playing");
-    }).catch(()=>{
-        playBtn.textContent = "▶";
-    });
-});
-
-// seguinte automático
+// seguinte automático quando acaba a música
 audio.addEventListener("ended", next);
 
-title.parentElement.classList.add("change");
-
-setTimeout(()=>{
-    title.parentElement.classList.remove("change");
-},300);
+// Configuração inicial ao carregar a página
+window.addEventListener("load", () => {
+    loadSong(songs[index]);
+    audio.volume = 0.5;
+});
 
 const tabs = document.querySelectorAll('.tab');
 const buttons = document.querySelectorAll('.menu span');
 
 buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-
-        // quitar activo de botones
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        // ocultar tabs
         tabs.forEach(t => t.classList.remove('active'));
-
-        // mostrar tab correcto
         const id = btn.textContent.toLowerCase();
-
         if(id.includes('perfil')) document.getElementById('perfil').classList.add('active');
         if(id.includes('amigos')) document.getElementById('amigos').classList.add('active');
         if(id.includes('galeria')) document.getElementById('galeria').classList.add('active');
@@ -1111,8 +1088,7 @@ buttons.forEach(btn => {
 });
 
 const text = "Não tenho medo de ser quem sou. Afinal, para que me esconder? É isso o que importa.";
-const speed = 40; // velocidad (más bajo = más rápido)
-
+const speed = 40; 
 let i = 0;
 const typing = document.getElementById("typing");
 
@@ -1124,102 +1100,67 @@ function writeText(){
     }
 }
 
-// iniciar al cargar
 window.addEventListener("load", writeText);
 
 const mainCard = document.getElementById("mainCard");
 const carousel = document.getElementById("carousel");
 const items = document.querySelectorAll(".item");
-
 let opened = false;
 
 mainCard.addEventListener("click", () => {
-
     if(opened) return;
     opened = true;
-
-    // ocultar carta principal
     mainCard.style.transform = "scale(0)";
     mainCard.style.opacity = "0";
-
     carousel.style.display = "block";
-
     const total = items.length;
     const radius = 170;
-
-// 🔥 RESET para evitar efecto hacia abajo
-items.forEach(item => {
-    item.style.transition = "none";
-    item.style.transform = "translate(-50%, -50%) rotateY(0deg) translateZ(0px)";
-});
-
-// forzar reflow
-items[0].offsetHeight;
-
-
-// efeito "repartir cartas"
-items.forEach((item, i) => {
-
-    const angle = (360 / total) * i;
-
+    items.forEach(item => {
+        item.style.transition = "none";
+        item.style.transform = "translate(-50%, -50%) rotateY(0deg) translateZ(0px)";
+    });
+    items[0].offsetHeight;
+    items.forEach((item, i) => {
+        const angle = (360 / total) * i;
+        setTimeout(() => {
+            item.style.transition = "0.8s ease";
+            item.style.transform = `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`;
+        }, i * 120);
+    });
     setTimeout(() => {
-        item.style.transition = "0.8s ease";
-        item.style.transform =
-            `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`;
-    }, i * 120);
-
+        carousel.classList.add("active");
+    }, total * 120 + 300);
 });
 
-
-// activar giro después de repartir
-setTimeout(() => {
-    carousel.classList.add("active");
-}, total * 120 + 300);
-});
+// LÓGICA DO BOTÃO ENTRAR
 const wrapper = document.querySelector(".wrapper");
+const intro = document.getElementById("intro");
+const enterBtn = document.getElementById("enterBtn");
 
 enterBtn.addEventListener("click", () => {
-
-    // animación intro
     intro.classList.add("hide");
-
-    // mostrar conteúdo com blur
     setTimeout(() => {
         intro.style.display = "none";
         wrapper.classList.add("show");
     }, 800);
 
-    // 🔊 reproduzir música
+    // INICIAR PLAYLIST AUTOMATICAMENTE
     loadSong(songs[index]);
-
-    audio.volume = 0.5;
-
     audio.play().then(() => {
         playing = true;
         playBtn.textContent = "⏸";
         player.classList.add("playing");
     }).catch(() => {
+        console.log("Autoplay bloqueado pelo navegador.");
         playBtn.textContent = "▶";
     });
-
 });
 
-/* Bloquear clic direito */
-document.addEventListener('contextmenu', function(e){
-  e.preventDefault();
-});
-
-/* Bloquear seleção de texto */
-document.addEventListener('selectstart', function(e){
-  e.preventDefault();
-});
-
-/* Bloquear arrastar imagens/texto */
-document.addEventListener('dragstart', function(e){
-  e.preventDefault();
-});
+/* Bloqueios de segurança */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
 
 </script>
-
 </body>
 </html>
