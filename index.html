@@ -84,6 +84,8 @@
             color: white;
             text-align: left;
             position: relative;
+            text-decoration: none;
+            display: block;
         }
 
         .nav-btn:hover, .nav-btn.active {
@@ -219,7 +221,7 @@
             <button class="nav-btn" onclick="showTab('pcback-est')"><span>PCBACK ESTÁTICO</span></button>
             <button class="nav-btn" onclick="showTab('pstyle-est')"><span>PSTYLE ESTÁTICO</span></button>
             <button class="nav-btn" onclick="showTab('fundos')"><span>FUNDOS</span></button>
-            <button class="nav-btn" onclick="showTab('xatspace')"><span>XATSPACE</span></button>
+            <a href="https://gabr1777777.github.io/GaleriaXatspace/" target="_blank" class="nav-btn"><span>XATSPACE</span></a>
             <button class="nav-btn" onclick="showTab('player')"><span>Player</span></button>
         </div>
 
@@ -249,7 +251,6 @@
             <div id="pcback-est" class="section"><div class="grid-container" id="content-pcback-est"></div></div>
             <div id="pstyle-est" class="section"><div class="grid-container" id="content-pstyle-est"></div></div>
             <div id="fundos" class="section"><div class="grid-container" id="content-fundos"></div></div>
-            <div id="xatspace" class="section"><h2 style="text-align:center; background: rgba(0,0,0,0.5); padding: 20px;">Modelos XatSpace</h2></div>
 
             <div id="player" class="section">
                 <div class="player-container">
@@ -283,8 +284,9 @@
         function showTab(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            if(window.event) window.event.currentTarget.classList.add('active');
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            if(window.event && window.event.currentTarget.tagName === 'BUTTON') window.event.currentTarget.classList.add('active');
         }
 
         function loadTrack(i) { audio.src = playlist[i].url; document.getElementById('trackName').innerText = playlist[i].name; }
@@ -297,7 +299,6 @@
         function closeZoom() { document.getElementById("modalZoom").style.display = "none"; }
 
         function render() {
-            // Render Gifs
             const gifSec = document.getElementById('gifs');
             dataGifs.forEach(sec => {
                 let h = `<div class="marquee-container"><div class="marquee-content"><span class="texto-animado">${sec.marquee}</span><span class="texto-animado">${sec.marquee}</span></div></div><div class="grid-gifs">`;
